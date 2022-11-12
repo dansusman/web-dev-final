@@ -1,4 +1,3 @@
-import React, { ReactNode } from "react";
 import {
     IconButton,
     Avatar,
@@ -14,14 +13,11 @@ import {
     DrawerContent,
     Text,
     useDisclosure,
-    BoxProps,
-    FlexProps,
     Menu,
     MenuButton,
     MenuDivider,
     MenuItem,
     MenuList,
-    Divider,
 } from "@chakra-ui/react";
 import {
     FiHome,
@@ -35,7 +31,7 @@ import {
 } from "react-icons/fi";
 
 const LinkItems = [
-    { name: "Home", icon: FiHome },
+    { name: "Home", icon: FiHome, link: "/" },
     { name: "Trending", icon: FiTrendingUp },
     { name: "Explore", icon: FiCompass },
     { name: "Favourites", icon: FiStar },
@@ -94,7 +90,7 @@ const SidebarContent = ({ onClose, ...rest }) => {
                     fontSize="3xl"
                     fontFamily="monospace"
                     fontWeight="bold"
-                    color={"blue.400"}
+                    color={"purple.400"}
                 >
                     smallTalk
                 </Text>
@@ -112,10 +108,10 @@ const SidebarContent = ({ onClose, ...rest }) => {
     );
 };
 
-const NavItem = ({ icon, children, ...rest }) => {
+const NavItem = ({ icon, link, children, ...rest }) => {
     return (
         <Link
-            href="#"
+            href="/"
             style={{ textDecoration: "none" }}
             _focus={{ boxShadow: "none" }}
         >
@@ -222,7 +218,13 @@ const MobileNav = ({ onOpen, ...rest }) => {
                                 "gray.700"
                             )}
                         >
-                            <MenuItem>Profile</MenuItem>
+                            <MenuItem
+                                as={Link}
+                                href="/profile"
+                                style={{ textDecoration: "none" }}
+                            >
+                                Profile
+                            </MenuItem>
                             <MenuItem>Settings</MenuItem>
                             <MenuDivider />
                             <MenuItem>Sign out</MenuItem>

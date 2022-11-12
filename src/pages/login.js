@@ -4,7 +4,6 @@ import {
     FormControl,
     FormLabel,
     Input,
-    Checkbox,
     Stack,
     Link,
     Button,
@@ -40,26 +39,22 @@ const LoginCard = () => {
                             <FormLabel>Password</FormLabel>
                             <Input type="password" />
                         </FormControl>
-                        <Stack spacing={10}>
-                            <Stack
-                                direction={{ base: "column", sm: "row" }}
-                                align={"start"}
-                                justify={"space-between"}
-                            >
-                                <Checkbox>Remember me</Checkbox>
+                        <Button
+                            bg={"blue.400"}
+                            color={"white"}
+                            _hover={{
+                                bg: "blue.500",
+                            }}
+                        >
+                            Sign in
+                        </Button>
+                        <Stack pt={5}>
+                            <Text align={"center"}>
+                                No account?{" "}
                                 <Link href="/register" color={"blue.400"}>
-                                    Forgot password?
+                                    Sign up!
                                 </Link>
-                            </Stack>
-                            <Button
-                                bg={"blue.400"}
-                                color={"white"}
-                                _hover={{
-                                    bg: "blue.500",
-                                }}
-                            >
-                                Sign in
-                            </Button>
+                            </Text>
                         </Stack>
                     </Stack>
                 </Box>

@@ -5,6 +5,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 import SignupCard from "./pages/register";
 import LoginCard from "./pages/login";
 import HomePage from "./pages/home";
+import ProfilePage from "./pages/profile";
 
 function App() {
     return (
@@ -14,6 +15,10 @@ function App() {
                     <Routes>
                         <Route index element={<HomePage />}></Route>
                         <Route path="/login" element={<LoginCard />}></Route>
+                        <Route
+                            path="/profile"
+                            element={<ProfilePage />}
+                        ></Route>
                         <Route
                             path="/register"
                             element={<SignupCard />}
