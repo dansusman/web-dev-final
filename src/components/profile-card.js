@@ -1,18 +1,18 @@
+import { SmallCloseIcon } from "@chakra-ui/icons";
 import {
+    Avatar,
+    AvatarBadge,
     Button,
+    Center,
     Flex,
     FormControl,
     FormLabel,
     Heading,
+    IconButton,
     Input,
     Stack,
     useColorModeValue,
-    Avatar,
-    AvatarBadge,
-    IconButton,
-    Center,
 } from "@chakra-ui/react";
-import { SmallCloseIcon } from "@chakra-ui/icons";
 
 const ProfileCard = () => {
     return (
@@ -48,8 +48,8 @@ const ProfileCard = () => {
                                 />
                             </Avatar>
                         </Center>
-                        <Center w="full">
-                            <Button w="full">Change Icon</Button>
+                        <Center>
+                            <Button>Change</Button>
                         </Center>
                     </Stack>
                 </FormControl>

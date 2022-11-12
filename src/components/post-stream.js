@@ -1,12 +1,4 @@
-import {
-    Button,
-    Flex,
-    HStack,
-    SimpleGrid,
-    Tab,
-    TabList,
-    Tabs,
-} from "@chakra-ui/react";
+import { Flex, SimpleGrid, Tab, TabList, Tabs } from "@chakra-ui/react";
 import PostBorder from "./post-border";
 import PostItem from "./post-item";
 
@@ -53,11 +45,13 @@ const PostStream = ({ homePage = false }) => {
                 {!homePage && (
                     <PostBorder
                         children={
-                            <HStack>
-                                <Button size={"lg"}>All Posts</Button>
-                                <Button size={"lg"}>Liked Posts</Button>
-                                <Button size={"lg"}>My Posts</Button>
-                            </HStack>
+                            <Tabs variant="soft-rounded" colorScheme={"purple"}>
+                                <TabList>
+                                    <Tab>All Posts</Tab>
+                                    <Tab>My Posts</Tab>
+                                    <Tab>Liked Posts</Tab>
+                                </TabList>
+                            </Tabs>
                         }
                     />
                 )}

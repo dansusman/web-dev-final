@@ -1,33 +1,35 @@
 import {
-    IconButton,
     Avatar,
     Box,
     CloseButton,
-    Flex,
-    HStack,
-    VStack,
-    Icon,
-    useColorModeValue,
-    Link,
     Drawer,
     DrawerContent,
-    Text,
-    useDisclosure,
+    Flex,
+    HStack,
+    Icon,
+    IconButton,
+    Link,
     Menu,
     MenuButton,
     MenuDivider,
     MenuItem,
     MenuList,
+    Text,
+    useColorMode,
+    useColorModeValue,
+    useDisclosure,
+    VStack,
 } from "@chakra-ui/react";
 import {
-    FiHome,
-    FiTrendingUp,
-    FiCompass,
-    FiStar,
-    FiSettings,
-    FiMenu,
-    FiBell,
     FiChevronDown,
+    FiCompass,
+    FiHome,
+    FiMenu,
+    FiMoon,
+    FiSettings,
+    FiStar,
+    FiSun,
+    FiTrendingUp,
 } from "react-icons/fi";
 
 const LinkItems = [
@@ -145,6 +147,7 @@ const NavItem = ({ icon, link, children, ...rest }) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }) => {
+    const { colorMode, setColorMode } = useColorMode();
     return (
         <Flex
             ml={{ base: 0, md: 60 }}
@@ -179,7 +182,8 @@ const MobileNav = ({ onOpen, ...rest }) => {
                     size="lg"
                     variant="ghost"
                     aria-label="open menu"
-                    icon={<FiBell />}
+                    icon={colorMode === "dark" ? <FiMoon /> : <FiSun />}
+                    onClick={setColorMode}
                 />
                 <Flex alignItems={"center"}>
                     <Menu>

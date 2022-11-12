@@ -1,8 +1,8 @@
-import { Box, HStack, Stack, useColorModeValue } from "@chakra-ui/react";
-import PostStream from "../components/post-stream";
-import ProfileCard from "../components/profile-card";
+import { Box, HStack, Stack } from "@chakra-ui/react";
 import Location from "../components/location";
 import NavigationSidebar from "../components/navigation-sidebar";
+import PostStream from "../components/post-stream";
+import ProfileCard from "../components/profile-card";
 
 const ProfilePage = () => {
     return (

@@ -1,15 +1,17 @@
+import { ChakraProvider, localStorageManager } from "@chakra-ui/react";
 import React from "react";
+import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import { Routes, Route } from "react-router";
-import { ChakraProvider } from "@chakra-ui/react";
-import SignupCard from "./pages/register";
-import LoginCard from "./pages/login";
 import HomePage from "./pages/home";
+import LoginCard from "./pages/login";
 import ProfilePage from "./pages/profile";
+import SignupCard from "./pages/register";
+
+const colorModeManager = localStorageManager;
 
 function App() {
     return (
-        <ChakraProvider>
+        <ChakraProvider colorModeManager={colorModeManager}>
             <BrowserRouter>
                 <div className="container">
                     <Routes>

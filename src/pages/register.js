@@ -1,21 +1,21 @@
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
-    Flex,
     Box,
+    Button,
+    Flex,
     FormControl,
     FormLabel,
+    Heading,
+    HStack,
     Input,
     InputGroup,
-    HStack,
     InputRightElement,
+    Link,
     Stack,
-    Button,
-    Heading,
     Text,
     useColorModeValue,
-    Link,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 const SignupCard = () => {
     const [showPassword, setShowPassword] = useState(false);
