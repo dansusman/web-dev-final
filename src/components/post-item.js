@@ -1,4 +1,4 @@
-import { Avatar, chakra, Flex, Stack } from "@chakra-ui/react";
+import { Avatar, chakra, Flex, Heading, Stack } from "@chakra-ui/react";
 import PostBorder from "./post-border";
 
 const backgrounds = [
@@ -9,7 +9,7 @@ const backgrounds = [
 ];
 
 const PostItem = (props) => {
-    const { name, username, content, avatar, index } = props;
+    const { name, username, content, avatar, title, index } = props;
     return (
         <PostBorder background={{ backgroundImage: backgrounds[index % 4] }}>
             <Flex
@@ -17,6 +17,7 @@ const PostItem = (props) => {
                 textAlign={"left"}
                 justifyContent={"space-between"}
             >
+                <Heading size="lg">{title}</Heading>
                 <chakra.p fontWeight={"medium"} fontSize={"15px"} pb={4}>
                     {content}
                 </chakra.p>

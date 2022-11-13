@@ -3,26 +3,22 @@ import React from "react";
 import { useLocation } from "react-router";
 import { Link } from "react-router-dom";
 import NavigationSidebar from "../components/navigation-sidebar";
-import PostBorder from "../components/post-border";
-
-const posts = [{ id: 0, title: "Hello", text: "whjoa" }];
+import PostItem from "../components/post-item";
+import posts from "../dummyData/posts.json";
 
 const Post = () => {
     const location = useLocation().pathname;
     const splitLocation = location.split("/");
     const postId = parseInt(splitLocation[splitLocation.length - 1]);
     const post = posts.find((p) => {
-        return p.id === postId;
+        return p._id === postId;
     });
     return (
         <NavigationSidebar>
             {post && (
-                <PostBorder>
-                    <Stack>
-                        <Heading mb={4}>{post.title}</Heading>
-                        <Box mb={6}>{post.text}</Box>
-                    </Stack>
-                </PostBorder>
+                <Link to={`/post/${post._id}`} key={post._id}>
+                    <PostItem {...post} index={post._id} />
+                </Link>
             )}
             {!post && (
                 <Stack align={"center"} pt="20">
