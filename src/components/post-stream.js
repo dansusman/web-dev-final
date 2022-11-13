@@ -11,11 +11,13 @@ import {
     Tabs,
     useColorModeValue,
 } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 import PostBorder from "./post-border";
 import PostItem from "./post-item";
 
 const testimonials = [
     {
+        _id: 0,
         name: "Brandon P.",
         username: "brandonp",
         content:
@@ -23,48 +25,7 @@ const testimonials = [
         avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
     },
     {
-        name: "Brandon P.",
-        username: "brandonp",
-        content:
-            "It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!",
-        avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    },
-    {
-        name: "Brandon P.",
-        username: "brandonp",
-        content:
-            "It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!",
-        avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    },
-    {
-        name: "Brandon P.",
-        username: "brandonp",
-        content:
-            "It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!",
-        avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    },
-    {
-        name: "Brandon P.",
-        username: "brandonp",
-        content:
-            "It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!",
-        avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    },
-    {
-        name: "Brandon P.",
-        username: "brandonp",
-        content:
-            "It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!",
-        avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    },
-    {
-        name: "Brandon P.",
-        username: "brandonp",
-        content:
-            "It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!",
-        avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
-    },
-    {
+        _id: 1,
         name: "Krysta B.",
         username: "krysta",
         content:
@@ -72,6 +33,7 @@ const testimonials = [
         avatar: "https://images.unsplash.com/photo-1598550874175-4d0ef436c909?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
     },
     {
+        _id: 2,
         name: "Darcy L.",
         username: "movieStarDar",
         content:
@@ -79,6 +41,7 @@ const testimonials = [
         avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&auto=format&fit=crop&w=334&q=80",
     },
     {
+        _id: 3,
         name: "Daniel T.",
         username: "guitarManJones",
         content:
@@ -136,7 +99,9 @@ const PostStream = ({ homePage = false }) => {
                     </Stack>
                 )}
                 {testimonials.map((cardInfo, index) => (
-                    <PostItem {...cardInfo} index={index} />
+                    <Link to={`/post/${cardInfo._id}`}>
+                        <PostItem {...cardInfo} index={index} />
+                    </Link>
                 ))}
             </SimpleGrid>
         </Flex>
