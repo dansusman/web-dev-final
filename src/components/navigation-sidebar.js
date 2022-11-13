@@ -147,7 +147,8 @@ const NavItem = ({ icon, link, children, ...rest }) => {
 };
 
 const MobileNav = ({ onOpen, ...rest }) => {
-    const { colorMode, setColorMode } = useColorMode();
+    const { toggleColorMode } = useColorMode();
+    const icon = useColorModeValue(<FiMoon />, <FiSun />);
     return (
         <Flex
             ml={{ base: 0, md: 60 }}
@@ -179,11 +180,10 @@ const MobileNav = ({ onOpen, ...rest }) => {
 
             <HStack spacing={{ base: "0", md: "6" }}>
                 <IconButton
-                    size="lg"
                     variant="ghost"
                     aria-label="open menu"
-                    icon={colorMode === "dark" ? <FiMoon /> : <FiSun />}
-                    onClick={setColorMode}
+                    icon={icon}
+                    onClick={toggleColorMode}
                 />
                 <Flex alignItems={"center"}>
                     <Menu>

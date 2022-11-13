@@ -1,8 +1,62 @@
-import { Flex, SimpleGrid, Tab, TabList, Tabs } from "@chakra-ui/react";
+import { SearchIcon } from "@chakra-ui/icons";
+import {
+    Flex,
+    Input,
+    InputGroup,
+    InputLeftElement,
+    SimpleGrid,
+    Stack,
+    Tab,
+    TabList,
+    Tabs,
+    useColorModeValue,
+} from "@chakra-ui/react";
 import PostBorder from "./post-border";
 import PostItem from "./post-item";
 
 const testimonials = [
+    {
+        name: "Brandon P.",
+        username: "brandonp",
+        content:
+            "It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!",
+        avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+    },
+    {
+        name: "Brandon P.",
+        username: "brandonp",
+        content:
+            "It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!",
+        avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+    },
+    {
+        name: "Brandon P.",
+        username: "brandonp",
+        content:
+            "It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!",
+        avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+    },
+    {
+        name: "Brandon P.",
+        username: "brandonp",
+        content:
+            "It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!",
+        avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+    },
+    {
+        name: "Brandon P.",
+        username: "brandonp",
+        content:
+            "It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!",
+        avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+    },
+    {
+        name: "Brandon P.",
+        username: "brandonp",
+        content:
+            "It really saves me time and effort. It is exactly what our business has been lacking. EEZY is the most valuable business resource we have EVER purchased. After using EEZY my business skyrocketed!",
+        avatar: "https://images.unsplash.com/photo-1603415526960-f7e0328c63b1?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80",
+    },
     {
         name: "Brandon P.",
         username: "brandonp",
@@ -34,6 +88,7 @@ const testimonials = [
 ];
 
 const PostStream = ({ homePage = false }) => {
+    const bgColor = useColorModeValue("white", "gray.800");
     return (
         <Flex
             textAlign={"center"}
@@ -56,17 +111,29 @@ const PostStream = ({ homePage = false }) => {
                     />
                 )}
                 {homePage && (
-                    <PostBorder
-                        children={
-                            <Tabs variant="soft-rounded" colorScheme={"purple"}>
-                                <TabList>
-                                    <Tab>Featured</Tab>
-                                    <Tab>New</Tab>
-                                    <Tab>Popular</Tab>
-                                </TabList>
-                            </Tabs>
-                        }
-                    />
+                    <Stack spacing={5}>
+                        <InputGroup width={"full"} rounded={"xl"} bg={bgColor}>
+                            <InputLeftElement
+                                pointerEvents="none"
+                                children={<SearchIcon color="gray.500" />}
+                            />
+                            <Input type="tel" placeholder="Search smallTalk" />
+                        </InputGroup>
+                        <PostBorder
+                            children={
+                                <Tabs
+                                    variant="soft-rounded"
+                                    colorScheme={"purple"}
+                                >
+                                    <TabList>
+                                        <Tab>Featured</Tab>
+                                        <Tab>New</Tab>
+                                        <Tab>Popular</Tab>
+                                    </TabList>
+                                </Tabs>
+                            }
+                        />
+                    </Stack>
                 )}
                 {testimonials.map((cardInfo, index) => (
                     <PostItem {...cardInfo} index={index} />
