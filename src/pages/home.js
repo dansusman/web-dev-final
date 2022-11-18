@@ -1,19 +1,8 @@
-import { Stack } from "@chakra-ui/react";
 import React from "react";
-import NavigationSidebar from "../components/navigation-sidebar";
+import BasicPage from "../components/basic-page";
 import PostStream from "../components/post-stream";
 const HomePage = () => {
-    return (
-        <>
-            <NavigationSidebar
-                children={
-                    <Stack>
-                        <PostStream homePage={true} />
-                    </Stack>
-                }
-            />
-        </>
-    );
+    return <BasicPage children={<PostStream homePage="true" />} />;
 };
 
 export default HomePage;

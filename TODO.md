@@ -10,8 +10,6 @@
 ## Ideas
 
 -   [ ] Explore = weather for various locations
--   [ ] no trending, no favorites, no settings in sidebar
--   [ ] no sidebar, just a link smallTalk
 -   [ ] weather icons relating to conditions at the time of posting
     -   cloudy
     -   sunny

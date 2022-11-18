@@ -11,7 +11,6 @@ const PostStream = ({ homePage = false }) => {
             textAlign={"center"}
             justifyContent={"center"}
             direction={"column"}
-            width={homePage ? "90%" : "full"}
         >
             <SimpleGrid columns={{ base: 1 }} spacing={"10"}>
                 {!homePage && (
