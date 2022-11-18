@@ -1,4 +1,16 @@
-import { Avatar, chakra, Flex, Heading, Stack } from "@chakra-ui/react";
+import {
+    Avatar,
+    Button,
+    chakra,
+    CloseButton,
+    Flex,
+    Heading,
+    HStack,
+    IconButton,
+    Stack,
+} from "@chakra-ui/react";
+import NightsStayIcon from "@mui/icons-material/NightsStay";
+import Interactions from "./interactions";
 import PostBorder from "./post-border";
 
 const backgrounds = [
@@ -21,8 +33,9 @@ const PostItem = (props) => {
                 <chakra.p fontWeight={"medium"} fontSize={"15px"} pb={4}>
                     {content}
                 </chakra.p>
+                <Interactions />
             </Flex>
-            <Stack ms="5" spacing={0} align="center" minW="100px">
+            <Stack ms="5" me="5" spacing={0} align="center" minW="100px">
                 <Avatar src={avatar} height={"80px"} width={"80px"} />
                 <chakra.p fontWeight={"bold"} fontSize={14}>
                     {name}
@@ -30,7 +43,25 @@ const PostItem = (props) => {
                 <chakra.p fontWeight={"medium"} color={"gray.500"}>
                     @{username}
                 </chakra.p>
+                <Button
+                    pt="4"
+                    flex="1"
+                    variant="ghost"
+                    leftIcon={<NightsStayIcon />}
+                >
+                    Weather
+                </Button>
             </Stack>
+            <IconButton
+                position="absolute"
+                right={"4"}
+                top={"4"}
+                backgroundColor={"transparent"}
+                _hover={{
+                    bg: "transparent",
+                }}
+                icon={<CloseButton />}
+            />
         </PostBorder>
     );
 };

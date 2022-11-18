@@ -1,8 +1,9 @@
-import { Box, HStack } from "@chakra-ui/react";
+import { Box, HStack, Stack } from "@chakra-ui/react";
 import BasicPage from "../components/basic-page";
 import Location from "../components/location";
 import PostStream from "../components/post-stream";
 import ProfileCard from "../components/profile-card";
+import UserSettings from "../components/user-settings";
 
 const ProfilePage = () => {
     return (
@@ -12,10 +13,16 @@ const ProfilePage = () => {
                     <Box w={{ base: "100%", xl: "70%" }}>
                         <PostStream />
                     </Box>
-                    <Box ps="4" display={{ base: "none", xl: "block" }} w="30%">
+                    <Stack
+                        spacing={"12"}
+                        ps="4"
+                        display={{ base: "none", xl: "block" }}
+                        w="30%"
+                    >
                         <ProfileCard />
                         <Location location={"Amsterdam"} />
-                    </Box>
+                        <UserSettings />
+                    </Stack>
                 </HStack>
             }
         ></BasicPage>

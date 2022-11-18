@@ -25,7 +25,6 @@ const ProfileCard = () => {
                 rounded={"xl"}
                 boxShadow={"lg"}
                 p={6}
-                my={12}
                 display={{ base: "none", lg: "block" }}
                 mt="0"
             >
