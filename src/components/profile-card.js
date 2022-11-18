@@ -11,7 +11,7 @@ import {
     IconButton,
     Input,
     Stack,
-    useColorModeValue,
+    useColorModeValue
 } from "@chakra-ui/react";
 
 const ProfileCard = () => {

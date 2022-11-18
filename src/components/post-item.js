@@ -5,7 +5,6 @@ import {
     CloseButton,
     Flex,
     Heading,
-    HStack,
     IconButton,
     Stack,
 } from "@chakra-ui/react";
@@ -44,10 +43,13 @@ const PostItem = (props) => {
                     @{username}
                 </chakra.p>
                 <Button
-                    pt="4"
                     flex="1"
+                    p="2"
                     variant="ghost"
                     leftIcon={<NightsStayIcon />}
+                    onClick={(e) => {
+                        e.preventDefault();
+                    }}
                 >
                     Weather
                 </Button>
@@ -56,6 +58,9 @@ const PostItem = (props) => {
                 position="absolute"
                 right={"4"}
                 top={"4"}
+                onClick={(e) => {
+                    e.preventDefault();
+                }}
                 backgroundColor={"transparent"}
                 _hover={{
                     bg: "transparent",

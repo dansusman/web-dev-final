@@ -1,10 +1,11 @@
-import { Button, Box, Heading, Stack } from "@chakra-ui/react";
-import React from "react";
-import { useLocation } from "react-router";
+import { Button, Heading, Stack } from "@chakra-ui/react";
+
+import BasicPage from "../components/basic-page";
 import { Link } from "react-router-dom";
-import NavigationSidebar from "../components/navigation-sidebar";
 import PostItem from "../components/post-item";
+import React from "react";
 import posts from "../dummyData/posts.json";
+import { useLocation } from "react-router";
 
 const Post = () => {
     const location = useLocation().pathname;
@@ -14,30 +15,34 @@ const Post = () => {
         return p._id === postId;
     });
     return (
-        <NavigationSidebar>
-            {post && (
-                <Link to={`/post/${post._id}`} key={post._id}>
-                    <PostItem {...post} index={post._id} />
-                </Link>
-            )}
-            {!post && (
-                <Stack align={"center"} pt="20">
-                    <Heading>
-                        Sorry, there doesn't seem to be anything here.
-                    </Heading>
-                    <Button
-                        bg={"blue.400"}
-                        color={"white"}
-                        w="80px"
-                        _hover={{
-                            bg: "blue.500",
-                        }}
-                    >
-                        <Link to={"/"}>Retry</Link>
-                    </Button>
-                </Stack>
-            )}
-        </NavigationSidebar>
+        <BasicPage
+            children={
+                <>
+                    {post && (
+                        <Link to={`/post/${post._id}`} key={post._id}>
+                            <PostItem {...post} index={post._id} />
+                        </Link>
+                    )}
+                    {!post && (
+                        <Stack align={"center"} pt="20">
+                            <Heading>
+                                Sorry, there doesn't seem to be anything here.
+                            </Heading>
+                            <Button
+                                bg={"blue.400"}
+                                color={"white"}
+                                w="80px"
+                                _hover={{
+                                    bg: "blue.500",
+                                }}
+                            >
+                                <Link to={"/"}>Retry</Link>
+                            </Button>
+                        </Stack>
+                    )}
+                </>
+            }
+        />
     );
 };
 

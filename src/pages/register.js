@@ -1,12 +1,11 @@
-import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
     Box,
     Button,
     Flex,
     FormControl,
     FormLabel,
-    Heading,
     HStack,
+    Heading,
     Input,
     InputGroup,
     InputRightElement,
@@ -15,6 +14,8 @@ import {
     Text,
     useColorModeValue,
 } from "@chakra-ui/react";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+
 import { useState } from "react";
 
 const SignupCard = () => {

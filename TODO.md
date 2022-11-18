@@ -5,7 +5,6 @@
 -   [ ] Make filter tabs work (profile and home)
 -   [ ] Add redux
 -   [ ] Build out search details page
--   [ ]
 
 ## Ideas
 

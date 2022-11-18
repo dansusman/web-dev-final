@@ -1,9 +1,9 @@
 import { Flex, SimpleGrid, Stack, Tab, TabList, Tabs } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
+import posts from "../dummyData/posts.json";
 import PostBorder from "./post-border";
 import PostItem from "./post-item";
 import SearchBar from "./search-bar";
-import posts from "../dummyData/posts.json";
 
 const PostStream = ({ homePage = false }) => {
     return (

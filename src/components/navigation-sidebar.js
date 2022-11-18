@@ -18,7 +18,7 @@ import {
     useColorMode,
     useColorModeValue,
     useDisclosure,
-    VStack,
+    VStack
 } from "@chakra-ui/react";
 import {
     FiChevronDown,
@@ -29,7 +29,7 @@ import {
     FiSettings,
     FiStar,
     FiSun,
-    FiTrendingUp,
+    FiTrendingUp
 } from "react-icons/fi";
 
 const LinkItems = [

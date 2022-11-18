@@ -9,7 +9,7 @@ import {
     RadioGroup,
     Stack,
     Switch,
-    useColorModeValue,
+    useColorModeValue
 } from "@chakra-ui/react";
 
 const UserSettings = () => {

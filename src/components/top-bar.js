@@ -1,24 +1,9 @@
-import React from "react";
-import {
-    Box,
-    Flex,
-    Avatar,
-    Link,
-    Button,
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
-    MenuDivider,
-    useColorModeValue,
-    Stack,
-    useColorMode,
-    Center,
-    Text,
-    HStack,
-    VStack,
-} from "@chakra-ui/react";
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import {
+    Avatar, Box, Button, Center, Flex, HStack, Link, Menu,
+    MenuButton, MenuDivider, MenuItem, MenuList, Stack, Text, useColorMode, useColorModeValue, VStack
+} from "@chakra-ui/react";
+import React from "react";
 
 export default function NavTopBar() {
     const { colorMode, toggleColorMode } = useColorMode();

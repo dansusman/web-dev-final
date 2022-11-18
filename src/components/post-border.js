@@ -1,8 +1,5 @@
 import {
-    CloseButton,
-    Flex,
-    IconButton,
-    useColorModeValue,
+    Flex, useColorModeValue
 } from "@chakra-ui/react";
 
 const PostBorder = ({ children }, { background }) => {
