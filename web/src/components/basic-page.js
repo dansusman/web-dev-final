@@ -1,6 +1,6 @@
 import { Box, useColorModeValue } from "@chakra-ui/react";
 import React from "react";
-import NavTopBar from "../components/top-bar";
+import NavTopBar from "./top-bar";
 const BasicPage = ({ children }) => {
     return (
         <Box minH="100vh" bg={useColorModeValue("gray.100", "gray.900")}>
