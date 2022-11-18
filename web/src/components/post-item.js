@@ -29,7 +29,7 @@ const PostItem = (props) => {
                 justifyContent={"space-between"}
             >
                 <Heading size="lg">{title}</Heading>
-                <chakra.p fontWeight={"medium"} fontSize={"15px"} pb={4}>
+                <chakra.p fontWeight={"medium"} fontSize={"15px"} pt={4} pb={4}>
                     {content}
                 </chakra.p>
                 <Interactions />

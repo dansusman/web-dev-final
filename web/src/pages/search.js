@@ -2,13 +2,20 @@ import { Button, Flex, Heading, SimpleGrid, Stack } from "@chakra-ui/react";
 
 import { Link } from "react-router-dom";
 import PostItem from "../components/post-item";
-import React from "react";
+import React, { useEffect } from "react";
 import SearchBar from "../components/search-bar";
-import posts from "../dummyData/posts.json";
 import { useLocation } from "react-router";
 import BasicPage from "../components/basic-page";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import { findPostsThunk } from "../services/posts-thunks";
 
 const Search = () => {
+    const { posts, loading } = useSelector((state) => state.postsData);
+    const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(findPostsThunk());
+    }, [dispatch]);
     const location = useLocation().pathname;
     const splitLocation = location.split("/");
     const searchText = decodeURI(splitLocation[splitLocation.length - 1]);
@@ -18,12 +25,13 @@ const Search = () => {
             p.content.toLowerCase().includes(searchText)
         );
     });
-    console.log(results);
+    console.log(searchText, posts, results);
     return (
         <BasicPage
             children={
                 <>
-                    {results.length > 0 && (
+                    {loading && <Heading>Loading ...</Heading>}
+                    {!loading && results.length > 0 && (
                         <Stack spacing={5}>
                             <SearchBar />
                             <Flex
@@ -47,7 +55,7 @@ const Search = () => {
                             </Flex>
                         </Stack>
                     )}
-                    {results.length === 0 && (
+                    {!loading && results.length === 0 && (
                         <Stack spacing={5}>
                             <SearchBar content={searchText} />
                             <Stack align={"center"} pt="20">

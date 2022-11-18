@@ -5,15 +5,24 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import theme from "./theme";
 import { ChakraProvider } from "@chakra-ui/react";
+import { configureStore } from "@reduxjs/toolkit";
+import postsReducer from "./posts/posts-reducer";
+import { Provider } from "react-redux";
+
+const store = configureStore({
+    reducer: { postsData: postsReducer },
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-    <React.StrictMode>
-        <ChakraProvider theme={theme}>
-            <ColorModeScript initialColorMode="dark" />
-            <App />
-        </ChakraProvider>
-    </React.StrictMode>
+    <Provider store={store}>
+        <React.StrictMode>
+            <ChakraProvider theme={theme}>
+                <ColorModeScript initialColorMode="dark" />
+                <App />
+            </ChakraProvider>
+        </React.StrictMode>
+    </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
