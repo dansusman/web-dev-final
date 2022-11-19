@@ -1,6 +1,12 @@
-import { ChatIcon, StarIcon } from "@chakra-ui/icons";
+import { ChatIcon } from "@chakra-ui/icons";
 import { Button, Stack } from "@chakra-ui/react";
-const Interactions = () => {
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import { useDispatch } from "react-redux";
+import { updatePostThunk } from "../services/posts-thunks";
+
+const Interactions = ({ post }) => {
+    const dispatch = useDispatch();
     return (
         <Stack spacing={"14"} direction={["column", "row"]}>
             <Button
@@ -10,16 +16,31 @@ const Interactions = () => {
                 variant="ghost"
                 leftIcon={<ChatIcon />}
             >
-                Comment
+                {post.replies}
             </Button>
             <Button
                 onClick={(e) => {
+                    dispatch(
+                        updatePostThunk({
+                            ...post,
+                            likes: post.liked
+                                ? post.likes - 1
+                                : (parseInt(post.likes) + 1).toString(),
+                            liked: !post.liked,
+                        })
+                    );
                     e.preventDefault();
                 }}
                 variant="ghost"
-                leftIcon={<StarIcon />}
+                leftIcon={
+                    post.liked ? (
+                        <FavoriteIcon sx={{ color: "red" }} />
+                    ) : (
+                        <FavoriteBorderIcon />
+                    )
+                }
             >
-                Like
+                {post.likes}
             </Button>
         </Stack>
     );

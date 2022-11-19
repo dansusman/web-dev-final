@@ -5,6 +5,7 @@
 -   [ ] Make filter tabs work (profile and home)
 -   [ ] Add redux
 -   [ ] Build out search details page
+-   [ ] Load only 40 posts at a time, multiple pages
 
 ## Ideas
 

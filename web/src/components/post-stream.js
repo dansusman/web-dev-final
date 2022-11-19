@@ -67,9 +67,9 @@ const PostStream = ({ homePage = false }) => {
                                 />
                             </Stack>
                         )}
-                        {posts.map((cardInfo, index) => (
-                            <Link to={`/post/${cardInfo._id}`} key={index}>
-                                <PostItem {...cardInfo} index={index} />
+                        {posts.map((post, index) => (
+                            <Link to={`/post/${post._id}`} key={index}>
+                                <PostItem post={post} index={index} />
                             </Link>
                         ))}
                     </SimpleGrid>
