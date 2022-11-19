@@ -9,6 +9,7 @@ const PostsController = (app) => {
 };
 const createPost = (req, res) => {
     const newPost = req.body;
+    const newDate = new Date();
     newPost._id = new Date().getTime() + "";
     newPost.likes = 0;
     newPost.dislikes = 0;
@@ -16,6 +17,8 @@ const createPost = (req, res) => {
     newPost.disliked = false;
     newPost.reposts = 0;
     newPost.replies = 0;
+    newPost.created = newDate;
+    newPost.updated = newDate;
     posts.push(newPost);
     res.json(newPost);
 };
@@ -27,10 +30,11 @@ const findPosts = (req, res) => {
 const updatePost = (req, res) => {
     const postIdToUpdate = req.params.tid;
     const updates = req.body;
+    const newDate = new Date();
     const postIndex = posts.findIndex(
         (t) => t._id.toString() === postIdToUpdate
     );
-    posts[postIndex] = { ...posts[postIndex], ...updates };
+    posts[postIndex] = { ...posts[postIndex], ...updates, updated: newDate };
     res.sendStatus(200);
 };
 

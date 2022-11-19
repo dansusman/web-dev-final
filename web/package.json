@@ -17,6 +17,7 @@
     "bootstrap": "^5.2.2",
     "chakra": "^0.0.3",
     "framer-motion": "^7.6.6",
+    "lodash": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.6.0",

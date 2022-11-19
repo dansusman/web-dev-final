@@ -12,7 +12,6 @@ const CreatePost = () => {
             rounded={"xl"}
             bg={bgColor}
             onClick={() => {
-                console.log("clicked");
                 handleClick();
             }}
         >
