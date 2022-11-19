@@ -1,6 +1,8 @@
 import {
+    Avatar,
     Flex,
     Heading,
+    HStack,
     SimpleGrid,
     Stack,
     Tab,
@@ -8,13 +10,12 @@ import {
     Tabs,
 } from "@chakra-ui/react";
 import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { findPostsThunk } from "../services/posts-thunks";
+import CreatePost from "./create-post";
 import PostBorder from "./post-border";
 import PostItem from "./post-item";
-import SearchBar from "./search-bar";
 
 const PostStream = ({ homePage = false }) => {
     const { posts, loading } = useSelector((state) => state.postsData);
@@ -50,7 +51,10 @@ const PostStream = ({ homePage = false }) => {
                         )}
                         {homePage && (
                             <Stack spacing={5}>
-                                <SearchBar />
+                                <HStack spacing={5}>
+                                    <Avatar />
+                                    <CreatePost />
+                                </HStack>
                                 <PostBorder
                                     children={
                                         <Tabs

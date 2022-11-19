@@ -3,7 +3,6 @@ import { Button, Flex, Heading, SimpleGrid, Stack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import PostItem from "../components/post-item";
 import React, { useEffect } from "react";
-import SearchBar from "../components/search-bar";
 import { useLocation } from "react-router";
 import BasicPage from "../components/basic-page";
 import { useDispatch } from "react-redux";
@@ -25,7 +24,6 @@ const Search = () => {
             p.content.toLowerCase().includes(searchText)
         );
     });
-    console.log(searchText, posts, results);
     return (
         <BasicPage
             children={
@@ -33,7 +31,6 @@ const Search = () => {
                     {loading && <Heading>Loading ...</Heading>}
                     {!loading && results.length > 0 && (
                         <Stack spacing={5}>
-                            <SearchBar />
                             <Flex
                                 textAlign={"center"}
                                 justifyContent={"center"}
@@ -48,7 +45,10 @@ const Search = () => {
                                             to={`/post/${post._id}`}
                                             key={index}
                                         >
-                                            <PostItem {...post} index={index} />
+                                            <PostItem
+                                                post={post}
+                                                index={index}
+                                            />
                                         </Link>
                                     ))}
                                 </SimpleGrid>
@@ -57,7 +57,6 @@ const Search = () => {
                     )}
                     {!loading && results.length === 0 && (
                         <Stack spacing={5}>
-                            <SearchBar content={searchText} />
                             <Stack align={"center"} pt="20">
                                 <Heading>
                                     Sorry, there doesn't seem to be anything

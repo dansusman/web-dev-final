@@ -1,9 +1,25 @@
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import {
-    Avatar, Box, Button, Center, Flex, HStack, Link, Menu,
-    MenuButton, MenuDivider, MenuItem, MenuList, Stack, Text, useColorMode, useColorModeValue, VStack
+    Avatar,
+    Box,
+    Button,
+    Center,
+    Flex,
+    HStack,
+    Link,
+    Menu,
+    MenuButton,
+    MenuDivider,
+    MenuItem,
+    MenuList,
+    Stack,
+    Text,
+    useColorMode,
+    useColorModeValue,
+    VStack,
 } from "@chakra-ui/react";
 import React from "react";
+import SearchBar from "./search-bar";
 
 export default function NavTopBar() {
     const { colorMode, toggleColorMode } = useColorMode();
@@ -24,8 +40,9 @@ export default function NavTopBar() {
                     >
                         smallTalk
                     </Link>
+                    <SearchBar />
                     <Flex alignItems={"center"}>
-                        <Stack direction={"row"} spacing={5}>
+                        <Stack direction={"row"}>
                             <Button onClick={toggleColorMode}>
                                 {colorMode === "light" ? (
                                     <MoonIcon />

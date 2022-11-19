@@ -1,11 +1,13 @@
 -   [ ] Add DB for posts and users
--   [ ] Add API functionality
--   [ ] Add thumbs up and reply functionality
--   [ ] Add create new post, update post, etc.
+-   [ ] Add weather API
+-   [x] Add thumbs up functionality
+-   [ ] Add reply functionality
+-   [x] Add create new post, update post, etc.
 -   [ ] Make filter tabs work (profile and home)
--   [ ] Add redux
+-   [x] Add redux
 -   [ ] Build out search details page
 -   [ ] Load only 40 posts at a time, multiple pages
+-   [ ] Decouple homePage and post stream
 
 ## Ideas
 

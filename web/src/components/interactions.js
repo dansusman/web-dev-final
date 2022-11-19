@@ -1,7 +1,7 @@
 import { ChatIcon } from "@chakra-ui/icons";
 import { Button, Stack } from "@chakra-ui/react";
-import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useDispatch } from "react-redux";
 import { updatePostThunk } from "../services/posts-thunks";
 

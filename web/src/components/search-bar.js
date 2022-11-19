@@ -3,12 +3,12 @@ import {
     Input,
     InputGroup,
     InputLeftElement,
-    useColorModeValue
+    useColorModeValue,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useNavigate } from "react-router";
 
-const SearchBar = (thing = false, content = "") => {
+const SearchBar = () => {
     const bgColor = useColorModeValue("white", "gray.800");
     const [searchText, setSearchText] = useState("");
     const inputHandler = (e) => {
@@ -26,8 +26,9 @@ const SearchBar = (thing = false, content = "") => {
     };
     return (
         <InputGroup
-            width={"full"}
-            rounded={"xl"}
+            ms="4"
+            width={"70%"}
+            rounded={"full"}
             bg={bgColor}
             onChange={inputHandler}
             onKeyUp={handleSearch}
@@ -36,7 +37,7 @@ const SearchBar = (thing = false, content = "") => {
                 pointerEvents="none"
                 children={<SearchIcon color="gray.500" />}
             />
-            <Input type="tel" placeholder="Search smallTalk" />
+            <Input rounded={"full"} type="tel" placeholder="Search smallTalk" />
         </InputGroup>
     );
 };

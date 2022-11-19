@@ -7,6 +7,7 @@ import Post from "./pages/post-details";
 import Search from "./pages/search";
 import ProfilePage from "./pages/profile";
 import SignupCard from "./pages/register";
+import Submit from "./pages/submit";
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
                     <Route path="/register" element={<SignupCard />}></Route>
                     <Route path="/post/*" element={<Post />}></Route>
                     <Route path="/search/*" element={<Search />}></Route>
+                    <Route path="/submit/*" element={<Submit />}></Route>
                 </Routes>
             </div>
         </BrowserRouter>
