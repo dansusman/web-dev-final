@@ -3,14 +3,17 @@ import { Button, Stack } from "@chakra-ui/react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
 import { updatePostThunk } from "../services/posts-thunks";
 
 const Interactions = ({ post }) => {
   const dispatch = useDispatch();
+  const nav = useNavigate();
   return (
     <Stack spacing={"14"} direction={["column", "row"]}>
       <Button
         onClick={(e) => {
+          nav(`/post/${post._id}`);
           e.preventDefault();
         }}
         variant="ghost"

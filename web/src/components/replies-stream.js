@@ -1,10 +1,10 @@
 import ReplyItem from "./reply-item";
 
-const RepliesStream = ({ replies }) => {
+const RepliesStream = ({ replies, post }) => {
   return (
     <>
-      {replies.map((r) => (
-        <ReplyItem reply={r}></ReplyItem>
+      {replies.map((r, index) => (
+        <ReplyItem key={index} reply={r} post={post}></ReplyItem>
       ))}
     </>
   );

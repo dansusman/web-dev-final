@@ -9,6 +9,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { findPostsThunk } from "../services/posts-thunks";
 import RepliesStream from "../components/replies-stream";
+import CreateReply from "../components/create-reply";
 
 const Post = () => {
   const { posts, loading } = useSelector((state) => state.postsData);
@@ -32,7 +33,11 @@ const Post = () => {
               <Link to={`/post/${post._id}`} key={post._id}>
                 <PostItem post={post} index={post._id} />
               </Link>
-              <RepliesStream replies={post.replies || []} />
+              <CreateReply post={post} />
+              <RepliesStream
+                post={post}
+                replies={post.replies || []}
+              />
             </Stack>
           )}
           {!loading && !post && (

@@ -1,24 +1,29 @@
 import {
   Avatar,
-  Button,
   chakra,
   CloseButton,
-  Flex,
-  Heading,
   HStack,
   IconButton,
   Stack,
   Text,
 } from "@chakra-ui/react";
-import NightsStayIcon from "@mui/icons-material/NightsStay";
 import { useDispatch } from "react-redux";
-import { deletePostThunk } from "../services/posts-thunks";
+import { updatePostThunk } from "../services/posts-thunks";
 import ReplyBorder from "./reply-border";
 
-const ReplyItem = ({ reply }) => {
+const ReplyItem = ({ reply, post }) => {
   const dispatch = useDispatch();
   const deleteHandler = (id) => {
-    dispatch(deletePostThunk(id));
+    const withoutId = post.replies.filter(
+      (p) => parseInt(p._id) !== parseInt(id)
+    );
+    dispatch(
+      updatePostThunk({
+        ...post,
+        replies: withoutId,
+        repliesCount: post.repliesCount - 1,
+      })
+    );
   };
   return (
     <ReplyBorder>
