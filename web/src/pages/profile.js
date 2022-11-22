@@ -6,16 +6,26 @@ import {
   TabList,
   Tabs,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import BasicPage from "../components/basic-page";
 import Location from "../components/location";
 import PostBorder from "../components/post-border";
 import PostStream from "../components/post-stream";
 import ProfileCard from "../components/profile-card";
 import UserSettings from "../components/user-settings";
+import { findWeatherThunk } from "../services/location-thunks";
 
 const ProfilePage = () => {
   const [mine, setMine] = useState(true);
+  const { locations, loading } = useSelector(
+    (state) => state.locationsData
+  );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(findWeatherThunk("London"));
+  }, [dispatch]);
+
   return (
     <BasicPage
       children={
@@ -42,7 +52,7 @@ const ProfilePage = () => {
             w="30%"
           >
             <ProfileCard />
-            <Location location={"Amsterdam"} />
+            <Location location={locations[0]} />
             <UserSettings />
           </Stack>
         </HStack>

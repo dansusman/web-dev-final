@@ -10,6 +10,7 @@ import {
 } from "@chakra-ui/react";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
 import { useDispatch } from "react-redux";
+import { findWeatherThunk } from "../services/location-thunks";
 import { deletePostThunk } from "../services/posts-thunks";
 import Interactions from "./interactions";
 import PostBorder from "./post-border";
@@ -67,6 +68,7 @@ const PostItem = ({ post }) => {
           leftIcon={<NightsStayIcon />}
           onClick={(e) => {
             e.preventDefault();
+            dispatch(findWeatherThunk("London"));
           }}
         >
           Weather
