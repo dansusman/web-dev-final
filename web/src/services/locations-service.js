@@ -9,13 +9,14 @@ const getLatLon = async (location) => {
   return result;
 };
 
-const url = async (location) => {
+const url = async (location, imperial) => {
   const latAndLon = await getLatLon(location);
-  return `http://api.openweathermap.org/data/2.5/weather?lat=${latAndLon[0]}&lon=${latAndLon[1]}&appid=${apiKey}`;
+  const units = imperial ? "imperial" : "metric";
+  return `http://api.openweathermap.org/data/2.5/weather?lat=${latAndLon[0]}&lon=${latAndLon[1]}&units=${units}&appid=${apiKey}`;
 };
 
-export const fetchWeather = async (location) => {
-  const apiUrl = await url(location);
+export const fetchWeather = async (location, imperial) => {
+  const apiUrl = await url(location, imperial);
   const response = await axios.post(apiUrl);
   return response.data;
 };
