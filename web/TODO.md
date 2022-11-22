@@ -5,8 +5,9 @@
 -   [x] Add create new post, update post, etc.
 -   [ ] Make filter tabs work (profile and home)
 -   [x] Add redux
--   [ ] Build out search details page
--   [ ] Load only 40 posts at a time, multiple pages
+-   [x] Build out search details page
+-   [ ] Load only 40 posts at a time, multiple pages?
+        - might add significant complexity
 -   [x] Decouple homePage and post stream
 
 ## Ideas
