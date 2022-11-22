@@ -46,7 +46,7 @@ const CreateReply = ({ post }) => {
           onClick={() => {
             const newPost = {
               content: text,
-              username: "Bob",
+              username: "Dylan",
               _id: new Date().getTime() + "",
             };
             const newPosts = (post.replies || []).concat(newPost);
