@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Center,
+  chakra,
   Flex,
   HStack,
   Link,
@@ -55,12 +56,7 @@ export default function NavTopBar() {
                   minW={0}
                 >
                   <HStack>
-                    <Avatar
-                      size={"sm"}
-                      src={
-                        "https://images.unsplash.com/photo-1619946794135-5bc917a27793?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9"
-                      }
-                    />
+                    <Avatar size={"sm"} />
                     <VStack
                       display={{
                         base: "none",
@@ -70,9 +66,9 @@ export default function NavTopBar() {
                       spacing="1px"
                       ml="2"
                     >
-                      <Text fontSize="sm">Justina Clark</Text>
+                      <Text fontSize="sm">Philip Cortez</Text>
                       <Text fontSize="xs" color="gray.600">
-                        Admin
+                        Moderator
                       </Text>
                     </VStack>
                   </HStack>
@@ -80,18 +76,15 @@ export default function NavTopBar() {
                 <MenuList alignItems={"center"}>
                   <br />
                   <Center>
-                    <Avatar
-                      size={"lg"}
-                      src={
-                        "https://avatars.dicebear.com/api/male/username.svg"
-                      }
-                    />
+                    <Avatar size={"lg"} />
                   </Center>
                   <Center>
-                    <p>Username</p>
+                    <chakra.p color={"gray.500"}>
+                      @weatherman3
+                    </chakra.p>
                   </Center>
                   <Center>
-                    <p>Admin</p>
+                    <chakra.p color={"gray.500"}>Moderator</chakra.p>
                   </Center>
                   <MenuDivider mb="0" />
                   <MenuItem as={Link} href="/profile">
