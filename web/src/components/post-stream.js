@@ -1,5 +1,5 @@
 import { Flex, Heading, SimpleGrid } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { findPostsThunk } from "../services/posts-thunks";
@@ -9,7 +9,7 @@ const PostStream = ({ chronological = true }) => {
   const { posts, loading } = useSelector((state) => state.postsData);
   const dispatch = useDispatch();
   useEffect(() => {
-    dispatch(findPostsThunk(chronological));
+    dispatch(findPostsThunk(true));
   }, [dispatch]);
   return (
     <>

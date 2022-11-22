@@ -36,7 +36,7 @@ const PostItem = ({ post }) => {
       >
         <HStack>
           <Heading size="lg">{post.title}</Heading>
-          {timePretty != "" && (
+          {timePretty !== "" && (
             <chakra.p fontWeight={"medium"} color={"gray.500"}>
               {timePretty}
             </chakra.p>
