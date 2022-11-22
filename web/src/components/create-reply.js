@@ -30,6 +30,7 @@ const CreateReply = ({ post }) => {
             sm: "sm",
           }}
           onChange={contentHandler}
+          value={text}
           bg={bgColor}
         />
       </FormControl>
@@ -49,7 +50,6 @@ const CreateReply = ({ post }) => {
               _id: new Date().getTime() + "",
             };
             const newPosts = (post.replies || []).concat(newPost);
-            console.log(newPost);
             dispatch(
               updatePostThunk({
                 ...post,
@@ -57,6 +57,7 @@ const CreateReply = ({ post }) => {
                 replies: newPosts,
               })
             );
+            setText("");
           }}
         >
           Submit
