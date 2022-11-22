@@ -3,7 +3,6 @@ import {
   chakra,
   CloseButton,
   HStack,
-  IconButton,
   Stack,
   Text,
 } from "@chakra-ui/react";
@@ -47,7 +46,7 @@ const ReplyItem = ({ reply, post }) => {
           {reply.content}
         </Text>
       </HStack>
-      <IconButton
+      <CloseButton
         position="absolute"
         right={"2"}
         top={"2"}
@@ -59,7 +58,6 @@ const ReplyItem = ({ reply, post }) => {
         _hover={{
           bg: "transparent",
         }}
-        icon={<CloseButton />}
       />
     </ReplyBorder>
   );
