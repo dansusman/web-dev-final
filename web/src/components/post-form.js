@@ -29,6 +29,7 @@ export default function PostForm() {
             title: title,
             content: text,
             time: new Date(),
+            username: "Bob",
         };
         dispatch(createPostThunk(newPost));
         nav("/");
