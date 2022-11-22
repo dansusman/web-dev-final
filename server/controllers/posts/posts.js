@@ -10,6 +10,7 @@ export default [
       "Morbi porttitor lorem id ligula. Suspendisse ornare consequat lectus. In est risus, auctor sed, tristique in, tempus sit amet, sem.",
     repliesCount: "5867",
     title: "Koelpin-Schmitt",
+    time: "2022-11-15",
     replies: [
       {
         _id: 223523905823095,
@@ -30,6 +31,7 @@ export default [
         image: "http://dummyimage.com/247x100.png/dddddd/000000",
         likes: "932",
         liked: true,
+        time: "2022-11-15",
         content:
           "Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.",
         repliesCount: "67",
@@ -60,6 +62,7 @@ export default [
       "Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.",
     repliesCount: "67",
     title: "Collins-Cruickshank",
+    time: "2022-11-15",
   },
   {
     _id: 3,
@@ -72,6 +75,7 @@ export default [
       "Integer ac leo. Pellentesque ultrices mattis odio. Donec vitae nisi.",
     repliesCount: "66287",
     title: "Krajcik Group",
+    time: "2022-11-15",
   },
   {
     _id: 4,
@@ -84,6 +88,7 @@ export default [
       "Suspendisse potenti. In eleifend quam a odio. In hac habitasse platea dictumst.",
     repliesCount: "90770",
     title: "Kub, Dach and Toy",
+    time: "2022-11-15",
   },
   {
     _id: 5,
@@ -96,6 +101,7 @@ export default [
       "Fusce consequat. Nulla nisl. Nunc nisl.\n\nDuis bibendum, felis sed interdum venenatis, turpis enim blandit mi, in porttitor pede justo eu massa. Donec dapibus. Duis at velit eu est congue elementum.",
     repliesCount: "1",
     title: "Herzog-Satterfield",
+    time: "2022-11-15",
   },
   {
     _id: 6,
@@ -108,6 +114,7 @@ export default [
       "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.",
     repliesCount: "39228",
     title: "Marquardt, Rodriguez and Herman",
+    time: "2022-11-15",
   },
   {
     _id: 7,
