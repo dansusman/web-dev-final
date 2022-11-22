@@ -62,7 +62,7 @@ const PostItem = ({ post }) => {
           @{post.username}
         </chakra.p>
         <Button
-          flex="1"
+          // flex="1"
           p="2"
           variant="ghost"
           leftIcon={<NightsStayIcon />}
