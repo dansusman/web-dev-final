@@ -5,6 +5,7 @@ import {
   CloseButton,
   Flex,
   Heading,
+  HStack,
   Stack,
 } from "@chakra-ui/react";
 import NightsStayIcon from "@mui/icons-material/NightsStay";
@@ -18,6 +19,14 @@ const PostItem = ({ post }) => {
   const deleteHandler = (id) => {
     dispatch(deletePostThunk(id));
   };
+  const dateStamp = post.time;
+  let splitUp = [];
+  let timePretty = "";
+  if (dateStamp != null) {
+    splitUp = dateStamp.split("T");
+    splitUp = splitUp[0].split("-");
+    timePretty = splitUp[1] + "/" + splitUp[2] + "/" + splitUp[0];
+  }
   return (
     <PostBorder>
       <Flex
@@ -25,7 +34,14 @@ const PostItem = ({ post }) => {
         textAlign={"left"}
         justifyContent={"space-between"}
       >
-        <Heading size="lg">{post.title}</Heading>
+        <HStack>
+          <Heading size="lg">{post.title}</Heading>
+          {timePretty != "" && (
+            <chakra.p fontWeight={"medium"} color={"gray.500"}>
+              {timePretty}
+            </chakra.p>
+          )}
+        </HStack>
         <chakra.p
           fontWeight={"medium"}
           fontSize={"15px"}

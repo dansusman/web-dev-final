@@ -10,7 +10,7 @@ const PostStream = ({ chronological = true }) => {
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(findPostsThunk(chronological));
-  }, [dispatch, chronological]);
+  }, [dispatch]);
   return (
     <>
       {loading && <Heading>Loading ...</Heading>}

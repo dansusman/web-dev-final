@@ -27,7 +27,7 @@ export const findPosts = async (chronological) => {
       posts,
       (a) => a.created === undefined
     );
-    grouped[1].sort((a, b) => a.created > b.created);
+    grouped[1].sort((a, b) => b.created > a.created);
     posts = grouped[1].concat(grouped[0]);
   }
   return posts;
