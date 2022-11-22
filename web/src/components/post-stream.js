@@ -1,24 +1,11 @@
-import {
-  Avatar,
-  Flex,
-  Heading,
-  HStack,
-  SimpleGrid,
-  Stack,
-  Tab,
-  TabList,
-  Tabs,
-} from "@chakra-ui/react";
+import { Flex, Heading, SimpleGrid } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { findPostsThunk } from "../services/posts-thunks";
-import CreatePost from "./create-post";
-import PostBorder from "./post-border";
 import PostItem from "./post-item";
 
-const PostStream = ({ homePage = false }) => {
-  const [chronological, setChronological] = useState(true);
+const PostStream = ({ chronological = true }) => {
   const { posts, loading } = useSelector((state) => state.postsData);
   const dispatch = useDispatch();
   useEffect(() => {
@@ -34,44 +21,6 @@ const PostStream = ({ homePage = false }) => {
           direction={"column"}
         >
           <SimpleGrid columns={{ base: 1 }} spacing={"10"}>
-            {!homePage && (
-              <PostBorder
-                children={
-                  <Tabs variant="soft-rounded" colorScheme={"purple"}>
-                    <TabList>
-                      <Tab>All Posts</Tab>
-                      <Tab>My Posts</Tab>
-                      <Tab>Liked Posts</Tab>
-                    </TabList>
-                  </Tabs>
-                }
-              />
-            )}
-            {homePage && (
-              <Stack spacing={5}>
-                <HStack spacing={5}>
-                  <Avatar />
-                  <CreatePost />
-                </HStack>
-                <PostBorder
-                  children={
-                    <Tabs
-                      variant="soft-rounded"
-                      colorScheme={"purple"}
-                    >
-                      <TabList>
-                        <Tab onClick={() => setChronological(true)}>
-                          New
-                        </Tab>
-                        <Tab onClick={() => setChronological(false)}>
-                          Popular
-                        </Tab>
-                      </TabList>
-                    </Tabs>
-                  }
-                />
-              </Stack>
-            )}
             {posts.map((post, index) => (
               <Link to={`/post/${post._id}`} key={index}>
                 <PostItem post={post} index={index} />
