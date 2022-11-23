@@ -20,10 +20,15 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import React from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router";
+import { logoutThunk } from "../services/users-thunks";
 import SearchBar from "./search-bar";
 
-export default function NavTopBar() {
+const NavTopBar = ({ user }) => {
   const { colorMode, toggleColorMode } = useColorMode();
+  const nav = useNavigate();
+  const dispatch = useDispatch();
   return (
     <>
       <Box px="4" mb="5">
@@ -66,10 +71,12 @@ export default function NavTopBar() {
                       spacing="1px"
                       ml="2"
                     >
-                      <Text fontSize="sm">Philip Cortez</Text>
-                      <Text fontSize="xs" color="gray.600">
-                        Moderator
-                      </Text>
+                      <Text fontSize="sm">{user?.username}</Text>
+                      {user?.type === "Moderator" && (
+                        <Text fontSize="xs" color="gray.600">
+                          {user?.type}
+                        </Text>
+                      )}
                     </VStack>
                   </HStack>
                 </MenuButton>
@@ -80,17 +87,26 @@ export default function NavTopBar() {
                   </Center>
                   <Center>
                     <chakra.p color={"gray.500"}>
-                      @weatherman3
+                      @{user?.username}
                     </chakra.p>
                   </Center>
                   <Center>
-                    <chakra.p color={"gray.500"}>Moderator</chakra.p>
+                    {user?.type === "Moderator" && (
+                      <chakra.p color={"gray.500"}>
+                        {user?.type}
+                      </chakra.p>
+                    )}
                   </Center>
                   <MenuDivider mb="0" />
-                  <MenuItem as={Link} href="/profile">
+                  <MenuItem onClick={() => nav("/profile")}>
                     View Profile
                   </MenuItem>
-                  <MenuItem as={Link} href="/login">
+                  <MenuItem
+                    onClick={() => {
+                      dispatch(logoutThunk());
+                      nav("/login");
+                    }}
+                  >
                     Logout
                   </MenuItem>
                 </MenuList>
@@ -101,4 +117,6 @@ export default function NavTopBar() {
       </Box>
     </>
   );
-}
+};
+
+export default NavTopBar;

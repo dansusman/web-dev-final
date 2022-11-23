@@ -9,11 +9,13 @@ import { configureStore } from "@reduxjs/toolkit";
 import postsReducer from "./posts/posts-reducer";
 import { Provider } from "react-redux";
 import locationsReducer from "./locations/locations-reducer";
+import usersReducer from "./users/users-reducer";
 
 const store = configureStore({
   reducer: {
     postsData: postsReducer,
     locationsData: locationsReducer,
+    users: usersReducer,
   },
 });
 

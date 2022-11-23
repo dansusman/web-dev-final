@@ -1,4 +1,4 @@
-export default [
+const cities = [
   "London",
   "Boston",
   "Amsterdam",
@@ -9,3 +9,5 @@ export default [
   "Sofia",
   "New York City",
 ];
+
+export default cities;
