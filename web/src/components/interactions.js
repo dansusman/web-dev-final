@@ -1,7 +1,8 @@
 import { ChatIcon } from "@chakra-ui/icons";
-import { Button, Stack } from "@chakra-ui/react";
+import { Button, Spacer, Stack } from "@chakra-ui/react";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import NightsStay from "@mui/icons-material/NightsStay";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { updatePostThunk } from "../services/posts-thunks";
@@ -11,6 +12,20 @@ const Interactions = ({ post }) => {
   const nav = useNavigate();
   return (
     <Stack spacing={"14"} direction={["column", "row"]}>
+      {post.location && (
+        <Button
+          // flex="1"
+          p="2"
+          variant="ghost"
+          leftIcon={<NightsStay />}
+          onClick={(e) => {
+            nav("/submit");
+            e.preventDefault();
+          }}
+        >
+          {post.location}
+        </Button>
+      )}
       <Button
         onClick={(e) => {
           nav(`/post/${post._id}`);

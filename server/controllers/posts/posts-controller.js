@@ -1,4 +1,5 @@
-import posts from "./posts.js";
+import items from "./posts.js";
+let posts = items;
 
 const PostsController = (app) => {
   app.post("/api/posts", createPost);

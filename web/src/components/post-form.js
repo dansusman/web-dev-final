@@ -4,9 +4,12 @@ import {
   ButtonGroup,
   Flex,
   FormControl,
+  FormErrorMessage,
   FormHelperText,
+  FormLabel,
   Heading,
   Input,
+  Select,
   SimpleGrid,
   Spacer,
   Textarea,
@@ -18,11 +21,14 @@ import { useToast } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { createPostThunk } from "../services/posts-thunks";
+import locations from "../locations/locations";
 
-export default function PostForm() {
+const PostForm = ({ locationDefault }) => {
   const nav = useNavigate();
   const [text, setText] = useState();
   const [title, setTitle] = useState();
+  const [location, setLocation] = useState(locationDefault);
+  const [showError, setShowError] = useState(false);
   const dispatch = useDispatch();
   const handleSubmit = () => {
     const newPost = {
@@ -30,17 +36,23 @@ export default function PostForm() {
       content: text,
       time: new Date(),
       username: "Bob",
+      location: location,
     };
     dispatch(createPostThunk(newPost));
     nav("/");
   };
   const titleHandler = (e) => {
-    const lowerCase = e.target.value.toLowerCase();
+    setShowError(false);
+    const lowerCase = e.target.value;
     setTitle(lowerCase);
   };
   const contentHandler = (e) => {
-    const lowerCase = e.target.value.toLowerCase();
+    const lowerCase = e.target.value;
     setText(lowerCase);
+  };
+  const locationHandler = (e) => {
+    const lowerCase = e.target.value;
+    setLocation(lowerCase);
   };
   const toast = useToast();
   return (
@@ -64,14 +76,20 @@ export default function PostForm() {
           <Heading w="100%" textAlign={"center"} fontWeight="normal">
             Create a post
           </Heading>
-          <Input
-            placeholder="Title"
-            focusBorderColor="brand.400"
-            rounded="md"
-            onChange={titleHandler}
-          />
-
+          <FormControl id="title" isRequired isInvalid={showError}>
+            <FormLabel>Title</FormLabel>
+            <Input
+              placeholder="Title"
+              focusBorderColor="brand.400"
+              rounded="md"
+              onChange={titleHandler}
+            />
+            {showError && (
+              <FormErrorMessage>Title is required.</FormErrorMessage>
+            )}
+          </FormControl>
           <FormControl id="body-text" mt={1}>
+            <FormLabel>Body</FormLabel>
             <Textarea
               placeholder="Text (optional)"
               rows={3}
@@ -87,6 +105,21 @@ export default function PostForm() {
               world!
             </FormHelperText>
           </FormControl>
+          <FormControl id="location" isRequired isInvalid={showError}>
+            <FormLabel>City</FormLabel>
+            <Select
+              onChange={locationHandler}
+              placeholder="Select Your Location"
+              value={location}
+            >
+              {locations.map((l, index) => (
+                <option key={index}>{l}</option>
+              ))}
+            </Select>
+            {showError && (
+              <FormErrorMessage>City is required.</FormErrorMessage>
+            )}
+          </FormControl>
         </SimpleGrid>
         <ButtonGroup mt="5%" w="100%">
           <Flex w="100%" justifyContent="space-between">
@@ -96,14 +129,18 @@ export default function PostForm() {
               colorScheme="red"
               variant="solid"
               onClick={() => {
-                toast({
-                  title: "Posted.",
-                  description: "Thanks for sharing!",
-                  status: "success",
-                  duration: 3000,
-                  isClosable: true,
-                });
-                handleSubmit(title, text);
+                if (title === undefined || location === undefined) {
+                  setShowError(true);
+                } else {
+                  handleSubmit();
+                  toast({
+                    title: "Posted.",
+                    description: "Thanks for sharing!",
+                    status: "success",
+                    duration: 3000,
+                    isClosable: true,
+                  });
+                }
               }}
             >
               Submit
@@ -113,4 +150,6 @@ export default function PostForm() {
       </Box>
     </>
   );
-}
+};
+
+export default PostForm;

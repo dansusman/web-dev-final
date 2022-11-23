@@ -11,6 +11,7 @@ export default [
     repliesCount: "5867",
     title: "Koelpin-Schmitt",
     time: "2022-11-15",
+    location: "Amsterdam",
     replies: [
       {
         _id: 223523905823095,
@@ -63,6 +64,7 @@ export default [
     repliesCount: "67",
     title: "Collins-Cruickshank",
     time: "2022-11-15",
+    location: "Boston",
   },
   {
     _id: 3,
@@ -76,6 +78,7 @@ export default [
     repliesCount: "66287",
     title: "Krajcik Group",
     time: "2022-11-15",
+    location: "London",
   },
   {
     _id: 4,

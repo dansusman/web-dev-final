@@ -17,6 +17,7 @@ const Location = ({ location }) => {
         boxShadow={"lg"}
         p={6}
       >
+        <Heading size={"md"}>Location Settings</Heading>
         <Heading
           lineHeight={1.1}
           fontSize={{ base: "2xl", sm: "3xl" }}

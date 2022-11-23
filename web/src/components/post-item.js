@@ -1,6 +1,5 @@
 import {
   Avatar,
-  Button,
   chakra,
   CloseButton,
   Flex,
@@ -8,9 +7,7 @@ import {
   HStack,
   Stack,
 } from "@chakra-ui/react";
-import NightsStayIcon from "@mui/icons-material/NightsStay";
 import { useDispatch } from "react-redux";
-import { findWeatherThunk } from "../services/location-thunks";
 import { deletePostThunk } from "../services/posts-thunks";
 import Interactions from "./interactions";
 import PostBorder from "./post-border";
@@ -61,18 +58,6 @@ const PostItem = ({ post }) => {
         <chakra.p fontWeight={"medium"} color={"gray.500"}>
           @{post.username}
         </chakra.p>
-        <Button
-          // flex="1"
-          p="2"
-          variant="ghost"
-          leftIcon={<NightsStayIcon />}
-          onClick={(e) => {
-            e.preventDefault();
-            dispatch(findWeatherThunk("London"));
-          }}
-        >
-          Weather
-        </Button>
       </Stack>
       <CloseButton
         position="absolute"
