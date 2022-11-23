@@ -7,4 +7,5 @@ export default [
   "Beijing",
   "Cape Town",
   "Sofia",
+  "New York City",
 ];
