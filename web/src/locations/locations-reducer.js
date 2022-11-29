@@ -18,10 +18,6 @@ const locationsSlice = createSlice({
         [findWeatherThunk.rejected]: (state) => {
             state.loading = false;
         },
-        // [selectLocationThunk.fulfilled]: (state, action) => {
-        //     state.loading = false;
-        //     state.locationDefault = action.payload;
-        // },
     },
 });
 
