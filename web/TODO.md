@@ -1,5 +1,5 @@
 -   [ ] Add DB for posts and users
--   [ ] Add weather API
+-   [x] Add weather API
 -   [x] Add thumbs up functionality
 -   [x] Add reply functionality
 -   [x] Add create new post, update post, etc.

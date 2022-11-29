@@ -8,27 +8,30 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { configureStore } from "@reduxjs/toolkit";
 import postsReducer from "./posts/posts-reducer";
 import { Provider } from "react-redux";
-import locationsReducer from "./locations/locations-reducer";
+import locationsReducer, {
+    locationSettingReducer,
+} from "./locations/locations-reducer";
 import usersReducer from "./users/users-reducer";
 
 const store = configureStore({
-  reducer: {
-    postsData: postsReducer,
-    locationsData: locationsReducer,
-    users: usersReducer,
-  },
+    reducer: {
+        postsData: postsReducer,
+        locationsData: locationsReducer,
+        users: usersReducer,
+        locationSetting: locationSettingReducer,
+    },
 });
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Provider store={store}>
-    <React.StrictMode>
-      <ChakraProvider theme={theme}>
-        <ColorModeScript initialColorMode="dark" />
-        <App />
-      </ChakraProvider>
-    </React.StrictMode>
-  </Provider>
+    <Provider store={store}>
+        <React.StrictMode>
+            <ChakraProvider theme={theme}>
+                <ColorModeScript initialColorMode="dark" />
+                <App />
+            </ChakraProvider>
+        </React.StrictMode>
+    </Provider>
 );
 
 // If you want to start measuring performance in your app, pass a function
