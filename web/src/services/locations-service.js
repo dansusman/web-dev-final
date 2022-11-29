@@ -1,8 +1,6 @@
 import axios from "axios";
 
 const apiKey = "4736a5f0de940dc3729c1212425f7864";
-const API_BASE = process.env.REACT_APP_API_BASE;
-const LOC_API = `${API_BASE}/location`;
 
 const getLatLon = async (location) => {
     const url = `http://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${apiKey}`;
