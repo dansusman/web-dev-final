@@ -11,10 +11,32 @@ import {
     IconButton,
     Input,
     Stack,
-    useColorModeValue
+    useColorModeValue,
 } from "@chakra-ui/react";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { updateUserThunk } from "../services/users-thunks";
 
-const ProfileCard = () => {
+const ProfileCard = ({ user }) => {
+    const dispatch = useDispatch();
+    const [usernameText, setUsernameText] = useState();
+    const [passwordText, setPasswordText] = useState();
+    const usernameHandler = (e) => {
+        const username = e.target.value;
+        setUsernameText(username);
+    };
+    const passwordHandler = (e) => {
+        const password = e.target.value;
+        setPasswordText(password);
+    };
+    const clickHandler = () => {
+        const changes = {
+            ...user,
+            username: usernameText,
+            password: passwordText,
+        };
+        dispatch(updateUserThunk(user, changes));
+    };
     return (
         <Flex align={"center"} justify={"center"}>
             <Stack
@@ -35,7 +57,7 @@ const ProfileCard = () => {
                     <FormLabel>User Icon</FormLabel>
                     <Stack direction={["column", "row"]} spacing={6}>
                         <Center>
-                            <Avatar size="xl" src="https://bit.ly/sage-adebayo">
+                            <Avatar size="xl" src={user?.image}>
                                 <AvatarBadge
                                     as={IconButton}
                                     size="sm"
@@ -55,25 +77,21 @@ const ProfileCard = () => {
                 <FormControl id="userName" isRequired>
                     <FormLabel>Username</FormLabel>
                     <Input
+                        onChange={usernameHandler}
                         placeholder="weatherman3"
                         _placeholder={{ color: "gray.500" }}
                         type="text"
-                    />
-                </FormControl>
-                <FormControl id="email" isRequired>
-                    <FormLabel>Email address</FormLabel>
-                    <Input
-                        placeholder="your-email@example.com"
-                        _placeholder={{ color: "gray.500" }}
-                        type="email"
+                        defaultValue={user?.username}
                     />
                 </FormControl>
                 <FormControl id="password" isRequired>
                     <FormLabel>Password</FormLabel>
                     <Input
+                        onChange={passwordHandler}
                         placeholder="password"
                         _placeholder={{ color: "gray.500" }}
                         type="password"
+                        defaultValue={user?.password}
                     />
                 </FormControl>
                 <Stack spacing={6} direction={["column", "row"]}>
@@ -94,6 +112,7 @@ const ProfileCard = () => {
                         _hover={{
                             bg: "blue.500",
                         }}
+                        onClick={clickHandler}
                     >
                         Submit
                     </Button>
