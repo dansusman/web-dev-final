@@ -15,13 +15,14 @@ import {
     Textarea,
     useColorModeValue,
 } from "@chakra-ui/react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useToast } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { createPostThunk } from "../services/posts-thunks";
-import locations from "../locations/locations";
+import cities from "../locations/locations";
+import { findWeatherThunk } from "../services/location-thunks";
 
 const PostForm = ({ locationDefault }) => {
     const nav = useNavigate();
@@ -33,6 +34,10 @@ const PostForm = ({ locationDefault }) => {
     const { users } = useSelector((state) => state.users);
     const currentUser = users[0];
     const dispatch = useDispatch();
+    const { locations } = useSelector((state) => state.locationsData);
+    useEffect(() => {
+        dispatch(findWeatherThunk(location));
+    }, [location]);
     const handleSubmit = () => {
         const newPost = {
             title: title,
@@ -40,6 +45,9 @@ const PostForm = ({ locationDefault }) => {
             time: new Date(),
             username: currentUser.username,
             location: location,
+            temperature: locations[0]?.main.temp,
+            conditions: locations[0]?.weather[0].main,
+            weatherIconCode: locations[0]?.weather[0].icon,
         };
         dispatch(createPostThunk(newPost));
         nav("/");
@@ -126,7 +134,7 @@ const PostForm = ({ locationDefault }) => {
                             placeholder="Select Your Location"
                             value={location}
                         >
-                            {locations.map((l, index) => (
+                            {cities.map((l, index) => (
                                 <option key={index}>{l}</option>
                             ))}
                         </Select>
