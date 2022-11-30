@@ -10,9 +10,9 @@
 
 -   [ ] User sessions
 -   [ ] Move Posts to DB
--   [ ] Store location data in Post DB object
--   [ ] Display temp and conditions on PostItem
-    -   [ ] weather icons relating to conditions at the time of posting
+-   [x] Store location data in Post DB object
+-   [x] Display temp and conditions on PostItem
+    -   [x] weather icons relating to conditions at the time of posting
         -   cloudy
         -   sunny
         -   rain
