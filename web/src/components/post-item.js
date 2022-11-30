@@ -7,24 +7,26 @@ import {
     HStack,
     Stack,
 } from "@chakra-ui/react";
+import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { deletePostThunk } from "../services/posts-thunks";
 import Interactions from "./interactions";
 import PostBorder from "./post-border";
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, currentUser }) => {
     const dispatch = useDispatch();
-    const { users } = useSelector((state) => state.users);
-    const currentUser = users[0];
+    const dateStamp = post.time;
+    const timePretty = useMemo(() => {
+        let timePretty = "";
+        if (dateStamp != null && currentUser) {
+            var options = { hour12: !currentUser.twentyFour };
+            timePretty = new Date(dateStamp).toLocaleString("en-US", options);
+        }
+        return timePretty;
+    }, [dateStamp, currentUser]);
     const deleteHandler = (id) => {
         dispatch(deletePostThunk(id));
     };
-    const dateStamp = post.time;
-    let timePretty = "";
-    if (dateStamp != null) {
-        var options = { hour12: !currentUser?.twentyFour };
-        timePretty = new Date(dateStamp).toLocaleString("en-US", options);
-    }
     return (
         <PostBorder>
             <Flex

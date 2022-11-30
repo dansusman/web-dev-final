@@ -6,21 +6,22 @@ import CreatePost from "../components/create-post";
 import PostBorder from "../components/post-border";
 import PostStream from "../components/post-stream";
 import { findPostsThunk } from "../services/posts-thunks";
-import { findAllUsersThunk } from "../services/users-thunks";
+import { findAllUsersThunk, profileThunk } from "../services/users-thunks";
 const HomePage = () => {
     const [chronological, setChronological] = useState(true);
-    const { users } = useSelector((state) => state.users);
+    const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(findAllUsersThunk());
+        dispatch(profileThunk());
     }, [dispatch]);
 
     useEffect(() => {
         dispatch(findPostsThunk(chronological));
     }, [chronological]);
+    console.log(currentUser);
     return (
         <BasicPage
-            user={users[0]}
+            user={currentUser}
             children={
                 <Stack spacing={10}>
                     <Stack spacing={5}>

@@ -43,6 +43,5 @@ export const updateUser = async (userUpdates) => {
         `${BASE_URL}/api/users/${userUpdates._id}`,
         userUpdates
     );
-    console.log(response.data);
-    return response.data;
+    return userUpdates;
 };

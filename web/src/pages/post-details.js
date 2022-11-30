@@ -10,12 +10,15 @@ import { useDispatch } from "react-redux";
 import { findPostsThunk } from "../services/posts-thunks";
 import RepliesStream from "../components/replies-stream";
 import CreateReply from "../components/create-reply";
+import { profileThunk } from "../services/users-thunks";
 
 const Post = () => {
     const { posts, loading } = useSelector((state) => state.postsData);
+    const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(findPostsThunk());
+        dispatch(profileThunk());
     }, [dispatch]);
     const location = useLocation().pathname;
     const splitLocation = location.split("/");
@@ -23,16 +26,20 @@ const Post = () => {
     const post = posts.find((p) => {
         return parseInt(p._id) === postId;
     });
-    console.log(post);
     return (
         <BasicPage
+            user={currentUser}
             children={
                 <>
                     {loading && <Heading>Loading ...</Heading>}
                     {!loading && post && (
                         <Stack spacing={10}>
                             <Link to={`/post/${post._id}`} key={post._id}>
-                                <PostItem post={post} index={post._id} />
+                                <PostItem
+                                    post={post}
+                                    currentUser={currentUser}
+                                    index={post._id}
+                                />
                             </Link>
                             <CreateReply post={post} />
                             <RepliesStream

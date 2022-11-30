@@ -31,8 +31,7 @@ const PostForm = ({ locationDefault }) => {
     const [location, setLocation] = useState(locationDefault);
     const [showTitleError, setShowTitleError] = useState(false);
     const [showLocationError, setShowLocationError] = useState(false);
-    const { users } = useSelector((state) => state.users);
-    const currentUser = users[0];
+    const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
     const { locations } = useSelector((state) => state.locationsData);
     useEffect(() => {

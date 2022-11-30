@@ -12,7 +12,11 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import { findAllUsersThunk, updateUserThunk } from "../services/users-thunks";
+import {
+    findAllUsersThunk,
+    profileThunk,
+    updateUserThunk,
+} from "../services/users-thunks";
 
 const UserSettings = ({ currentUser }) => {
     const dispatch = useDispatch();
@@ -24,15 +28,13 @@ const UserSettings = ({ currentUser }) => {
             ...currentUser,
             twentyFour: !checkedBefore,
         };
+        console.log(updates);
         dispatch(updateUserThunk(updates));
     };
-    useEffect(() => {
-        dispatch(findAllUsersThunk());
-    }, [dispatch]);
 
     useEffect(() => {
         setChecked(currentUser?.twentyFour);
-    }, [currentUser.twentyFour]);
+    }, [currentUser?.twentyFour]);
 
     return (
         <Flex align={"center"} justify={"center"}>
@@ -53,7 +55,14 @@ const UserSettings = ({ currentUser }) => {
                     <RadioGroup defaultValue={"F"}>
                         <HStack spacing="10">
                             <Radio value="F">Fahrenheit</Radio>
-                            <Radio value="C">Celsius</Radio>
+                            <Radio
+                                onClick={() => {
+                                    console.log(currentUser);
+                                }}
+                                value="C"
+                            >
+                                Celsius
+                            </Radio>
                         </HStack>
                     </RadioGroup>
                 </FormControl>
