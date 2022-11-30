@@ -35,7 +35,7 @@ const ProfileCard = ({ user }) => {
             username: usernameText,
             password: passwordText,
         };
-        dispatch(updateUserThunk(user, changes));
+        dispatch(updateUserThunk(changes));
     };
     return (
         <Flex align={"center"} justify={"center"}>

@@ -1,5 +1,4 @@
 import {
-    Button,
     Flex,
     FormControl,
     FormLabel,
@@ -11,27 +10,29 @@ import {
     Switch,
     useColorModeValue,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 import { findAllUsersThunk, updateUserThunk } from "../services/users-thunks";
 
-const UserSettings = () => {
+const UserSettings = ({ currentUser }) => {
     const dispatch = useDispatch();
-    const { users } = useSelector((state) => state.users);
+    const [checked, setChecked] = useState(currentUser?.twentyFour);
     const timeHandler = () => {
-        const currentUser = users[0];
-        if (!currentUser) {
-            return;
-        }
+        const checkedBefore = checked;
+        setChecked(!checked);
         const updates = {
             ...currentUser,
-            twentyFour: !currentUser?.twentyFour,
+            twentyFour: !checkedBefore,
         };
         dispatch(updateUserThunk(updates));
     };
     useEffect(() => {
         dispatch(findAllUsersThunk());
-    }, [dispatch, users]);
+    }, [dispatch]);
+
+    useEffect(() => {
+        setChecked(currentUser?.twentyFour);
+    }, [currentUser.twentyFour]);
 
     return (
         <Flex align={"center"} justify={"center"}>
@@ -62,20 +63,10 @@ const UserSettings = () => {
                     </FormLabel>
                     <Switch
                         id="24-hr-time"
-                        defaultChecked={users[0]?.twentyFour}
+                        defaultChecked={checked}
                         onChange={timeHandler}
                     />
                 </FormControl>
-                <Button
-                    bg={"red.400"}
-                    color={"white"}
-                    w="full"
-                    _hover={{
-                        bg: "red.500",
-                    }}
-                >
-                    Reset
-                </Button>
             </Stack>
         </Flex>
     );

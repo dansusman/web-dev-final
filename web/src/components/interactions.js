@@ -46,7 +46,7 @@ const Interactions = ({ post }) => {
                         updatePostThunk({
                             ...post,
                             likes: post.liked
-                                ? post.likes - 1
+                                ? (parseInt(post.likes) - 1).toString()
                                 : (parseInt(post.likes) + 1).toString(),
                             liked: !post.liked,
                         })
@@ -62,7 +62,7 @@ const Interactions = ({ post }) => {
                     )
                 }
             >
-                {post.likes}
+                {parseInt(post.likes)}
             </Button>
         </Stack>
     );

@@ -1,5 +1,5 @@
 import { Box, HStack, Stack, Tab, TabList, Tabs } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BasicPage from "../components/basic-page";
 import Location from "../components/location";
@@ -8,18 +8,22 @@ import PostStream from "../components/post-stream";
 import ProfileCard from "../components/profile-card";
 import UserSettings from "../components/user-settings";
 import { findWeatherThunk } from "../services/location-thunks";
+import { findAllUsersThunk } from "../services/users-thunks";
 
 const ProfilePage = () => {
-    const [mine, setMine] = useState(true);
-    const { locations, loading } = useSelector((state) => state.locationsData);
+    const { locations } = useSelector((state) => state.locationsData);
     const { users } = useSelector((state) => state.users);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(findWeatherThunk("London"));
     }, [dispatch]);
 
+    useEffect(() => {
+        dispatch(findAllUsersThunk());
+    }, [dispatch]);
     return (
         <BasicPage
+            user={users[0]}
             children={
                 <HStack minH={"100vh"} align="top">
                     <Box w={{ base: "100%", xl: "70%" }}>
@@ -48,7 +52,7 @@ const ProfilePage = () => {
                     >
                         <ProfileCard user={users[0]} />
                         <Location location={locations[0]} />
-                        <UserSettings />
+                        <UserSettings currentUser={users[0]} />
                     </Stack>
                 </HStack>
             }

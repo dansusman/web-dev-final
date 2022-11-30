@@ -6,29 +6,28 @@ const API_BASE = process.env.REACT_APP_API_BASE;
 const POSTS_API = `${API_BASE}/posts`;
 
 export const createPost = async (post) => {
-  const response = await axios.post(`${POSTS_API}`, post);
-  return response.data;
+    const response = await axios.post(`${POSTS_API}`, post);
+    return response.data;
 };
 export const deletePost = async (tid) => {
-  const response = await axios.delete(`${POSTS_API}/${tid}`);
-  return response.data;
+    const response = await axios.delete(`${POSTS_API}/${tid}`);
+    return response.data;
 };
 
 export const updatePost = async (post) => {
-  await axios.put(`${POSTS_API}/${post._id}`, post);
-  return post;
+    await axios.put(`${POSTS_API}/${post._id}`, post);
+    return post;
 };
 
 export const findPosts = async (chronological) => {
-  const response = await axios.get(POSTS_API);
-  let posts = response.data;
-  if (chronological) {
-    const grouped = _.partition(
-      posts,
-      (a) => a.created === undefined
-    );
-    grouped[1].sort((a, b) => b.created > a.created);
-    posts = grouped[1].concat(grouped[0]);
-  }
-  return posts;
+    const response = await axios.get(POSTS_API);
+    let posts = response.data;
+    if (chronological) {
+        const grouped = _.partition(posts, (a) => a.created === undefined);
+        grouped[1].sort((a, b) => b.created > a.created);
+        posts = grouped[1].concat(grouped[0]);
+    } else {
+        posts.sort((a, b) => parseInt(a.likes) < parseInt(b.likes));
+    }
+    return posts;
 };
