@@ -9,10 +9,31 @@ import {
     RadioGroup,
     Stack,
     Switch,
-    useColorModeValue
+    useColorModeValue,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { findAllUsersThunk, updateUserThunk } from "../services/users-thunks";
 
 const UserSettings = () => {
+    const dispatch = useDispatch();
+    const { users } = useSelector((state) => state.users);
+    const timeHandler = () => {
+        const currentUser = users[0];
+        if (!currentUser) {
+            return;
+        }
+        dispatch(
+            updateUserThunk(currentUser, {
+                ...currentUser,
+                twentyFour: !currentUser?.twentyFour,
+            })
+        );
+    };
+    useEffect(() => {
+        dispatch(findAllUsersThunk());
+    }, [dispatch, users]);
+
     return (
         <Flex align={"center"} justify={"center"}>
             <Stack
@@ -40,7 +61,11 @@ const UserSettings = () => {
                     <FormLabel htmlFor="24-hr-time" mb="0">
                         Enable 24 hour time?
                     </FormLabel>
-                    <Switch id="24-hr-time" />
+                    <Switch
+                        id="24-hr-time"
+                        defaultChecked={users[0]?.twentyFour}
+                        onChange={timeHandler}
+                    />
                 </FormControl>
                 <Button
                     bg={"red.400"}

@@ -1,79 +1,74 @@
 import {
-  Avatar,
-  chakra,
-  CloseButton,
-  Flex,
-  Heading,
-  HStack,
-  Stack,
+    Avatar,
+    chakra,
+    CloseButton,
+    Flex,
+    Heading,
+    HStack,
+    Stack,
 } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { deletePostThunk } from "../services/posts-thunks";
 import Interactions from "./interactions";
 import PostBorder from "./post-border";
 
 const PostItem = ({ post }) => {
-  const dispatch = useDispatch();
-  const deleteHandler = (id) => {
-    dispatch(deletePostThunk(id));
-  };
-  const dateStamp = post.time;
-  let splitUp = [];
-  let timePretty = "";
-  if (dateStamp != null) {
-    splitUp = dateStamp.split("T");
-    splitUp = splitUp[0].split("-");
-    timePretty = splitUp[1] + "/" + splitUp[2] + "/" + splitUp[0];
-  }
-  return (
-    <PostBorder>
-      <Flex
-        direction={"column"}
-        textAlign={"left"}
-        justifyContent={"space-between"}
-      >
-        <HStack>
-          <Heading size="lg">{post.title}</Heading>
-          {timePretty !== "" && (
-            <chakra.p fontWeight={"medium"} color={"gray.500"}>
-              {timePretty}
-            </chakra.p>
-          )}
-        </HStack>
-        <chakra.p
-          fontWeight={"medium"}
-          fontSize={"15px"}
-          pt={4}
-          pb={4}
-        >
-          {post.content}
-        </chakra.p>
-        <Interactions post={post} />
-      </Flex>
-      <Stack ms="5" me="5" spacing={0} align="center" minW="100px">
-        <Avatar src={post.image} height={"80px"} width={"80px"} />
-        <chakra.p fontWeight={"bold"} fontSize={14}>
-          {post.name}
-        </chakra.p>
-        <chakra.p fontWeight={"medium"} color={"gray.500"}>
-          @{post.username}
-        </chakra.p>
-      </Stack>
-      <CloseButton
-        position="absolute"
-        right={"4"}
-        top={"4"}
-        onClick={(e) => {
-          e.preventDefault();
-          deleteHandler(post._id);
-        }}
-        backgroundColor={"transparent"}
-        _hover={{
-          bg: "transparent",
-        }}
-      />
-    </PostBorder>
-  );
+    const dispatch = useDispatch();
+    const { users } = useSelector((state) => state.users);
+    const currentUser = users[0];
+    const deleteHandler = (id) => {
+        dispatch(deletePostThunk(id));
+    };
+    const dateStamp = post.time;
+    let timePretty = "";
+    if (dateStamp != null) {
+        var options = { hour12: !currentUser.twentyFour };
+        timePretty = new Date(dateStamp).toLocaleString("en-US", options);
+    }
+    return (
+        <PostBorder>
+            <Flex
+                direction={"column"}
+                textAlign={"left"}
+                justifyContent={"space-between"}
+            >
+                <HStack>
+                    <Heading size="lg">{post.title}</Heading>
+                    {timePretty !== "" && (
+                        <chakra.p fontWeight={"medium"} color={"gray.500"}>
+                            {timePretty}
+                        </chakra.p>
+                    )}
+                </HStack>
+                <chakra.p fontWeight={"medium"} fontSize={"15px"} pt={4} pb={4}>
+                    {post.content}
+                </chakra.p>
+                <Interactions post={post} />
+            </Flex>
+            <Stack ms="5" me="5" spacing={0} align="center" minW="100px">
+                <Avatar src={post.image} height={"80px"} width={"80px"} />
+                <chakra.p fontWeight={"bold"} fontSize={14}>
+                    {post.name}
+                </chakra.p>
+                <chakra.p fontWeight={"medium"} color={"gray.500"}>
+                    @{post.username}
+                </chakra.p>
+            </Stack>
+            <CloseButton
+                position="absolute"
+                right={"4"}
+                top={"4"}
+                onClick={(e) => {
+                    e.preventDefault();
+                    deleteHandler(post._id);
+                }}
+                backgroundColor={"transparent"}
+                _hover={{
+                    bg: "transparent",
+                }}
+            />
+        </PostBorder>
+    );
 };
 
 export default PostItem;
