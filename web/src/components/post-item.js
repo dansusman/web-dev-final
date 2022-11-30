@@ -22,7 +22,7 @@ const PostItem = ({ post }) => {
     const dateStamp = post.time;
     let timePretty = "";
     if (dateStamp != null) {
-        var options = { hour12: !currentUser.twentyFour };
+        var options = { hour12: !currentUser?.twentyFour };
         timePretty = new Date(dateStamp).toLocaleString("en-US", options);
     }
     return (

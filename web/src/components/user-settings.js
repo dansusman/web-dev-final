@@ -23,12 +23,11 @@ const UserSettings = () => {
         if (!currentUser) {
             return;
         }
-        dispatch(
-            updateUserThunk(currentUser, {
-                ...currentUser,
-                twentyFour: !currentUser?.twentyFour,
-            })
-        );
+        const updates = {
+            ...currentUser,
+            twentyFour: !currentUser?.twentyFour,
+        };
+        dispatch(updateUserThunk(updates));
     };
     useEffect(() => {
         dispatch(findAllUsersThunk());

@@ -9,9 +9,7 @@ export const findAllUsers = async () => {
 };
 
 export const findUserByUsername = async (username) => {
-    console.log(username);
     const response = await axios.get(`${BASE_URL}/api/users/name/${username}`);
-    console.log(response);
     return response.data;
 };
 
@@ -40,11 +38,11 @@ export const deleteUser = async (uid) => {
     return response.data;
 };
 
-export const updateUser = async (uid, userUpdates) => {
-    console.log("here we are", uid, userUpdates);
+export const updateUser = async (userUpdates) => {
     const response = await axios.put(
-        `${BASE_URL}/api/users/${uid}`,
+        `${BASE_URL}/api/users/${userUpdates._id}`,
         userUpdates
     );
+    console.log(response.data);
     return response.data;
 };
