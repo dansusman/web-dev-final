@@ -6,6 +6,7 @@ import {
     loginThunk,
     registerThunk,
     updateUserThunk,
+    findUserByUsernameThunk,
 } from "../services/users-thunks";
 
 const usersReducer = createSlice({
@@ -14,12 +15,20 @@ const usersReducer = createSlice({
         loading: false,
         users: [],
         currentUser: null,
+        existing: null,
         error: null,
     },
     reducers: {},
     extraReducers: {
         [findAllUsersThunk.fulfilled]: (state, action) => {
             state.users = action.payload;
+        },
+        [findUserByUsernameThunk.fulfilled]: (state, action) => {
+            state.existing = action.payload;
+        },
+        [findUserByUsernameThunk.rejected]: (state, action) => {
+            state.existing = null;
+            state.error = action.payload;
         },
         [loginThunk.fulfilled]: (state, action) => {
             state.currentUser = action.payload;

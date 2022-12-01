@@ -12,11 +12,7 @@ import {
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-import {
-    findAllUsersThunk,
-    profileThunk,
-    updateUserThunk,
-} from "../services/users-thunks";
+import { updateUserThunk } from "../services/users-thunks";
 
 const UserSettings = ({ currentUser }) => {
     const dispatch = useDispatch();

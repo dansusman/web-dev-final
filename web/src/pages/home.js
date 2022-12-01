@@ -6,7 +6,7 @@ import CreatePost from "../components/create-post";
 import PostBorder from "../components/post-border";
 import PostStream from "../components/post-stream";
 import { findPostsThunk } from "../services/posts-thunks";
-import { findAllUsersThunk, profileThunk } from "../services/users-thunks";
+import { profileThunk } from "../services/users-thunks";
 const HomePage = () => {
     const [chronological, setChronological] = useState(true);
     const { currentUser } = useSelector((state) => state.users);

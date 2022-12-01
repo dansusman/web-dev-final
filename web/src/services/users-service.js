@@ -9,6 +9,9 @@ export const findAllUsers = async () => {
 };
 
 export const findUserByUsername = async (username) => {
+    if (username === "") {
+        return null;
+    }
     const response = await axios.get(`${BASE_URL}/api/users/name/${username}`);
     return response.data;
 };

@@ -8,7 +8,7 @@ import PostStream from "../components/post-stream";
 import ProfileCard from "../components/profile-card";
 import UserSettings from "../components/user-settings";
 import { findWeatherThunk } from "../services/location-thunks";
-import { findAllUsersThunk, profileThunk } from "../services/users-thunks";
+import { profileThunk } from "../services/users-thunks";
 
 const ProfilePage = () => {
     const { locations } = useSelector((state) => state.locationsData);

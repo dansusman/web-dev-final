@@ -4,7 +4,6 @@ import {
     Flex,
     FormControl,
     FormLabel,
-    HStack,
     Heading,
     Input,
     InputGroup,
@@ -13,13 +12,58 @@ import {
     Stack,
     Text,
     useColorModeValue,
+    FormErrorMessage,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { register } from "../services/users-service";
+import {
+    findUserByUsernameThunk,
+    registerThunk,
+} from "../services/users-thunks";
+import { useNavigate } from "react-router";
 
 const SignupCard = () => {
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
     const [showPassword, setShowPassword] = useState(false);
+    const [showPasswordError, setShowPasswordError] = useState(false);
+    const [showError, setShowError] = useState(false);
+    const dispatch = useDispatch();
+    const { existing } = useSelector((state) => state.users);
+    const nav = useNavigate();
+
+    const taken = () => {
+        dispatch(findUserByUsernameThunk(username));
+        return existing;
+    };
+
+    const passwordValid = () => {
+        return password.length >= 8;
+    };
+
+    useEffect(() => {
+        dispatch(findUserByUsernameThunk(username));
+    });
+
+    const handleSubmit = () => {
+        setShowError(false);
+        setShowPasswordError(false);
+        if (!passwordValid()) {
+            setShowPasswordError(true);
+            return;
+        }
+        if (taken()) {
+            setShowError(true);
+            return;
+        }
+        dispatch(registerThunk({ username: username, password: password }));
+        nav("/login");
+    };
+    const handleUsername = (e) => setUsername(e.target.value);
+    const handlePassword = (e) => setPassword(e.target.value);
 
     return (
         <Flex
@@ -41,29 +85,29 @@ const SignupCard = () => {
                     p={8}
                 >
                     <Stack spacing={4}>
-                        <HStack>
-                            <Box>
-                                <FormControl id="firstName" isRequired>
-                                    <FormLabel>First Name</FormLabel>
-                                    <Input type="text" />
-                                </FormControl>
-                            </Box>
-                            <Box>
-                                <FormControl id="lastName">
-                                    <FormLabel>Last Name</FormLabel>
-                                    <Input type="text" />
-                                </FormControl>
-                            </Box>
-                        </HStack>
-                        <FormControl id="email" isRequired>
-                            <FormLabel>Email address</FormLabel>
-                            <Input type="email" />
+                        <FormControl
+                            id="username"
+                            isRequired
+                            isInvalid={showError}
+                            onChange={handleUsername}
+                        >
+                            <FormLabel>Username</FormLabel>
+                            <Input type="text" name="username" />
+                            <FormErrorMessage>
+                                Invalid name! Please enter another username.
+                            </FormErrorMessage>
                         </FormControl>
-                        <FormControl id="password" isRequired>
+                        <FormControl
+                            id="password"
+                            isRequired
+                            isInvalid={showPasswordError}
+                            onChange={handlePassword}
+                        >
                             <FormLabel>Password</FormLabel>
                             <InputGroup>
                                 <Input
                                     type={showPassword ? "text" : "password"}
+                                    name="password"
                                 />
                                 <InputRightElement h={"full"}>
                                     <Button
@@ -82,6 +126,10 @@ const SignupCard = () => {
                                     </Button>
                                 </InputRightElement>
                             </InputGroup>
+                            <FormErrorMessage>
+                                Please enter a password longer than 8
+                                characters.
+                            </FormErrorMessage>
                         </FormControl>
                         <Stack spacing={10} pt={2}>
                             <Button
@@ -92,6 +140,8 @@ const SignupCard = () => {
                                 _hover={{
                                     bg: "blue.500",
                                 }}
+                                type="submit"
+                                onClick={handleSubmit}
                             >
                                 Sign up
                             </Button>
