@@ -10,7 +10,7 @@
 
 -   [ ] User sessions
 -   [ ] User privileges (User vs Moderator)
--   [ ] Move Posts to DB
+-   [x] Move Posts to DB
 -   [x] Store location data in Post DB object
 -   [x] Display temp and conditions on PostItem
     -   [x] weather icons relating to conditions at the time of posting
