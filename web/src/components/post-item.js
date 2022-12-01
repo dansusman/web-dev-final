@@ -8,7 +8,7 @@ import {
     Stack,
 } from "@chakra-ui/react";
 import { useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { deletePostThunk } from "../services/posts-thunks";
 import Interactions from "./interactions";
@@ -57,14 +57,11 @@ const PostItem = ({ post, currentUser }) => {
                 minW="100px"
                 onClick={(e) => {
                     e.preventDefault();
-                    console.log("clicked");
-                    nav(`/profile/${post.author?._id}`);
+                    console.log(post);
+                    nav(`/profile/${post.author}`);
                 }}
             >
                 <Avatar src={post.image} height={"80px"} width={"80px"} />
-                <chakra.p fontWeight={"bold"} fontSize={14}>
-                    {post.name}
-                </chakra.p>
                 <chakra.p fontWeight={"medium"} color={"gray.500"}>
                     @{post.username}
                 </chakra.p>

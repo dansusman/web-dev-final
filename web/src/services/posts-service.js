@@ -5,22 +5,24 @@ import _ from "lodash";
 const API_BASE = process.env.REACT_APP_API_BASE;
 const POSTS_API = `${API_BASE}/posts`;
 
+const api = axios.create({ withCredentials: true });
+
 export const createPost = async (post) => {
-    const response = await axios.post(`${POSTS_API}`, post);
+    const response = await api.post(`${POSTS_API}`, post);
     return response.data;
 };
 export const deletePost = async (pid) => {
-    const response = await axios.delete(`${POSTS_API}/${pid}`);
+    const response = await api.delete(`${POSTS_API}/${pid}`);
     return response.data;
 };
 
 export const updatePost = async (post) => {
-    await axios.put(`${POSTS_API}/${post._id}`, post);
+    await api.put(`${POSTS_API}/${post._id}`, post);
     return post;
 };
 
 export const findPosts = async (chronological) => {
-    const response = await axios.get(POSTS_API);
+    const response = await api.get(POSTS_API);
     let posts = response.data;
     if (chronological) {
         const grouped = _.partition(posts, (a) => a.created === undefined);
