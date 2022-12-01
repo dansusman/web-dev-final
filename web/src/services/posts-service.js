@@ -9,8 +9,8 @@ export const createPost = async (post) => {
     const response = await axios.post(`${POSTS_API}`, post);
     return response.data;
 };
-export const deletePost = async (tid) => {
-    const response = await axios.delete(`${POSTS_API}/${tid}`);
+export const deletePost = async (pid) => {
+    const response = await axios.delete(`${POSTS_API}/${pid}`);
     return response.data;
 };
 
