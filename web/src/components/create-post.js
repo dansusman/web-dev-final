@@ -8,8 +8,10 @@ const CreatePost = () => {
     const handleClick = () => {
         if (currentUser) {
             nav("/submit");
+            return;
         } else {
             nav("/login");
+            return;
         }
     };
     return (

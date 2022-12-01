@@ -124,7 +124,6 @@ const NavTopBar = ({ user }) => {
                                         <MenuItem
                                             onClick={() => {
                                                 dispatch(logoutThunk());
-                                                nav("/login");
                                             }}
                                         >
                                             Logout

@@ -17,8 +17,7 @@ const HomePage = () => {
 
     useEffect(() => {
         dispatch(findPostsThunk(chronological));
-    }, [chronological]);
-    console.log(currentUser);
+    }, [chronological, dispatch]);
     return (
         <BasicPage
             user={currentUser}

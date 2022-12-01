@@ -28,7 +28,6 @@ const UserSettings = ({ currentUser }) => {
             ...currentUser,
             twentyFour: !checkedBefore,
         };
-        console.log(updates);
         dispatch(updateUserThunk(updates));
     };
 
@@ -55,12 +54,7 @@ const UserSettings = ({ currentUser }) => {
                     <RadioGroup defaultValue={"F"}>
                         <HStack spacing="10">
                             <Radio value="F">Fahrenheit</Radio>
-                            <Radio
-                                onClick={() => {
-                                    console.log(currentUser);
-                                }}
-                                value="C"
-                            >
+                            <Radio onClick={() => {}} value="C">
                                 Celsius
                             </Radio>
                         </HStack>

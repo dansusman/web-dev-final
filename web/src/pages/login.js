@@ -3,6 +3,7 @@ import {
     Button,
     Flex,
     FormControl,
+    FormErrorMessage,
     FormLabel,
     Heading,
     Input,
@@ -11,15 +12,15 @@ import {
     Text,
     useColorModeValue,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { loginThunk } from "../services/users-thunks";
+import { loginThunk, profileThunk } from "../services/users-thunks";
 
 const LoginCard = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(null);
+    const [showError, setError] = useState(null);
     const { currentUser } = useSelector((state) => state.users);
     const nav = useNavigate();
     const dispatch = useDispatch();
@@ -27,10 +28,20 @@ const LoginCard = () => {
         setError(null);
         const loginUser = { username, password };
         dispatch(loginThunk(loginUser));
+        if (!currentUser) {
+            setError(true);
+            return;
+        }
         nav("/");
     };
     const handleUsername = (e) => setUsername(e.target.value);
     const handlePassword = (e) => setPassword(e.target.value);
+    useEffect(() => {
+        dispatch(profileThunk());
+        if (currentUser) {
+            nav("/");
+        }
+    }, [dispatch, currentUser, nav]);
     return (
         <Flex
             minH={"100vh"}
@@ -49,14 +60,20 @@ const LoginCard = () => {
                     p={8}
                 >
                     <Stack spacing={4}>
-                        <FormControl id="username">
+                        <FormControl id="username" isInvalid={showError}>
                             <FormLabel>Username</FormLabel>
                             <Input type="text" onChange={handleUsername} />
                         </FormControl>
-                        <FormControl id="password">
+                        <FormControl id="password" isInvalid={showError}>
                             <FormLabel>Password</FormLabel>
                             <Input type="password" onChange={handlePassword} />
-                        </FormControl>
+                            {showError && (
+                                <FormErrorMessage>
+                                    Issue with login information. Please check
+                                    again!
+                                </FormErrorMessage>
+                            )}
+                        </FormControl>{" "}
                         <Button
                             bg={"blue.400"}
                             color={"white"}

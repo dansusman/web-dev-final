@@ -45,7 +45,6 @@ const usersReducer = createSlice({
             state.error = action.payload;
         },
         [profileThunk.fulfilled]: (state, action) => {
-            console.log(action.payload);
             state.currentUser = action.payload;
         },
         [profileThunk.rejected]: (state, action) => {
