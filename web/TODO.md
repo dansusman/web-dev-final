@@ -9,6 +9,7 @@
 ## Updated Todos (30 November 2022)
 
 -   [ ] User sessions
+-   [ ] User privileges (User vs Moderator)
 -   [ ] Move Posts to DB
 -   [x] Store location data in Post DB object
 -   [x] Display temp and conditions on PostItem
@@ -23,3 +24,4 @@
 -   [ ] Fahrenheit vs. Celsius state management
 -   [ ] Login/Register error handling
 -   [ ] Load only 40 posts at a time, multiple pages? - might add significant complexity
+-   [x] If user is not logged in and tries to post, nav to /login
