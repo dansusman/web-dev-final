@@ -1,7 +1,7 @@
 import * as dao from "./users-dao.js";
 import { findByCredentials, findByUsername } from "./users-dao.js";
 
-let currentUser = null;
+// let currentUser = null;
 
 const UserController = (app) => {
     app.get("/api/users", findAllUsers);
@@ -25,7 +25,11 @@ const findAllUsers = async (req, res) => {
 const findUserById = async (req, res) => {
     const uid = req.params.uid;
     const user = await dao.findUserById(uid);
-    res.json(user);
+    if (user) {
+        res.json(user);
+        return;
+    }
+    res.sendStatus(404);
 };
 
 const findUserByUsername = async (req, res) => {
@@ -66,7 +70,7 @@ const register = async (req, res) => {
         return;
     }
     const registered = await dao.createUser(user);
-    currentUser = registered;
+    // currentUser = registered;
     req.session["currentUser"] = registered;
     res.json(registered);
 };
@@ -81,12 +85,14 @@ const login = async (req, res) => {
         res.sendStatus(403);
         return;
     }
-    currentUser = existing;
+    // currentUser = existing;
+    req.session["currentUser"] = existing;
     res.json(existing);
 };
 
 const logout = (req, res) => {
-    currentUser = null;
+    // currentUser = null;
+    req.session.destory();
     res.sendStatus(200);
 };
 
