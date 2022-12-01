@@ -29,7 +29,7 @@ const LikesController = (app) => {
     };
 
     app.post("/users/:uid/likes/:pid", userLikesPost);
-    app.delete("/users/:uid/unlikes/:pid", userUnlikesPost);
+    app.post("/users/:uid/unlikes/:pid", userUnlikesPost);
     app.get("/likes", findAllLikes);
     app.get("/users/:uid/likes", findPostsLikedByUser);
     app.get("/posts/:pid/likes", findUsersWhoLikedPost);

@@ -12,6 +12,7 @@ import locationsReducer, {
     locationSettingReducer,
 } from "./locations/locations-reducer";
 import usersReducer from "./users/users-reducer";
+import likesReducer from "./likes/likes-reducer";
 
 const store = configureStore({
     reducer: {
@@ -19,6 +20,7 @@ const store = configureStore({
         locationsData: locationsReducer,
         users: usersReducer,
         locationSetting: locationSettingReducer,
+        likes: likesReducer,
     },
 });
 

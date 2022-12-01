@@ -11,6 +11,10 @@ const postsSchema = mongoose.Schema(
         time: Date,
         location: String,
         repliesCount: Number,
+        likesCount: Number,
+        temperature: String,
+        conditions: String,
+        weatherIconCode: String,
     },
     { collection: "posts" }
 );

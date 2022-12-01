@@ -1,6 +1,10 @@
 import likesModel from "./likes-model.js";
 
 export const userLikesPost = async (uid, pid) => {
+    if (likesModel.find({ post: pid, user: uid })) {
+        // user already liked this post!
+        return;
+    }
     return await likesModel.create({ user: uid, post: pid });
 };
 export const userUnlikesPost = async (uid, pid) => {
