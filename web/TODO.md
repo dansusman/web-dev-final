@@ -22,6 +22,6 @@
 -   [ ] User icons in DB?
 -   [ ] Sort My Posts/Liked Posts on Profile page
 -   [ ] Fahrenheit vs. Celsius state management
--   [ ] Login/Register error handling
+-   [x] Login/Register error handling
 -   [ ] Load only 40 posts at a time, multiple pages? - might add significant complexity
 -   [x] If user is not logged in and tries to post, nav to /login
