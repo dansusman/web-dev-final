@@ -20,6 +20,7 @@
         -   snow
         -   fog
 -   [ ] User icons in DB?
+    -   store link to https://ui-avatars.com/api/?background=random&name=John+Doe
 -   [ ] Sort My Posts/Liked Posts on Profile page
 -   [ ] Fahrenheit vs. Celsius state management
 -   [x] Login/Register error handling

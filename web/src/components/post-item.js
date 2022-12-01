@@ -9,6 +9,7 @@ import {
 } from "@chakra-ui/react";
 import { useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
 import { deletePostThunk } from "../services/posts-thunks";
 import Interactions from "./interactions";
 import PostBorder from "./post-border";
@@ -27,6 +28,7 @@ const PostItem = ({ post, currentUser }) => {
     const deleteHandler = (id) => {
         dispatch(deletePostThunk(id));
     };
+    const nav = useNavigate();
     return (
         <PostBorder>
             <Flex
@@ -47,7 +49,18 @@ const PostItem = ({ post, currentUser }) => {
                 </chakra.p>
                 <Interactions post={post} />
             </Flex>
-            <Stack ms="5" me="5" spacing={0} align="center" minW="100px">
+            <Stack
+                ms="5"
+                me="5"
+                spacing={0}
+                align="center"
+                minW="100px"
+                onClick={(e) => {
+                    e.preventDefault();
+                    console.log("clicked");
+                    nav(`/profile/${post.author?._id}`);
+                }}
+            >
                 <Avatar src={post.image} height={"80px"} width={"80px"} />
                 <chakra.p fontWeight={"bold"} fontSize={14}>
                     {post.name}

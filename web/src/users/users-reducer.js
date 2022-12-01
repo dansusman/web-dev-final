@@ -7,6 +7,7 @@ import {
     registerThunk,
     updateUserThunk,
     findUserByUsernameThunk,
+    findUserByIdThunk,
 } from "../services/users-thunks";
 
 const usersReducer = createSlice({
@@ -17,11 +18,19 @@ const usersReducer = createSlice({
         currentUser: null,
         existing: null,
         error: null,
+        publicProfile: null,
     },
     reducers: {},
     extraReducers: {
         [findAllUsersThunk.fulfilled]: (state, action) => {
             state.users = action.payload;
+        },
+        [findUserByIdThunk.fulfilled]: (state, action) => {
+            state.publicProfile = action.payload;
+        },
+        [findUserByIdThunk.rejected]: (state, action) => {
+            state.publicProfile = null;
+            state.error = action.payload;
         },
         [findUserByUsernameThunk.fulfilled]: (state, action) => {
             state.existing = action.payload;

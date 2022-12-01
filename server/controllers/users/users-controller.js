@@ -56,6 +56,10 @@ const updateUser = async (req, res) => {
 
 const register = async (req, res) => {
     const user = req.body;
+    if (!user.username) {
+        res.sendStatus(403);
+        return;
+    }
     const existing = await findByUsername(user.username);
     if (existing) {
         res.sendStatus(403);
@@ -63,6 +67,7 @@ const register = async (req, res) => {
     }
     const registered = await dao.createUser(user);
     currentUser = registered;
+    req.session["currentUser"] = registered;
     res.json(registered);
 };
 
@@ -86,8 +91,9 @@ const logout = (req, res) => {
 };
 
 const profile = (req, res) => {
-    if (currentUser) {
-        res.json(currentUser);
+    const user = req.session["currentUser"];
+    if (user) {
+        res.json(user);
         return;
     }
     res.sendStatus(403);

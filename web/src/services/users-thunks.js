@@ -7,6 +7,7 @@ import {
     profile,
     updateUser,
     findUserByUsername,
+    findUserById,
 } from "../services/users-service";
 
 export const findAllUsersThunk = createAsyncThunk(
@@ -43,4 +44,9 @@ export const updateUserThunk = createAsyncThunk(
     async (changes) => {
         return await updateUser(changes);
     }
+);
+
+export const findUserByIdThunk = createAsyncThunk(
+    "findUserById",
+    async (uid) => await findUserById(uid)
 );
