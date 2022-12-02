@@ -72,7 +72,7 @@ const Interactions = ({ post }) => {
     const { currentUser } = useSelector((state) => state.users);
     useEffect(() => {
         dispatch(findUsersThatLikePostThunk(post._id));
-    });
+    }, [post]);
 
     const likedByCurrent = useMemo(() => {
         return (

@@ -111,6 +111,14 @@ const NavTopBar = ({ user }) => {
                                     <MenuItem onClick={() => nav("/profile")}>
                                         View Profile
                                     </MenuItem>
+                                    {currentUser &&
+                                        currentUser?.type === "Moderator" && (
+                                            <MenuItem
+                                                onClick={() => nav("/users")}
+                                            >
+                                                View Users
+                                            </MenuItem>
+                                        )}
                                     {!currentUser && (
                                         <MenuItem
                                             onClick={() => {

@@ -10,6 +10,8 @@ import SignupCard from "./pages/register";
 import Submit from "./pages/submit";
 import ProtectedRoute from "./components/protected-route";
 import PublicProfile from "./pages/public-profile";
+import UserPage from "./pages/users";
+import ModeratorRoute from "./components/moderator-route";
 
 function App() {
     return (
@@ -27,6 +29,14 @@ function App() {
                         }
                     ></Route>
                     <Route path="/register" element={<SignupCard />}></Route>
+                    <Route
+                        path="/users"
+                        element={
+                            <ModeratorRoute>
+                                <UserPage />
+                            </ModeratorRoute>
+                        }
+                    ></Route>
                     <Route path="/post/*" element={<Post />}></Route>
                     <Route path="/search/*" element={<Search />}></Route>
                     <Route path="/submit/*" element={<Submit />}></Route>

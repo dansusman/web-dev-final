@@ -57,7 +57,6 @@ const PostItem = ({ post, currentUser }) => {
                 minW="100px"
                 onClick={(e) => {
                     e.preventDefault();
-                    console.log(post);
                     nav(`/profile/${post.author}`);
                 }}
             >
@@ -66,19 +65,22 @@ const PostItem = ({ post, currentUser }) => {
                     @{post.username}
                 </chakra.p>
             </Stack>
-            <CloseButton
-                position="absolute"
-                right={"4"}
-                top={"4"}
-                onClick={(e) => {
-                    e.preventDefault();
-                    deleteHandler(post._id);
-                }}
-                backgroundColor={"transparent"}
-                _hover={{
-                    bg: "transparent",
-                }}
-            />
+            {(currentUser?._id === post.author._id ||
+                currentUser?.type === "Moderator") && (
+                <CloseButton
+                    position="absolute"
+                    right={"4"}
+                    top={"4"}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        deleteHandler(post._id);
+                    }}
+                    backgroundColor={"transparent"}
+                    _hover={{
+                        bg: "transparent",
+                    }}
+                />
+            )}
         </PostBorder>
     );
 };

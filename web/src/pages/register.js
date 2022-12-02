@@ -13,6 +13,7 @@ import {
     Text,
     useColorModeValue,
     FormErrorMessage,
+    Switch,
 } from "@chakra-ui/react";
 import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
@@ -59,7 +60,13 @@ const SignupCard = () => {
             setShowError(true);
             return;
         }
-        dispatch(registerThunk({ username: username, password: password }));
+        dispatch(
+            registerThunk({
+                username: username,
+                password: password,
+                type: "User",
+            })
+        );
         nav("/login");
     };
     const handleUsername = (e) => setUsername(e.target.value);
@@ -93,6 +100,18 @@ const SignupCard = () => {
                         >
                             <FormLabel>Username</FormLabel>
                             <Input type="text" name="username" />
+                            <FormErrorMessage>
+                                Invalid name! Please enter another username.
+                            </FormErrorMessage>
+                        </FormControl>
+                        <FormControl
+                            id="isModerator"
+                            // isInvalid={showError}
+                            // onChange={handleUsername}
+                        >
+                            <FormLabel>Want Mod?</FormLabel>
+                            <Switch />
+                            {/* <Input type="text" name="username" /> */}
                             <FormErrorMessage>
                                 Invalid name! Please enter another username.
                             </FormErrorMessage>

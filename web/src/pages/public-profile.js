@@ -16,6 +16,7 @@ const PublicProfile = () => {
         <>
             <h1>{publicProfile && publicProfile.username}</h1>
             <h1>Posts</h1>
+            {/* <PostStream user={currentUser} /> TODO*/}
         </>
     );
 };
