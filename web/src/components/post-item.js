@@ -10,7 +10,7 @@ import {
 import { useMemo } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { deletePostThunk } from "../services/posts-thunks";
+import { deletePostThunk } from "../posts/posts-thunks";
 import Interactions from "./interactions";
 import PostBorder from "./post-border";
 

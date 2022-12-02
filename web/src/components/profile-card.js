@@ -15,7 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { updateUserThunk } from "../services/users-thunks";
+import { updateUserThunk } from "../users/users-thunks";
 
 const ProfileCard = ({ user }) => {
     const dispatch = useDispatch();

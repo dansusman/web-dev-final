@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { findWeatherThunk } from "../services/location-thunks";
+import { findWeatherThunk } from "../locations/location-thunks";
 
 const initialState = {
     locations: [],

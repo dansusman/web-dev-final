@@ -8,7 +8,7 @@ import {
     updateUser,
     findUserByUsername,
     findUserById,
-} from "../services/users-service";
+} from "../users/users-service";
 
 export const findAllUsersThunk = createAsyncThunk(
     "findAllUsers",

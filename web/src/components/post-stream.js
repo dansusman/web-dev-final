@@ -2,7 +2,7 @@ import { Flex, Heading, SimpleGrid } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { findPostsThunk } from "../services/posts-thunks";
+import { findPostsThunk } from "../posts/posts-thunks";
 import PostItem from "./post-item";
 
 const PostStream = ({ chronological = true }) => {

@@ -22,7 +22,7 @@ import {
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { logoutThunk } from "../services/users-thunks";
+import { logoutThunk } from "../users/users-thunks";
 import SearchBar from "./search-bar";
 
 const NavTopBar = ({ user }) => {

@@ -14,7 +14,7 @@ import {
     findUsersThatLikePostThunk,
     userLikesPostThunk,
     userUnlikesPostThunk,
-} from "../services/likes-thunks";
+} from "../likes/likes-thunks";
 import { useEffect, useMemo } from "react";
 
 const icons = [

@@ -19,11 +19,7 @@ import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { register } from "../services/users-service";
-import {
-    findUserByUsernameThunk,
-    registerThunk,
-} from "../services/users-thunks";
+import { findUserByUsernameThunk, registerThunk } from "../users/users-thunks";
 import { useNavigate } from "react-router";
 
 const SignupCard = () => {

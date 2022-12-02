@@ -1,7 +1,7 @@
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { findUserByIdThunk } from "../services/users-thunks";
+import { findUserByIdThunk } from "../users/users-thunks";
 
 const PublicProfile = () => {
     const { uid } = useParams();

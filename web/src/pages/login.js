@@ -15,7 +15,7 @@ import {
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { loginThunk, profileThunk } from "../services/users-thunks";
+import { loginThunk, profileThunk } from "../users/users-thunks";
 
 const LoginCard = () => {
     const [username, setUsername] = useState("");

@@ -7,10 +7,10 @@ import React, { useEffect } from "react";
 import { useLocation } from "react-router";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { findPostsThunk } from "../services/posts-thunks";
+import { findPostsThunk } from "../posts/posts-thunks";
 import RepliesStream from "../components/replies-stream";
 import CreateReply from "../components/create-reply";
-import { profileThunk } from "../services/users-thunks";
+import { profileThunk } from "../users/users-thunks";
 
 const Post = () => {
     const { posts, loading } = useSelector((state) => state.postsData);

@@ -20,9 +20,9 @@ import React, { useEffect, useState } from "react";
 import { useToast } from "@chakra-ui/react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { createPostThunk } from "../services/posts-thunks";
+import { createPostThunk } from "../posts/posts-thunks";
 import cities from "../locations/locations";
-import { findWeatherThunk } from "../services/location-thunks";
+import { findWeatherThunk } from "../locations/location-thunks";
 
 const PostForm = ({ locationDefault }) => {
     const nav = useNavigate();

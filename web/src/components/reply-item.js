@@ -8,7 +8,7 @@ import {
 } from "@chakra-ui/react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { updatePostThunk } from "../services/posts-thunks";
+import { updatePostThunk } from "../posts/posts-thunks";
 import ReplyBorder from "./reply-border";
 
 const ReplyItem = ({ reply, post }) => {

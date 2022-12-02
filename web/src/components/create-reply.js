@@ -11,7 +11,7 @@ import {
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { updatePostThunk } from "../services/posts-thunks";
+import { updatePostThunk } from "../posts/posts-thunks";
 const CreateReply = ({ post }) => {
     const { currentUser } = useSelector((state) => state.users);
     const bgColor = useColorModeValue("white", "gray.800");
