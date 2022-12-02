@@ -8,6 +8,10 @@ smallTalk is a social media site exclusively for talking about the weather.
 
 ## Quick Start
 
+```bash
+npm install
+```
+
 ### Webpage
 
 ```bash
