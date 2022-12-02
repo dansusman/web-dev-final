@@ -27,8 +27,7 @@
     -   Can delete any post?
     -   Can delete users?
 
--   [ ] User icons in DB?
-    -   store link to https://ui-avatars.com/api/?background=random&name=John+Doe
+-   [x] User icons
 -   [ ] Sort My Posts/Liked Posts on Profile page
 -   [ ] Filter posts to who you are following
 -   [ ] Fahrenheit vs. Celsius state management? Make 24 hour time propagate properly (it stores in the DB but redux has an old cache)

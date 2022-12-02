@@ -7,6 +7,7 @@ import {
     HStack,
     Stack,
 } from "@chakra-ui/react";
+import axios from "axios";
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
@@ -30,6 +31,12 @@ const PostItem = ({ post, currentUser }) => {
     const deleteHandler = (id) => {
         dispatch(deletePostThunk(id));
     };
+    const imageGenerator = () => {
+        const username = post.username;
+        const url = `https://ui-avatars.com/api/?background=random&name=${username}`;
+        return url;
+    };
+
     return (
         <PostBorder>
             <Flex
@@ -61,7 +68,7 @@ const PostItem = ({ post, currentUser }) => {
                     nav(`/profile/${post.author}`);
                 }}
             >
-                <Avatar src={post.image} height={"80px"} width={"80px"} />
+                <Avatar src={imageGenerator()} height={"80px"} width={"80px"} />
                 <chakra.p fontWeight={"medium"} color={"gray.500"}>
                     @{post.username}
                 </chakra.p>
