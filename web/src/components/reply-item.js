@@ -35,7 +35,7 @@ const ReplyItem = ({ reply, post }) => {
                     align="center"
                     onClick={(e) => {
                         e.preventDefault();
-                        nav(`/profile/${post.author?._id}`);
+                        nav(`/profile/${post.author}`);
                     }}
                 >
                     <Avatar src={reply.image} height={"50px"} width={"50px"} />
