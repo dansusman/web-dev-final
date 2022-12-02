@@ -34,3 +34,8 @@ export const findPosts = async (chronological) => {
     }
     return posts;
 };
+
+export const findPostById = async (pid) => {
+    const response = await api.get(`${POSTS_API}/${pid}`);
+    return response.data;
+};

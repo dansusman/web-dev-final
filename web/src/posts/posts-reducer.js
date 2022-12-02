@@ -2,11 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
     createPostThunk,
     deletePostThunk,
+    findPostByIdThunk,
     findPostsThunk,
     updatePostThunk,
 } from "./posts-thunks";
 
 const initialState = {
+    post: null,
     posts: [],
     loading: false,
 };
@@ -31,6 +33,19 @@ const postsSlice = createSlice({
         [findPostsThunk.rejected]: (state) => {
             state.loading = false;
         },
+
+        [findPostByIdThunk.pending]: (state) => {
+            state.loading = true;
+            state.post = null;
+        },
+        [findPostByIdThunk.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.post = payload;
+        },
+        [findPostByIdThunk.rejected]: (state) => {
+            state.loading = false;
+        },
+
         [createPostThunk.fulfilled]: (state, { payload }) => {
             state.loading = false;
             state.posts.push(payload);

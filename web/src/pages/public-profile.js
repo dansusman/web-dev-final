@@ -10,7 +10,7 @@ const PublicProfile = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(findUserByIdThunk(uid));
-        // dispatch(findPostsByIdThunk(uid));
+        // dispatch(findPostByIdThunk(uid));
     }, [uid, dispatch]);
     return (
         <>

@@ -4,10 +4,10 @@ import BasicPage from "../components/basic-page";
 import { Link } from "react-router-dom";
 import PostItem from "../components/post-item";
 import React, { useEffect } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { findPostsThunk } from "../posts/posts-thunks";
+import { findPostByIdThunk, findPostsThunk } from "../posts/posts-thunks";
 import RepliesStream from "../components/replies-stream";
 import CreateReply from "../components/create-reply";
 import { profileThunk } from "../users/users-thunks";
@@ -16,16 +16,13 @@ const Post = () => {
     const { posts, loading } = useSelector((state) => state.postsData);
     const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
+    const { pid } = useParams();
+    const { post } = useSelector((state) => state.postsData);
     useEffect(() => {
-        dispatch(findPostsThunk());
         dispatch(profileThunk());
-    }, [dispatch]);
-    const location = useLocation().pathname;
-    const splitLocation = location.split("/");
-    const postId = parseInt(splitLocation[splitLocation.length - 1]);
-    const post = posts.find((p) => {
-        return parseInt(p._id) === postId;
-    });
+        dispatch(findPostByIdThunk(pid));
+    }, []);
+    // const { reviews } = useSelector((state) => state.reviews);
     return (
         <BasicPage
             user={currentUser}

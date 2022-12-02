@@ -53,5 +53,5 @@ export const updateUser = async (userUpdates) => {
 
 export const findUserById = async (uid) => {
     const response = await api.get(`${BASE_URL}/api/users/${uid}`);
-    return response;
+    return response.data;
 };

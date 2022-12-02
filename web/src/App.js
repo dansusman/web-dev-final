@@ -45,7 +45,7 @@ function App() {
                             </ModeratorRoute>
                         }
                     ></Route>
-                    <Route path="/post/*" element={<Post />}></Route>
+                    <Route path="/post/:pid" element={<Post />}></Route>
                     <Route path="/search/*" element={<Search />}></Route>
                     <Route path="/submit/*" element={<Submit />}></Route>
                     <Route path="/profile/:uid" element={<PublicProfile />} />

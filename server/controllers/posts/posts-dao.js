@@ -21,5 +21,5 @@ export const findPostsByAuthor = async (author) => {
 };
 
 export const findPostById = async (pid) => {
-    return await postsModel.find({ _id: pid });
+    return await postsModel.findById(pid);
 };

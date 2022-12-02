@@ -60,11 +60,13 @@ const deletePost = async (req, res) => {
 };
 
 const findPostById = async (req, res) => {
-    const postId = req.params.pid;
-    const post = await dao.findPostById(postId);
-    res.json(post);
-    // const post = posts.find((t) => t._id.toString() === postId);
-    // res.json(post);
+    const pid = req.params.pid;
+    const post = await dao.findPostById(pid);
+    if (post) {
+        res.json(post);
+        return;
+    }
+    res.sendStatus(404);
 };
 
 export default PostsController;

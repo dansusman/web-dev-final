@@ -7,6 +7,7 @@ const postsSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "UserModel",
         },
+        username: String,
         content: String,
         time: Date,
         location: String,
