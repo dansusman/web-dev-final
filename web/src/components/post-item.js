@@ -65,7 +65,7 @@ const PostItem = ({ post, currentUser }) => {
                     @{post.username}
                 </chakra.p>
             </Stack>
-            {(currentUser?._id === post.author._id ||
+            {((currentUser && currentUser?._id === post.author._id) ||
                 currentUser?.type === "Moderator") && (
                 <CloseButton
                     position="absolute"

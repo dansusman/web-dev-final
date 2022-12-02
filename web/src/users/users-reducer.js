@@ -8,7 +8,7 @@ import {
     updateUserThunk,
     findUserByUsernameThunk,
     findUserByIdThunk,
-} from "../services/users-thunks";
+} from "./users-thunks";
 
 const usersReducer = createSlice({
     name: "users",

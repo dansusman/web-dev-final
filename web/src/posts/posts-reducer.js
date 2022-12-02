@@ -4,7 +4,7 @@ import {
     deletePostThunk,
     findPostsThunk,
     updatePostThunk,
-} from "../services/posts-thunks";
+} from "./posts-thunks";
 
 const initialState = {
     posts: [],

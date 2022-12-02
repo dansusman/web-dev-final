@@ -12,6 +12,7 @@ import ProtectedRoute from "./components/protected-route";
 import PublicProfile from "./pages/public-profile";
 import UserPage from "./pages/users";
 import ModeratorRoute from "./components/moderator-route";
+import BasicPage from "./components/basic-page";
 
 function App() {
     return (
@@ -19,7 +20,14 @@ function App() {
             <div className="container">
                 <Routes>
                     <Route index element={<HomePage />}></Route>
-                    <Route path="/login" element={<LoginCard />}></Route>
+                    <Route
+                        path="/login"
+                        element={
+                            <BasicPage>
+                                <LoginCard />
+                            </BasicPage>
+                        }
+                    ></Route>
                     <Route
                         path="/profile"
                         element={

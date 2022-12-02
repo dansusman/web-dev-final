@@ -1,8 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import {
-    findUsersThatLikePostThunk,
-    userLikesPostThunk,
-} from "../services/likes-thunks";
+import { findUsersThatLikePostThunk, userLikesPostThunk } from "./likes-thunks";
 
 const initialState = {
     likes: [],

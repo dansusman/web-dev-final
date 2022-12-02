@@ -152,13 +152,17 @@ const PostForm = ({ locationDefault }) => {
                             colorScheme="red"
                             variant="solid"
                             onClick={() => {
-                                if (title === undefined) {
+                                if (title === undefined || title === "") {
                                     setShowTitleError(true);
                                 }
                                 if (location === "") {
                                     setShowLocationError(true);
                                 }
-                                if (title === undefined || location === "") {
+                                if (
+                                    title === undefined ||
+                                    title === "" ||
+                                    location === ""
+                                ) {
                                     return;
                                 } else {
                                     handleSubmit();
