@@ -18,11 +18,13 @@ const Post = () => {
     const dispatch = useDispatch();
     const { pid } = useParams();
     const { post } = useSelector((state) => state.postsData);
+
     useEffect(() => {
         dispatch(findAllUsersThunk());
         dispatch(profileThunk());
         dispatch(findPostByIdThunk(pid));
     }, []);
+
     return (
         <BasicPage
             user={currentUser}

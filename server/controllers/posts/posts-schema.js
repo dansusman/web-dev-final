@@ -16,6 +16,8 @@ const postsSchema = mongoose.Schema(
         temperature: String,
         conditions: String,
         weatherIconCode: String,
+        replies: Array,
+        repliesCount: Number,
     },
     { collection: "posts" }
 );

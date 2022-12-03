@@ -31,7 +31,7 @@
 
 -   [ ] Sort My Posts/Liked Posts on Profile page
 -   [ ] Filter posts to who you are following
--   [ ] Add button to PostItem that takes you to posts with that location
 -   [ ] Filter posts by location on home page
--   [ ] Fix Interactions!!!
+-   [ ] Add button to PostItem that takes you to posts with that location
+-   [x] Fix Interactions!!!
 -   [ ] Make PostItem UI responsive

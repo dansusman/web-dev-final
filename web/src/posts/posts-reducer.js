@@ -66,6 +66,7 @@ const postsSlice = createSlice({
                 ...state.posts[postNdx],
                 ...payload,
             };
+            state.post = payload;
         },
     },
     reducers: {},

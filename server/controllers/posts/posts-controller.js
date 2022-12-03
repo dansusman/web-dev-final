@@ -14,6 +14,8 @@ const createPost = async (req, res) => {
     const newPost = req.body;
     const currentUser = req.session["currentUser"];
     newPost.author = currentUser._id;
+    newPost.replies = [];
+    newPost.repliesCount = 0;
     const actual = await dao.createPost(newPost);
     res.json(actual);
     // const newDate = new Date();
