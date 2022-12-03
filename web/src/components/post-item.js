@@ -69,11 +69,12 @@ const PostItem = ({ post }) => {
                 minW="100px"
                 onClick={(e) => e.preventDefault()}
             >
-                <div
+                <Stack
                     onClick={(e) => {
                         e.preventDefault();
                         nav(`/profile/${post.author}`);
                     }}
+                    align={"center"}
                 >
                     <Avatar
                         src={imageGenerator()}
@@ -83,10 +84,10 @@ const PostItem = ({ post }) => {
                     <chakra.p fontWeight={"medium"} color={"gray.500"}>
                         @{post.username}
                     </chakra.p>
-                </div>
-                {currentUser?._id !== post.author && (
-                    <Button onClick={handleFollow}>Follow</Button>
-                )}
+                    {currentUser?._id !== post.author && (
+                        <Button onClick={handleFollow}>Follow</Button>
+                    )}
+                </Stack>
             </Stack>
             {((currentUser && currentUser?._id === post.author) ||
                 currentUser?.type === "Moderator") && (
