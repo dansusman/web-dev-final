@@ -8,13 +8,11 @@ import {
     HStack,
     Stack,
 } from "@chakra-ui/react";
-import axios from "axios";
-import { useEffect, useMemo } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useMemo } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { followUserThunk } from "../follows/follows-thunks";
 import { deletePostThunk } from "../posts/posts-thunks";
-import { findUserByIdThunk } from "../users/users-thunks";
 import Interactions from "./interactions";
 import PostBorder from "./post-border";
 
@@ -23,12 +21,11 @@ const PostItem = ({ post, currentUser }) => {
     const nav = useNavigate();
     const dateStamp = post.time;
     const timePretty = useMemo(() => {
-        let timePretty = "";
-        if (dateStamp != null && currentUser) {
-            var options = { hour12: !currentUser.twentyFour };
-            timePretty = new Date(dateStamp).toLocaleString("en-US", options);
+        var options = { hour12: !(currentUser && currentUser.twentyFour) };
+        if (dateStamp != null) {
+            return new Date(dateStamp).toLocaleString("en-US", options);
         }
-        return timePretty;
+        return "";
     }, [dateStamp, currentUser]);
     const deleteHandler = (id) => {
         dispatch(deletePostThunk(id));

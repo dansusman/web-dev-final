@@ -16,23 +16,22 @@
         -   rain
         -   snow
         -   fog
-
-## Updated Todos (2 December 2022)
-
--   [ ] User to User relationship (follow)
+-   [x] User to User relationship (follow)
 -   [x] User sessions
--   [ ] Cookies?
+-   [x] User icons
+-   [x] Fix CloseButton on PostItem for YOUR post (it's not there)
+
+## Updated Todos (3 December 2022)
+
 -   [ ] User privileges (User vs Moderator)
 
     -   Different home page?
     -   Can delete any post?
     -   Can delete users?
 
--   [x] User icons
 -   [ ] Sort My Posts/Liked Posts on Profile page
 -   [ ] Filter posts to who you are following
--   [ ] Fahrenheit vs. Celsius state management? Make 24 hour time propagate properly (it stores in the DB but redux has an old cache)
 -   [ ] Add button to PostItem that takes you to posts with that location
 -   [ ] Filter posts by location on home page
 -   [ ] Make PostItem UI responsive
--   [ ] Fix CloseButton on PostItem for YOUR post (it's not there)
+-   [ ] Fix Interactions!!!

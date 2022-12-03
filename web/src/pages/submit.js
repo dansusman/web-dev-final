@@ -4,8 +4,12 @@ import PostForm from "../components/post-form";
 
 const Submit = () => {
     const { locationDefault } = useSelector((state) => state.locationSetting);
+    const { currentUser } = useSelector((state) => state.users);
     return (
-        <BasicPage children={<PostForm locationDefault={locationDefault} />} />
+        <BasicPage
+            user={currentUser}
+            children={<PostForm locationDefault={locationDefault} />}
+        />
     );
 };
 

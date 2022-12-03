@@ -12,6 +12,7 @@ import { findPostsThunk } from "../posts/posts-thunks";
 const Search = () => {
     const { posts, loading } = useSelector((state) => state.postsData);
     const dispatch = useDispatch();
+    const { currentUser } = useSelector((state) => state.users);
     useEffect(() => {
         dispatch(findPostsThunk());
     }, [dispatch]);
@@ -34,6 +35,7 @@ const Search = () => {
     });
     return (
         <BasicPage
+            user={currentUser}
             children={
                 <>
                     {loading && <Heading>Loading ...</Heading>}
