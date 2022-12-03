@@ -6,6 +6,7 @@ import UserController from "./controllers/users/users-controller.js";
 import mongoose from "mongoose";
 import SessionController from "./controllers/session-controller.js";
 import LikesController from "./controllers/likes/likes-controller.js";
+import FollowsController from "./controllers/follows/follows-controller.js";
 
 const options = {
     useNewUrlParser: true,
@@ -39,4 +40,5 @@ UserController(app);
 PostsController(app);
 SessionController(app);
 LikesController(app);
+FollowsController(app);
 app.listen(process.env.PORT || 4000);

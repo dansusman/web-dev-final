@@ -13,6 +13,7 @@ import locationsReducer, {
 } from "./locations/locations-reducer";
 import usersReducer from "./users/users-reducer";
 import likesReducer from "./likes/likes-reducer";
+import followsReducer from "./follows/follows-reducer";
 
 const store = configureStore({
     reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
         users: usersReducer,
         locationSetting: locationSettingReducer,
         likes: likesReducer,
+        follows: followsReducer,
     },
 });
 

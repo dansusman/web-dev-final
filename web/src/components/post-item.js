@@ -1,5 +1,6 @@
 import {
     Avatar,
+    Button,
     chakra,
     CloseButton,
     Flex,
@@ -11,6 +12,7 @@ import axios from "axios";
 import { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
+import { followUserThunk } from "../follows/follows-thunks";
 import { deletePostThunk } from "../posts/posts-thunks";
 import { findUserByIdThunk } from "../users/users-thunks";
 import Interactions from "./interactions";
@@ -35,6 +37,14 @@ const PostItem = ({ post, currentUser }) => {
         const username = post.username;
         const url = `https://ui-avatars.com/api/?background=random&name=${username}`;
         return url;
+    };
+
+    const handleFollow = () => {
+        if (!currentUser) {
+            nav("/login");
+            return;
+        }
+        dispatch(followUserThunk({ followed: post.author }));
     };
 
     return (
@@ -63,15 +73,31 @@ const PostItem = ({ post, currentUser }) => {
                 spacing={0}
                 align="center"
                 minW="100px"
-                onClick={(e) => {
-                    e.preventDefault();
-                    nav(`/profile/${post.author}`);
-                }}
+                onClick={(e) => e.preventDefault()}
             >
-                <Avatar src={imageGenerator()} height={"80px"} width={"80px"} />
-                <chakra.p fontWeight={"medium"} color={"gray.500"}>
-                    @{post.username}
-                </chakra.p>
+                <div
+                    onClick={(e) => {
+                        e.preventDefault();
+                        nav(`/profile/${post.author}`);
+                    }}
+                >
+                    <Avatar
+                        src={imageGenerator()}
+                        height={"80px"}
+                        width={"80px"}
+                    />
+                    <chakra.p fontWeight={"medium"} color={"gray.500"}>
+                        @{post.username}
+                    </chakra.p>
+                </div>
+                <Button
+                    onClick={(e) => {
+                        e.preventDefault();
+                        handleFollow();
+                    }}
+                >
+                    Follow
+                </Button>
             </Stack>
             {((currentUser && currentUser?._id === post.author) ||
                 currentUser?.type === "Moderator") && (

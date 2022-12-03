@@ -20,7 +20,8 @@
 ## Updated Todos (2 December 2022)
 
 -   [ ] User to User relationship (follow)
--   [ ] User sessions
+-   [x] User sessions
+-   [ ] Cookies?
 -   [ ] User privileges (User vs Moderator)
 
     -   Different home page?

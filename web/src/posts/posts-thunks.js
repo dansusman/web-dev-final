@@ -17,6 +17,7 @@ export const createPostThunk = createAsyncThunk(
     "posts/createPost",
     async (post) => await service.createPost(post)
 );
+
 export const deletePostThunk = createAsyncThunk(
     "posts/deletePost",
     async (postId) => {
@@ -28,4 +29,11 @@ export const deletePostThunk = createAsyncThunk(
 export const updatePostThunk = createAsyncThunk(
     "posts/updatePost",
     async (post) => await service.updatePost(post)
+);
+
+export const findPostsByAuthorThunk = createAsyncThunk(
+    "posts/findPostByAuthor",
+    async (author) => {
+        return await service.findPostsByAuthor(author);
+    }
 );

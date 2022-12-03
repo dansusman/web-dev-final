@@ -5,6 +5,7 @@ import * as dao from "./posts-dao.js";
 const PostsController = (app) => {
     app.post("/api/posts", createPost);
     app.get("/api/posts", findPosts);
+    app.get("/api/users/:author/posts", findPostsByAuthor);
     app.get("/api/posts/:pid", findPostById);
     app.put("/api/posts/:pid", updatePost);
     app.delete("/api/posts/:pid", deletePost);
@@ -67,6 +68,12 @@ const findPostById = async (req, res) => {
         return;
     }
     res.sendStatus(404);
+};
+
+const findPostsByAuthor = async (req, res) => {
+    const author = req.params.author;
+    const posts = await dao.findPostsByAuthor(author);
+    res.json(posts);
 };
 
 export default PostsController;

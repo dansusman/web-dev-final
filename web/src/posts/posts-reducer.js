@@ -3,6 +3,7 @@ import {
     createPostThunk,
     deletePostThunk,
     findPostByIdThunk,
+    findPostsByAuthorThunk,
     findPostsThunk,
     updatePostThunk,
 } from "./posts-thunks";
@@ -31,6 +32,18 @@ const postsSlice = createSlice({
             state.posts = payload;
         },
         [findPostsThunk.rejected]: (state) => {
+            state.loading = false;
+        },
+
+        [findPostsByAuthorThunk.pending]: (state) => {
+            state.loading = true;
+            state.posts = [];
+        },
+        [findPostsByAuthorThunk.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.posts = payload;
+        },
+        [findPostsByAuthorThunk.rejected]: (state) => {
             state.loading = false;
         },
 

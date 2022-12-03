@@ -39,3 +39,8 @@ export const findPostById = async (pid) => {
     const response = await api.get(`${POSTS_API}/${pid}`);
     return response.data;
 };
+
+export const findPostsByAuthor = async (author) => {
+    const response = await api.get(`${API_BASE}/users/${author}/posts`);
+    return response.data;
+};
