@@ -7,6 +7,7 @@ import {
     ModalFooter,
     ModalHeader,
     ModalOverlay,
+    SimpleGrid,
     Text,
     useDisclosure,
 } from "@chakra-ui/react";
@@ -24,20 +25,17 @@ export const UsersListModal = ({ text, users, followed }) => {
                     <ModalHeader>Followers</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        {users.map((u, index) => (
-                            <UserListItem
-                                followed={followed}
-                                user={u}
-                                index={index}
-                            />
-                        ))}
+                        <SimpleGrid columns={{ base: 1 }} spacing={"4"}>
+                            {users.map((u, index) => (
+                                <UserListItem
+                                    followed={followed}
+                                    user={u}
+                                    key={index}
+                                />
+                            ))}
+                        </SimpleGrid>
                     </ModalBody>
-
-                    <ModalFooter>
-                        <Button colorScheme="blue" mr={3} onClick={onClose}>
-                            Close
-                        </Button>
-                    </ModalFooter>
+                    <ModalFooter></ModalFooter>
                 </ModalContent>
             </Modal>
         </>

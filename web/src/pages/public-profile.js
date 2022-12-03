@@ -57,18 +57,6 @@ const PublicProfile = () => {
                         }}
                     ></UserCard>
                     <PostStream forUser={publicProfile}></PostStream>
-                    <div>
-                        {following &&
-                            following.map((follow) => (
-                                <div>{follow.followed.username}</div>
-                            ))}
-                    </div>
-                    <div>
-                        {followers &&
-                            followers.map((follow) => (
-                                <div>{follow.follower.username}</div>
-                            ))}
-                    </div>
                 </Stack>
             }
         ></BasicPage>
