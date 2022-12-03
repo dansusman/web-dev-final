@@ -20,6 +20,8 @@
 -   [x] User sessions
 -   [x] User icons
 -   [x] Fix CloseButton on PostItem for YOUR post (it's not there)
+-   [x] Fix Interactions!!!
+-   [x] Make PostItem UI responsive
 
 ## Updated Todos (3 December 2022)
 
@@ -33,5 +35,3 @@
 -   [ ] Filter posts to who you are following
 -   [ ] Filter posts by location on home page
 -   [ ] Add button to PostItem that takes you to posts with that location
--   [x] Fix Interactions!!!
--   [ ] Make PostItem UI responsive

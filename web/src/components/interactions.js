@@ -81,7 +81,7 @@ const Interactions = ({ post }) => {
         }).length > 0;
 
     return (
-        <Stack spacing={"14"} direction={["column", "row"]}>
+        <Stack spacing={"5"} direction={["row"]}>
             {post.location && (
                 <HStack>
                     <Button
@@ -99,8 +99,12 @@ const Interactions = ({ post }) => {
                     >
                         <HStack spacing="2">
                             <Text>{post.location}</Text>
-                            <Text>{post.temperature}</Text>
-                            <Text>{post.conditions}</Text>
+                            <Text display={{ base: "none", lg: "block" }}>
+                                {post.temperature}
+                            </Text>
+                            <Text display={{ base: "none", lg: "block" }}>
+                                {post.conditions}
+                            </Text>
                         </HStack>
                     </Button>
                 </HStack>
@@ -110,12 +114,14 @@ const Interactions = ({ post }) => {
                     nav(`/post/${post._id}`);
                     e.preventDefault();
                 }}
+                maxW="50px"
                 variant="ghost"
                 leftIcon={<ChatIcon />}
             >
                 {post.repliesCount}
             </Button>
             <Button
+                maxW="50px"
                 onClick={(e) => {
                     e.preventDefault();
                     if (!currentUser) {
