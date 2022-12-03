@@ -1,9 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { findUsersThatLikePostThunk, userLikesPostThunk } from "./likes-thunks";
+import {
+    findUsersThatLikePostThunk,
+    userLikesPostThunk,
+    userUnlikesPostThunk,
+} from "./likes-thunks";
 
 const initialState = {
     likes: [],
-    likers: [],
+    likers: {},
     loading: false,
 };
 
@@ -15,8 +19,16 @@ const likesReducer = createSlice({
         [userLikesPostThunk.fulfilled]: (state, action) => {
             state.likes.push(action.payload);
         },
+        [userUnlikesPostThunk.fulfilled]: (state, action) => {
+            const uid = action.payload.uid;
+            const pid = action.payload.pid;
+            state.likes = state.likes.filter((l) => {
+                return l.user !== uid || l.post !== pid;
+            });
+        },
         [findUsersThatLikePostThunk.fulfilled]: (state, action) => {
-            state.likers = action.payload;
+            const post = action.payload.post;
+            state.likers[post] = action.payload.likers;
         },
     },
 });

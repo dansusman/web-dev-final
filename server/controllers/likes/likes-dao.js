@@ -1,7 +1,8 @@
 import likesModel from "./likes-model.js";
 
 export const userLikesPost = async (uid, pid) => {
-    if (likesModel.find({ post: pid, user: uid })) {
+    const result = await likesModel.find({ post: pid, user: uid });
+    if (result.length > 0) {
         // user already liked this post!
         return;
     }

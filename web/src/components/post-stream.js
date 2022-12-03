@@ -15,6 +15,7 @@ const PostStream = ({ chronological = true, forUser = null }) => {
             dispatch(findPostsThunk(chronological));
         }
     }, [dispatch, forUser]);
+
     return (
         <>
             {loading && <Heading>Loading ...</Heading>}

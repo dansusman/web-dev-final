@@ -25,12 +25,9 @@ export const findPosts = async (chronological) => {
     const response = await api.get(POSTS_API);
     let posts = response.data;
     if (chronological) {
-        // const grouped = _.partition(posts, (a) => a.created === undefined);
-        // grouped[1].sort((a, b) => b.created > a.created);
-        // posts = grouped[1].concat(grouped[0]);
-        posts.sort((a, b) => new Date(a.time) > new Date(b.time));
-    } else {
-        posts.sort((a, b) => parseInt(a.likes) < parseInt(b.likes));
+        posts.sort((a, b) => {
+            return new Date(a.time) <= new Date(b.time);
+        });
     }
     return posts;
 };

@@ -22,6 +22,10 @@ export const userUnlikesPostThunk = createAsyncThunk(
 export const findUsersThatLikePostThunk = createAsyncThunk(
     "findUsersThatLikePost",
     async (pid) => {
-        return await findUsersThatLikePost(pid);
+        const likers = await findUsersThatLikePost(pid);
+        return {
+            post: pid,
+            likers: likers,
+        };
     }
 );

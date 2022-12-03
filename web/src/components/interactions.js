@@ -1,13 +1,14 @@
 import { ChatIcon } from "@chakra-ui/icons";
 import { Button, HStack, Stack, Text } from "@chakra-ui/react";
+import AcUnitIcon from "@mui/icons-material/AcUnit";
+import AirIcon from "@mui/icons-material/Air";
+import CloudIcon from "@mui/icons-material/Cloud";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import AirIcon from "@mui/icons-material/Air";
-import AcUnitIcon from "@mui/icons-material/AcUnit";
-import CloudIcon from "@mui/icons-material/Cloud";
 import NightsStay from "@mui/icons-material/NightsStay";
 import ThunderstormIcon from "@mui/icons-material/Thunderstorm";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import {
@@ -15,7 +16,6 @@ import {
     userLikesPostThunk,
     userUnlikesPostThunk,
 } from "../likes/likes-thunks";
-import { useEffect, useMemo } from "react";
 
 const icons = [
     <NightsStay />,
@@ -68,18 +68,17 @@ const Interactions = ({ post }) => {
     const dispatch = useDispatch();
     const nav = useNavigate();
     const icon = getIcon(post.weatherIconCode);
-    const { likers } = useSelector((state) => state.likes);
     const { currentUser } = useSelector((state) => state.users);
+    const { likers, likes } = useSelector((state) => state.likes);
+
     useEffect(() => {
         dispatch(findUsersThatLikePostThunk(post._id));
-    }, [post]);
+    }, [likes]);
 
-    const likedByCurrent = useMemo(() => {
-        return (
-            currentUser &&
-            likers.filter((u) => u._id === currentUser._id).length > 0
-        );
-    }, [currentUser, likers]);
+    const liked =
+        likers[post._id]?.filter((u) => {
+            return u.user._id === currentUser?._id;
+        }).length > 0;
 
     return (
         <Stack spacing={"14"} direction={["column", "row"]}>
@@ -118,16 +117,12 @@ const Interactions = ({ post }) => {
             </Button>
             <Button
                 onClick={(e) => {
-                    // dispatch(
-                    //     updatePostThunk({
-                    //         ...post,
-                    //         likes: post.liked
-                    //             ? (parseInt(post.likes) - 1).toString()
-                    //             : (parseInt(post.likes) + 1).toString(),
-                    //         liked: !post.liked,
-                    //     })
-                    // );
-                    if (likedByCurrent) {
+                    e.preventDefault();
+                    if (!currentUser) {
+                        nav("/login");
+                        return;
+                    }
+                    if (liked) {
                         dispatch(
                             userUnlikesPostThunk({
                                 uid: currentUser?._id,
@@ -142,18 +137,17 @@ const Interactions = ({ post }) => {
                             })
                         );
                     }
-                    e.preventDefault();
                 }}
                 variant="ghost"
                 leftIcon={
-                    likedByCurrent ? (
+                    liked ? (
                         <FavoriteIcon sx={{ color: "red" }} />
                     ) : (
                         <FavoriteBorderIcon />
                     )
                 }
             >
-                {likers.length}
+                {likers[post._id]?.length}
             </Button>
         </Stack>
     );

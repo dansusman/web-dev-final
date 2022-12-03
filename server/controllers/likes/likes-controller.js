@@ -11,7 +11,11 @@ const LikesController = (app) => {
         const uid = req.params.uid;
         const pid = req.params.pid;
         const status = await likesDao.userUnlikesPost(uid, pid);
-        res.send(status);
+        if (status.deletedCount > 0) {
+            res.json({ uid: uid, pid: pid });
+        } else {
+            res.send(status);
+        }
     };
     const findAllLikes = async (req, res) => {
         const likes = await likesDao.findAllLikes();
