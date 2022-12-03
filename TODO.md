@@ -22,6 +22,7 @@
 -   [x] Fix CloseButton on PostItem for YOUR post (it's not there)
 -   [x] Fix Interactions!!!
 -   [x] Make PostItem UI responsive
+-   [x] Sort New/Popular
 
 ## Updated Todos (3 December 2022)
 

@@ -7,6 +7,7 @@ import PostItem from "./post-item";
 
 const PostStream = ({ chronological = true, forUser = null }) => {
     const { posts, loading } = useSelector((state) => state.postsData);
+    const { likers } = useSelector((state) => state.likes);
     const dispatch = useDispatch();
     useEffect(() => {
         if (forUser) {
@@ -15,6 +16,17 @@ const PostStream = ({ chronological = true, forUser = null }) => {
             dispatch(findPostsThunk(chronological));
         }
     }, [dispatch, forUser]);
+
+    var postsSort = [...posts];
+    if (!chronological) {
+        postsSort.sort((a, b) => {
+            return (
+                likers[a._id] &&
+                likers[b._id] &&
+                likers[a._id].length < likers[b._id].length
+            );
+        });
+    }
 
     return (
         <>
@@ -26,7 +38,7 @@ const PostStream = ({ chronological = true, forUser = null }) => {
                     direction={"column"}
                 >
                     <SimpleGrid columns={{ base: 1 }} spacing={"10"}>
-                        {posts.map((post, index) => (
+                        {postsSort.map((post, index) => (
                             <Link to={`/post/${post._id}`} key={index}>
                                 <PostItem post={post} index={index} />
                             </Link>
