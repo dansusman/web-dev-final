@@ -11,6 +11,7 @@ import {
 const initialState = {
     post: null,
     posts: [],
+    postsForUser: [],
     loading: false,
 };
 
@@ -33,11 +34,6 @@ const postsSlice = createSlice({
         },
         [findPostsThunk.rejected]: (state) => {
             state.loading = false;
-        },
-
-        [findPostsByAuthorThunk.pending]: (state) => {
-            state.loading = true;
-            state.posts = [];
         },
         [findPostsByAuthorThunk.fulfilled]: (state, { payload }) => {
             state.loading = false;

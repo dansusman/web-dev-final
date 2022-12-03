@@ -10,19 +10,19 @@ import { useDispatch } from "react-redux";
 import { findPostByIdThunk, findPostsThunk } from "../posts/posts-thunks";
 import RepliesStream from "../components/replies-stream";
 import CreateReply from "../components/create-reply";
-import { profileThunk } from "../users/users-thunks";
+import { findAllUsersThunk, profileThunk } from "../users/users-thunks";
 
 const Post = () => {
-    const { posts, loading } = useSelector((state) => state.postsData);
+    const { loading } = useSelector((state) => state.postsData);
     const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
     const { pid } = useParams();
     const { post } = useSelector((state) => state.postsData);
     useEffect(() => {
+        dispatch(findAllUsersThunk());
         dispatch(profileThunk());
         dispatch(findPostByIdThunk(pid));
     }, []);
-    // const { reviews } = useSelector((state) => state.reviews);
     return (
         <BasicPage
             user={currentUser}
@@ -31,12 +31,8 @@ const Post = () => {
                     {loading && <Heading>Loading ...</Heading>}
                     {!loading && post && (
                         <Stack spacing={10}>
-                            <Link to={`/post/${post._id}`} key={post._id}>
-                                <PostItem
-                                    post={post}
-                                    currentUser={currentUser}
-                                    index={post._id}
-                                />
+                            <Link to={`/post/${post?._id}`} key={post?._id}>
+                                <PostItem post={post} />
                             </Link>
                             <CreateReply post={post} />
                             <RepliesStream

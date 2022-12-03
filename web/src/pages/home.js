@@ -11,6 +11,11 @@ const HomePage = () => {
     const [chronological, setChronological] = useState(true);
     const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
+    const imageGenerator = () => {
+        const username = currentUser?.username;
+        const url = `https://ui-avatars.com/api/?background=random&name=${username}`;
+        return url;
+    };
     useEffect(() => {
         dispatch(profileThunk());
     }, [dispatch]);
@@ -25,7 +30,7 @@ const HomePage = () => {
                 <Stack spacing={10}>
                     <Stack spacing={5}>
                         <HStack spacing={5}>
-                            <Avatar />
+                            <Avatar src={imageGenerator()} />
                             <CreatePost />
                         </HStack>
                         <PostBorder

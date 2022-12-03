@@ -17,7 +17,6 @@ const url = async (location, imperial) => {
 
 export const fetchWeather = async (location, imperial) => {
     const apiUrl = await url(location, imperial);
-    console.log(apiUrl);
     const response = await axios.post(apiUrl);
     return response.data;
 };

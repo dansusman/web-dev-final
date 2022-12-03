@@ -30,6 +30,11 @@ const NavTopBar = ({ user }) => {
     const nav = useNavigate();
     const dispatch = useDispatch();
     const { currentUser } = useSelector((state) => state.users);
+    const imageGenerator = () => {
+        const username = currentUser?.username;
+        const url = `https://ui-avatars.com/api/?background=random&name=${username}`;
+        return url;
+    };
     return (
         <>
             <Box px="4" mb="5">
@@ -66,7 +71,10 @@ const NavTopBar = ({ user }) => {
                                     minW={0}
                                 >
                                     <HStack>
-                                        <Avatar size={"sm"} />
+                                        <Avatar
+                                            src={imageGenerator()}
+                                            size={"sm"}
+                                        />
                                         <VStack
                                             display={{
                                                 base: "none",
@@ -93,7 +101,10 @@ const NavTopBar = ({ user }) => {
                                 <MenuList alignItems={"center"}>
                                     <br />
                                     <Center>
-                                        <Avatar size={"lg"} />
+                                        <Avatar
+                                            src={imageGenerator()}
+                                            size={"lg"}
+                                        />
                                     </Center>
                                     <Center>
                                         <chakra.p color={"gray.500"}>

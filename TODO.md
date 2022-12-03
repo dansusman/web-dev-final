@@ -33,5 +33,5 @@
 -   [ ] Filter posts to who you are following
 -   [ ] Add button to PostItem that takes you to posts with that location
 -   [ ] Filter posts by location on home page
--   [ ] Make PostItem UI responsive
 -   [ ] Fix Interactions!!!
+-   [ ] Make PostItem UI responsive

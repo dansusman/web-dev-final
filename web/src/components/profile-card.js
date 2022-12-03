@@ -1,4 +1,4 @@
-import { SmallCloseIcon } from "@chakra-ui/icons";
+import { SmallCloseIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
     Avatar,
     AvatarBadge,
@@ -6,10 +6,13 @@ import {
     Center,
     Flex,
     FormControl,
+    FormErrorMessage,
     FormLabel,
     Heading,
     IconButton,
     Input,
+    InputGroup,
+    InputRightElement,
     Stack,
     useColorModeValue,
 } from "@chakra-ui/react";
@@ -21,11 +24,13 @@ const ProfileCard = ({ user }) => {
     const dispatch = useDispatch();
     const [usernameText, setUsernameText] = useState();
     const [passwordText, setPasswordText] = useState();
+    const [showPassword, setShowPassword] = useState(false);
+    const [showPasswordError, setShowPasswordError] = useState(false);
     const usernameHandler = (e) => {
         const username = e.target.value;
         setUsernameText(username);
     };
-    const passwordHandler = (e) => {
+    const handlePassword = (e) => {
         const password = e.target.value;
         setPasswordText(password);
     };
@@ -53,46 +58,43 @@ const ProfileCard = ({ user }) => {
                 <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
                     User Profile Edit
                 </Heading>
-                <FormControl id="userName">
-                    <FormLabel>User Icon</FormLabel>
-                    <Stack direction={["column", "row"]} spacing={6}>
-                        <Center>
-                            <Avatar size="xl" src={user?.image}>
-                                <AvatarBadge
-                                    as={IconButton}
-                                    size="sm"
-                                    rounded="full"
-                                    top="-10px"
-                                    colorScheme="red"
-                                    aria-label="remove Image"
-                                    icon={<SmallCloseIcon />}
-                                />
-                            </Avatar>
-                        </Center>
-                        <Center>
-                            <Button>Change</Button>
-                        </Center>
-                    </Stack>
-                </FormControl>
                 <FormControl id="userName" isRequired>
                     <FormLabel>Username</FormLabel>
                     <Input
                         onChange={usernameHandler}
-                        placeholder="weatherman3"
-                        _placeholder={{ color: "gray.500" }}
                         type="text"
                         defaultValue={user?.username}
                     />
                 </FormControl>
-                <FormControl id="password" isRequired>
+                <FormControl
+                    id="password"
+                    isRequired
+                    isInvalid={showPasswordError}
+                    onChange={handlePassword}
+                >
                     <FormLabel>Password</FormLabel>
-                    <Input
-                        onChange={passwordHandler}
-                        placeholder="password"
-                        _placeholder={{ color: "gray.500" }}
-                        type="password"
-                        defaultValue={user?.password}
-                    />
+                    <InputGroup>
+                        <Input
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            defaultValue={user?.password}
+                        />
+                        <InputRightElement h={"full"}>
+                            <Button
+                                variant={"ghost"}
+                                onClick={() =>
+                                    setShowPassword(
+                                        (showPassword) => !showPassword
+                                    )
+                                }
+                            >
+                                {showPassword ? <ViewIcon /> : <ViewOffIcon />}
+                            </Button>
+                        </InputRightElement>
+                    </InputGroup>
+                    <FormErrorMessage>
+                        Please enter a password longer than 8 characters.
+                    </FormErrorMessage>
                 </FormControl>
                 <Stack spacing={6} direction={["column", "row"]}>
                     <Button

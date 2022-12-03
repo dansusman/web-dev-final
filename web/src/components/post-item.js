@@ -8,25 +8,20 @@ import {
     HStack,
     Stack,
 } from "@chakra-ui/react";
-import { useMemo } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { followUserThunk } from "../follows/follows-thunks";
 import { deletePostThunk } from "../posts/posts-thunks";
 import Interactions from "./interactions";
 import PostBorder from "./post-border";
 
-const PostItem = ({ post, currentUser }) => {
+const PostItem = ({ post }) => {
     const dispatch = useDispatch();
     const nav = useNavigate();
+    const { currentUser } = useSelector((state) => state.users);
     const dateStamp = post.time;
-    const timePretty = useMemo(() => {
-        var options = { hour12: !(currentUser && currentUser.twentyFour) };
-        if (dateStamp != null) {
-            return new Date(dateStamp).toLocaleString("en-US", options);
-        }
-        return "";
-    }, [dateStamp, currentUser]);
+    var options = { hour12: !(currentUser && currentUser.twentyFour) };
+    const timePretty = new Date(dateStamp).toLocaleString("en-US", options);
     const deleteHandler = (id) => {
         dispatch(deletePostThunk(id));
     };
@@ -41,7 +36,9 @@ const PostItem = ({ post, currentUser }) => {
             nav("/login");
             return;
         }
-        dispatch(followUserThunk({ followed: post.author }));
+        if (post.author) {
+            dispatch(followUserThunk({ followed: post.author }));
+        }
     };
 
     return (
@@ -87,14 +84,9 @@ const PostItem = ({ post, currentUser }) => {
                         @{post.username}
                     </chakra.p>
                 </div>
-                <Button
-                    onClick={(e) => {
-                        e.preventDefault();
-                        handleFollow();
-                    }}
-                >
-                    Follow
-                </Button>
+                {currentUser?._id !== post.author && (
+                    <Button onClick={handleFollow}>Follow</Button>
+                )}
             </Stack>
             {((currentUser && currentUser?._id === post.author) ||
                 currentUser?.type === "Moderator") && (

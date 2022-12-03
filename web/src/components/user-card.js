@@ -10,8 +10,21 @@ import {
     Text,
     useColorModeValue,
 } from "@chakra-ui/react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router";
+import { followUserThunk } from "../follows/follows-thunks";
 import { UsersListModal } from "./users-list-modal";
-const UserCard = ({ user }) => {
+const UserCard = ({ user, showFollow }) => {
+    const dispatch = useDispatch();
+    const nav = useNavigate();
+    const { currentUser } = useSelector((state) => state.users);
+    const handleFollow = () => {
+        if (!currentUser) {
+            nav("/login");
+            return;
+        }
+        dispatch(followUserThunk({ followed: user._id }));
+    };
     return (
         <Flex justify={"center"}>
             <Stack spacing={8} minW={350} mx={"auto"} maxW={"lg"}>
@@ -29,9 +42,15 @@ const UserCard = ({ user }) => {
                                     {user.username}
                                 </Heading>
                                 <Spacer />
-                                <Button variant="solid" colorScheme="purple">
-                                    Follow
-                                </Button>
+                                {showFollow && (
+                                    <Button
+                                        variant="solid"
+                                        colorScheme="purple"
+                                        onClick={handleFollow}
+                                    >
+                                        Follow
+                                    </Button>
+                                )}
                             </HStack>
                             <HStack spacing="10">
                                 <UsersListModal

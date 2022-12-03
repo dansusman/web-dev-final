@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { findAllUsersThunk, findUserByIdThunk } from "../users/users-thunks";
@@ -12,22 +12,19 @@ import BasicPage from "../components/basic-page";
 import { Stack } from "@chakra-ui/react";
 import UserCard from "../components/user-card";
 import PostStream from "../components/post-stream";
-import { FollowersModal } from "../components/users-list-modal";
 
 const PublicProfile = () => {
     const { uid } = useParams();
     const { publicProfile } = useSelector((state) => state.users);
     const { followers, following } = useSelector((state) => state.follows);
-    const { posts } = useSelector((state) => state.postsData);
     const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
-    const nav = useNavigate();
     useEffect(() => {
         dispatch(findAllUsersThunk());
-        if (uid === currentUser?._id) {
-            nav("/profile");
-            return;
-        }
+        // if (uid === currentUser?._id) {
+        //     nav("/profile");
+        //     return;
+        // }
         dispatch(findUserByIdThunk(uid));
         dispatch(findPostsByAuthorThunk(uid));
         dispatch(findFollowersThunk(uid));
@@ -47,6 +44,7 @@ const PublicProfile = () => {
             children={
                 <Stack spacing={10}>
                     <UserCard
+                        showFollow={currentUser?._id !== publicProfile?._id}
                         user={{
                             ...publicProfile,
                             image: imageGenerator(),
@@ -56,7 +54,7 @@ const PublicProfile = () => {
                             following: following,
                         }}
                     ></UserCard>
-                    <PostStream forUser={publicProfile}></PostStream>
+                    <PostStream forUser={publicProfile?._id}></PostStream>
                 </Stack>
             }
         ></BasicPage>
