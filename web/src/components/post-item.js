@@ -8,26 +8,20 @@ import {
     HStack,
     Stack,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import {
-    findFollowersThunk,
-    findFollowingThunk,
-    followUserThunk,
-} from "../follows/follows-thunks";
+import { followUserThunk } from "../follows/follows-thunks";
 import { deletePostThunk } from "../posts/posts-thunks";
 import Interactions from "./interactions";
 import PostBorder from "./post-border";
 
-const PostItem = ({ post }) => {
+const PostItem = ({ post, following, forUser }) => {
     const dispatch = useDispatch();
     const nav = useNavigate();
     const { currentUser } = useSelector((state) => state.users);
     const dateStamp = post.time;
     var options = { hour12: !(currentUser && currentUser.twentyFour) };
     const timePretty = new Date(dateStamp).toLocaleString("en-US", options);
-    const { following } = useSelector((state) => state.follows);
     const deleteHandler = (id) => {
         dispatch(deletePostThunk(id));
     };
@@ -37,15 +31,31 @@ const PostItem = ({ post }) => {
         return url;
     };
 
-    const handleFollow = () => {
+    const handleFollow = (e) => {
+        e.preventDefault();
         if (!currentUser) {
             nav("/login");
             return;
         }
         if (post.author) {
             dispatch(followUserThunk({ followed: post.author }));
+            return;
         }
     };
+
+    // don't show the follow button if:
+    // 1. Not logged in
+    // 2. I am the post's author
+    // 3. I am already following the post's author
+    const notLoggedIn = !currentUser;
+    const iFollow = following?.filter((u) => {
+        const compareThis = forUser ? currentUser?._id : post.author;
+        const toThat = forUser ? u.follower : u.followed;
+        return compareThis === toThat._id;
+    });
+    const followingPoster = iFollow.length > 0;
+    const iAmPoster = currentUser?._id === post.author;
+    const showFollowButton = notLoggedIn || (!iAmPoster && !followingPoster);
 
     return (
         <PostBorder>
@@ -75,26 +85,23 @@ const PostItem = ({ post }) => {
                 minW="100px"
                 onClick={(e) => e.preventDefault()}
             >
-                <Stack
-                    onClick={(e) => {
-                        e.preventDefault();
-                        nav(`/profile/${post.author}`);
-                    }}
-                    align={"center"}
-                >
-                    <Avatar
-                        src={imageGenerator()}
-                        height={"80px"}
-                        width={"80px"}
-                    />
-                    <chakra.p fontWeight={"medium"} color={"gray.500"}>
-                        @{post.username}
-                    </chakra.p>
-                    {(!currentUser ||
-                        (currentUser?._id !== post.author &&
-                            following?.filter(
-                                (f) => f.followed._id === post.author?._id
-                            ).length === 0)) && (
+                <Stack align={"center"}>
+                    <Stack
+                        onClick={(e) => {
+                            e.preventDefault();
+                            nav(`/profile/${post.author}`);
+                        }}
+                    >
+                        <Avatar
+                            src={imageGenerator()}
+                            height={"80px"}
+                            width={"80px"}
+                        />
+                        <chakra.p fontWeight={"medium"} color={"gray.500"}>
+                            @{post.username}
+                        </chakra.p>
+                    </Stack>
+                    {showFollowButton && (
                         <Button onClick={handleFollow}>Follow</Button>
                     )}
                 </Stack>

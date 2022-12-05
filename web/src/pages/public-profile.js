@@ -2,7 +2,11 @@ import React from "react";
 import { useParams } from "react-router";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { findAllUsersThunk, findUserByIdThunk } from "../users/users-thunks";
+import {
+    findAllUsersThunk,
+    findUserByIdThunk,
+    profileThunk,
+} from "../users/users-thunks";
 import { findPostsByAuthorThunk } from "../posts/posts-thunks";
 import {
     findFollowersThunk,
@@ -16,20 +20,27 @@ import PostStream from "../components/post-stream";
 const PublicProfile = () => {
     const { uid } = useParams();
     const { publicProfile } = useSelector((state) => state.users);
-    const { followers, following } = useSelector((state) => state.follows);
+    const { followers, following, reload } = useSelector(
+        (state) => state.follows
+    );
     const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
+    var showFollow =
+        currentUser?._id !== publicProfile?._id &&
+        followers.filter((f) => f.follower._id === currentUser?._id).length ===
+            0;
+    useEffect(() => {
+        dispatch(profileThunk());
+    }, [dispatch]);
+
     useEffect(() => {
         dispatch(findAllUsersThunk());
-        // if (uid === currentUser?._id) {
-        //     nav("/profile");
-        //     return;
-        // }
         dispatch(findUserByIdThunk(uid));
         dispatch(findPostsByAuthorThunk(uid));
         dispatch(findFollowersThunk(uid));
         dispatch(findFollowingThunk(uid));
-    }, [uid, dispatch]);
+    }, [uid, dispatch, reload]);
+
     const imageGenerator = () => {
         if (!publicProfile) {
             return null;
@@ -44,12 +55,7 @@ const PublicProfile = () => {
             children={
                 <Stack spacing={10}>
                     <UserCard
-                        showFollow={
-                            currentUser?._id !== publicProfile?._id &&
-                            following.filter(
-                                (f) => f.followed._id === publicProfile?._id
-                            ).length === 0
-                        }
+                        showFollow={showFollow}
                         user={{
                             ...publicProfile,
                             image: imageGenerator(),
@@ -59,7 +65,10 @@ const PublicProfile = () => {
                             following: following,
                         }}
                     ></UserCard>
-                    <PostStream forUser={publicProfile?._id}></PostStream>
+                    <PostStream
+                        following={followers}
+                        forUser={publicProfile?._id}
+                    ></PostStream>
                 </Stack>
             }
         ></BasicPage>

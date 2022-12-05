@@ -11,6 +11,7 @@ import { profileThunk } from "../users/users-thunks";
 const HomePage = () => {
     const [chronological, setChronological] = useState(true);
     const { currentUser } = useSelector((state) => state.users);
+    const { following, reload } = useSelector((state) => state.follows);
     const dispatch = useDispatch();
     const imageGenerator = () => {
         const username = currentUser?.username;
@@ -29,7 +30,7 @@ const HomePage = () => {
         if (currentUser) {
             dispatch(findFollowingThunk(currentUser._id));
         }
-    }, [dispatch]);
+    }, [dispatch, currentUser, reload]);
 
     return (
         <BasicPage
@@ -73,7 +74,10 @@ const HomePage = () => {
                             }
                         />
                     </Stack>
-                    <PostStream chronological={chronological} />
+                    <PostStream
+                        following={following}
+                        chronological={chronological}
+                    />
                 </Stack>
             }
         />

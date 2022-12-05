@@ -13,6 +13,7 @@ const PostStream = ({
     chronological = true,
     forUser = null,
     liked = false,
+    following = null,
 }) => {
     const { posts, loading } = useSelector((state) => state.postsData);
     const { likers } = useSelector((state) => state.likes);
@@ -63,7 +64,12 @@ const PostStream = ({
                     <SimpleGrid columns={{ base: 1 }} spacing={"10"}>
                         {actualPosts.map((post, index) => (
                             <Link to={`/post/${post._id}`} key={index}>
-                                <PostItem post={post} index={index} />
+                                <PostItem
+                                    following={following}
+                                    post={post}
+                                    index={index}
+                                    forUser={forUser}
+                                />
                             </Link>
                         ))}
                     </SimpleGrid>

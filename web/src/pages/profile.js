@@ -17,6 +17,7 @@ import { profileThunk } from "../users/users-thunks";
 const ProfilePage = () => {
     const { locations } = useSelector((state) => state.locationsData);
     const { currentUser } = useSelector((state) => state.users);
+    const { following } = useSelector((state) => state.follows);
     const [wantLiked, setWantLiked] = useState(false);
     const dispatch = useDispatch();
     useEffect(() => {
@@ -66,6 +67,7 @@ const ProfilePage = () => {
                             <PostStream
                                 forUser={currentUser?._id}
                                 liked={wantLiked}
+                                following={following}
                             />
                         </Stack>
                     </Box>

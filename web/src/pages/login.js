@@ -35,7 +35,9 @@ const LoginCard = () => {
         nav("/");
     };
     const handleUsername = (e) => setUsername(e.target.value);
-    const handlePassword = (e) => setPassword(e.target.value);
+    const handlePassword = (e) => {
+        setPassword(e.target.value);
+    };
     useEffect(() => {
         dispatch(profileThunk());
         if (currentUser) {
@@ -61,7 +63,16 @@ const LoginCard = () => {
                         </FormControl>
                         <FormControl id="password" isInvalid={showError}>
                             <FormLabel>Password</FormLabel>
-                            <Input type="password" onChange={handlePassword} />
+                            <Input
+                                type="password"
+                                onKeyDown={(e) => {
+                                    if (e.key === "Enter") {
+                                        handleSubmit();
+                                        return;
+                                    }
+                                }}
+                                onChange={handlePassword}
+                            />
                             {showError && (
                                 <FormErrorMessage>
                                     Issue with login information. Please check

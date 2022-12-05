@@ -11,6 +11,7 @@ import { findPostByIdThunk, findPostsThunk } from "../posts/posts-thunks";
 import RepliesStream from "../components/replies-stream";
 import CreateReply from "../components/create-reply";
 import { findAllUsersThunk, profileThunk } from "../users/users-thunks";
+import { findFollowingThunk } from "../follows/follows-thunks";
 
 const Post = () => {
     const { loading } = useSelector((state) => state.postsData);
@@ -18,12 +19,19 @@ const Post = () => {
     const dispatch = useDispatch();
     const { pid } = useParams();
     const { post } = useSelector((state) => state.postsData);
+    const { following, reload } = useSelector((state) => state.follows);
 
     useEffect(() => {
         dispatch(findAllUsersThunk());
         dispatch(profileThunk());
         dispatch(findPostByIdThunk(pid));
     }, []);
+
+    useEffect(() => {
+        if (currentUser) {
+            dispatch(findFollowingThunk(currentUser._id));
+        }
+    }, [dispatch, currentUser, reload]);
 
     return (
         <BasicPage
@@ -34,7 +42,7 @@ const Post = () => {
                     {!loading && post && (
                         <Stack spacing={10}>
                             <Link to={`/post/${post?._id}`} key={post?._id}>
-                                <PostItem post={post} />
+                                <PostItem following={following} post={post} />
                             </Link>
                             <CreateReply post={post} />
                             <RepliesStream
