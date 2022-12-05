@@ -5,6 +5,7 @@ import BasicPage from "../components/basic-page";
 import CreatePost from "../components/create-post";
 import PostBorder from "../components/post-border";
 import PostStream from "../components/post-stream";
+import { findFollowingThunk } from "../follows/follows-thunks";
 import { findPostsThunk } from "../posts/posts-thunks";
 import { profileThunk } from "../users/users-thunks";
 const HomePage = () => {
@@ -23,6 +24,13 @@ const HomePage = () => {
     useEffect(() => {
         dispatch(findPostsThunk(chronological));
     }, [chronological, dispatch]);
+
+    useEffect(() => {
+        if (currentUser) {
+            dispatch(findFollowingThunk(currentUser._id));
+        }
+    }, [dispatch]);
+
     return (
         <BasicPage
             user={currentUser}

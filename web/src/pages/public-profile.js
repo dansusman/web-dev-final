@@ -44,7 +44,12 @@ const PublicProfile = () => {
             children={
                 <Stack spacing={10}>
                     <UserCard
-                        showFollow={currentUser?._id !== publicProfile?._id}
+                        showFollow={
+                            currentUser?._id !== publicProfile?._id &&
+                            following.filter(
+                                (f) => f.followed._id === publicProfile?._id
+                            ).length === 0
+                        }
                         user={{
                             ...publicProfile,
                             image: imageGenerator(),

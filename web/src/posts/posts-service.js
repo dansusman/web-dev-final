@@ -4,6 +4,7 @@ import _ from "lodash";
 // const POSTS_API = "https://poster-node-server-app.herokuapp.com/api/posts";
 const API_BASE = process.env.REACT_APP_API_BASE;
 const POSTS_API = `${API_BASE}/posts`;
+const USERS_URL = "http://localhost:4000/users";
 
 const api = axios.create({ withCredentials: true });
 
@@ -39,5 +40,11 @@ export const findPostById = async (pid) => {
 
 export const findPostsByAuthor = async (author) => {
     const response = await api.get(`${API_BASE}/users/${author}/posts`);
+    return response.data;
+};
+
+export const findPostsLikedByUser = async (uid) => {
+    const url = `${USERS_URL}/${uid}/likes`;
+    const response = await axios.get(url);
     return response.data;
 };

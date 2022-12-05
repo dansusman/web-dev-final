@@ -1,5 +1,5 @@
 import { Box, HStack, Stack, Tab, TabList, Tabs } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BasicPage from "../components/basic-page";
 import Location from "../components/location";
@@ -8,19 +8,36 @@ import PostStream from "../components/post-stream";
 import ProfileCard from "../components/profile-card";
 import UserSettings from "../components/user-settings";
 import { findWeatherThunk } from "../locations/location-thunks";
+import {
+    findPostsByAuthorThunk,
+    findPostsLikedByUserThunk,
+} from "../posts/posts-thunks";
 import { profileThunk } from "../users/users-thunks";
 
 const ProfilePage = () => {
     const { locations } = useSelector((state) => state.locationsData);
     const { currentUser } = useSelector((state) => state.users);
+    const [wantLiked, setWantLiked] = useState(false);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(findWeatherThunk("London"));
     }, [dispatch]);
 
     useEffect(() => {
+        if (wantLiked) {
+            dispatch(findPostsLikedByUserThunk(currentUser?._id));
+        } else {
+            dispatch(findPostsByAuthorThunk(currentUser?._id));
+        }
+    }, [wantLiked, dispatch]);
+
+    useEffect(() => {
         dispatch(profileThunk());
     }, [dispatch]);
+
+    const clickHandler = () => {
+        setWantLiked((wantLiked) => !wantLiked);
+    };
 
     return (
         <BasicPage
@@ -36,13 +53,20 @@ const ProfilePage = () => {
                                         colorScheme={"purple"}
                                     >
                                         <TabList>
-                                            <Tab>My Posts</Tab>
-                                            <Tab>Liked Posts</Tab>
+                                            <Tab onClick={clickHandler}>
+                                                My Posts
+                                            </Tab>
+                                            <Tab onClick={clickHandler}>
+                                                Liked Posts
+                                            </Tab>
                                         </TabList>
                                     </Tabs>
                                 }
                             />
-                            <PostStream />
+                            <PostStream
+                                forUser={currentUser?._id}
+                                liked={wantLiked}
+                            />
                         </Stack>
                     </Box>
                     <Stack

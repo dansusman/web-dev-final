@@ -8,9 +8,14 @@ import {
     HStack,
     Stack,
 } from "@chakra-ui/react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
-import { followUserThunk } from "../follows/follows-thunks";
+import {
+    findFollowersThunk,
+    findFollowingThunk,
+    followUserThunk,
+} from "../follows/follows-thunks";
 import { deletePostThunk } from "../posts/posts-thunks";
 import Interactions from "./interactions";
 import PostBorder from "./post-border";
@@ -22,6 +27,7 @@ const PostItem = ({ post }) => {
     const dateStamp = post.time;
     var options = { hour12: !(currentUser && currentUser.twentyFour) };
     const timePretty = new Date(dateStamp).toLocaleString("en-US", options);
+    const { following } = useSelector((state) => state.follows);
     const deleteHandler = (id) => {
         dispatch(deletePostThunk(id));
     };
@@ -84,7 +90,11 @@ const PostItem = ({ post }) => {
                     <chakra.p fontWeight={"medium"} color={"gray.500"}>
                         @{post.username}
                     </chakra.p>
-                    {currentUser?._id !== post.author && (
+                    {(!currentUser ||
+                        (currentUser?._id !== post.author &&
+                            following?.filter(
+                                (f) => f.followed._id === post.author?._id
+                            ).length === 0)) && (
                         <Button onClick={handleFollow}>Follow</Button>
                     )}
                 </Stack>

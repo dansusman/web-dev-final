@@ -14,7 +14,7 @@ export const userUnlikesPost = async (uid, pid) => {
 export const findPostsLikedByUser = async (uid) => {
     return await likesModel
         .find({ user: uid }, { user: false })
-        .populate("post", "title")
+        .populate("post", ["title", "content", "username", "time"])
         .exec();
 };
 export const findUsersThatLikePost = async (pid) => {

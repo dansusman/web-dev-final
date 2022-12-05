@@ -32,7 +32,8 @@
     -   Can delete any post?
     -   Can delete users?
 
--   [ ] Sort My Posts/Liked Posts on Profile page
+-   [x] Sort My Posts/Liked Posts on Profile page
 -   [ ] Filter posts to who you are following
 -   [ ] Filter posts by location on home page
 -   [ ] Add button to PostItem that takes you to posts with that location
+-   [ ] Allow users to select a location on /profile page

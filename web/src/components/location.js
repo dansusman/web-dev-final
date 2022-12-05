@@ -1,4 +1,12 @@
-import { Flex, Heading, Stack, useColorModeValue } from "@chakra-ui/react";
+import {
+    Button,
+    Flex,
+    Heading,
+    HStack,
+    Input,
+    Stack,
+    useColorModeValue,
+} from "@chakra-ui/react";
 
 const Location = ({ location }) => {
     return (
@@ -13,15 +21,17 @@ const Location = ({ location }) => {
                 p={6}
             >
                 <Heading size={"md"}>Location Settings</Heading>
-                <Heading lineHeight={1.1} fontSize={{ base: "2xl", sm: "3xl" }}>
-                    {location?.name}
-                </Heading>
-                <Heading lineHeight={1.1} fontSize={{ base: "xl", sm: "2xl" }}>
-                    {location?.main.temp}
-                </Heading>
-                <Heading lineHeight={1.1} fontSize={{ base: "xl", sm: "2xl" }}>
-                    {location?.weather[0].main}
-                </Heading>
+                <HStack align="center">
+                    <Heading fontSize={"xl"}>{location?.name}</Heading>
+                    <Heading fontSize={"xl"}>{location?.main.temp}</Heading>
+                    <Heading fontSize={"xl"}>
+                        {location?.weather[0].main}
+                    </Heading>
+                </HStack>
+                <HStack>
+                    <Input></Input>
+                    <Button>Change</Button>
+                </HStack>
             </Stack>
         </Flex>
     );
