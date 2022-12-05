@@ -4,10 +4,10 @@ import BasicPage from "../components/basic-page";
 import { Link } from "react-router-dom";
 import PostItem from "../components/post-item";
 import React, { useEffect } from "react";
-import { useLocation, useParams } from "react-router";
+import { useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { findPostByIdThunk, findPostsThunk } from "../posts/posts-thunks";
+import { findPostByIdThunk } from "../posts/posts-thunks";
 import RepliesStream from "../components/replies-stream";
 import CreateReply from "../components/create-reply";
 import { findAllUsersThunk, profileThunk } from "../users/users-thunks";
@@ -25,7 +25,7 @@ const Post = () => {
         dispatch(findAllUsersThunk());
         dispatch(profileThunk());
         dispatch(findPostByIdThunk(pid));
-    }, []);
+    }, [dispatch, pid]);
 
     useEffect(() => {
         if (currentUser) {

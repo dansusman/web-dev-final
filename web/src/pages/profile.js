@@ -20,6 +20,7 @@ const ProfilePage = () => {
     const { following } = useSelector((state) => state.follows);
     const [wantLiked, setWantLiked] = useState(false);
     const dispatch = useDispatch();
+
     useEffect(() => {
         dispatch(findWeatherThunk("London"));
     }, [dispatch]);
@@ -30,7 +31,7 @@ const ProfilePage = () => {
         } else {
             dispatch(findPostsByAuthorThunk(currentUser?._id));
         }
-    }, [wantLiked, dispatch]);
+    }, [wantLiked, dispatch, currentUser]);
 
     useEffect(() => {
         dispatch(profileThunk());
