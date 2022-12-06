@@ -37,4 +37,5 @@
 -   [ ] Filter posts to who you are following
 -   [x] Filter posts by location on home page
 -   [ ] Add button to PostItem that takes you to posts with that location
--   [ ] Allow users to select a location on /profile page
+-   [x] Allow users to select a location on /profile page
+-   [ ] Show/Hide Follow buttons in UserListModals

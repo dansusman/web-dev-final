@@ -15,15 +15,10 @@ import {
 import { profileThunk } from "../users/users-thunks";
 
 const ProfilePage = () => {
-    const { locations } = useSelector((state) => state.locationsData);
     const { currentUser } = useSelector((state) => state.users);
     const { following } = useSelector((state) => state.follows);
     const [wantLiked, setWantLiked] = useState(false);
     const dispatch = useDispatch();
-
-    useEffect(() => {
-        dispatch(findWeatherThunk("London"));
-    }, [dispatch]);
 
     useEffect(() => {
         if (wantLiked) {
@@ -79,7 +74,7 @@ const ProfilePage = () => {
                         w="30%"
                     >
                         <ProfileCard user={currentUser} />
-                        <Location location={locations[0]} />
+                        <Location />
                         <UserSettings currentUser={currentUser} />
                     </Stack>
                 </HStack>

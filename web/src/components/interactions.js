@@ -73,7 +73,7 @@ const Interactions = ({ post }) => {
 
     useEffect(() => {
         dispatch(findUsersThatLikePostThunk(post._id));
-    }, [likes]);
+    }, [likes, dispatch]);
 
     const liked =
         likers[post._id]?.filter((u) => {
@@ -100,7 +100,7 @@ const Interactions = ({ post }) => {
                         <HStack spacing="2">
                             <Text>{post.location}</Text>
                             <Text display={{ base: "none", lg: "block" }}>
-                                {post.temperature}
+                                {post.temperature}℉
                             </Text>
                             <Text display={{ base: "none", lg: "block" }}>
                                 {post.conditions}

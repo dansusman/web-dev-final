@@ -16,20 +16,15 @@ import { updateUserThunk } from "../users/users-thunks";
 
 const UserSettings = ({ currentUser }) => {
     const dispatch = useDispatch();
-    const [checked, setChecked] = useState(currentUser?.twentyFour);
+    const [checked, setChecked] = useState(currentUser.twentyFour);
     const timeHandler = () => {
-        const checkedBefore = checked;
-        setChecked(!checked);
+        setChecked((checked) => !checked);
         const updates = {
             ...currentUser,
-            twentyFour: !checkedBefore,
+            twentyFour: !checked,
         };
         dispatch(updateUserThunk(updates));
     };
-
-    useEffect(() => {
-        setChecked(currentUser?.twentyFour);
-    }, [currentUser?.twentyFour]);
 
     return (
         <Flex align={"center"} justify={"center"}>
@@ -43,26 +38,13 @@ const UserSettings = ({ currentUser }) => {
                 p={6}
             >
                 <Heading size={"md"}>General Settings</Heading>
-                <FormControl alignItems="center">
-                    <FormLabel htmlFor="celsius" mb="0">
-                        Temperature Units
-                    </FormLabel>
-                    <RadioGroup defaultValue={"F"}>
-                        <HStack spacing="10">
-                            <Radio value="F">Fahrenheit</Radio>
-                            <Radio onClick={() => {}} value="C">
-                                Celsius
-                            </Radio>
-                        </HStack>
-                    </RadioGroup>
-                </FormControl>
                 <FormControl display="flex" alignItems="center">
                     <FormLabel htmlFor="24-hr-time" mb="0">
                         Enable 24 hour time?
                     </FormLabel>
                     <Switch
                         id="24-hr-time"
-                        defaultChecked={checked}
+                        defaultChecked={!currentUser || currentUser.twentyFour}
                         onChange={timeHandler}
                     />
                 </FormControl>

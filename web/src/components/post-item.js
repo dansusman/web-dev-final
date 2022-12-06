@@ -20,7 +20,9 @@ const PostItem = ({ post, following, forUser }) => {
     const nav = useNavigate();
     const { currentUser } = useSelector((state) => state.users);
     const dateStamp = post.time;
-    var options = { hour12: !(currentUser && currentUser.twentyFour) };
+    var options = {
+        hour12: !currentUser || !currentUser.twentyFour,
+    };
     const timePretty = new Date(dateStamp).toLocaleString("en-US", options);
     const deleteHandler = (id) => {
         dispatch(deletePostThunk(id));

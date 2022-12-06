@@ -44,10 +44,8 @@ export const deleteUser = async (uid) => {
 };
 
 export const updateUser = async (userUpdates) => {
-    const response = await api.put(
-        `${BASE_URL}/api/users/${userUpdates._id}`,
-        userUpdates
-    );
+    const url = `${BASE_URL}/api/users/${userUpdates._id}`;
+    const response = await api.put(url, userUpdates);
     return userUpdates;
 };
 

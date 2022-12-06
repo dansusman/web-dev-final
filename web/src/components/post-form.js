@@ -28,25 +28,25 @@ const PostForm = ({ locationDefault }) => {
     const nav = useNavigate();
     const [text, setText] = useState();
     const [title, setTitle] = useState();
-    const [location, setLocation] = useState(locationDefault);
+    const [locationText, setLocation] = useState(locationDefault);
     const [showTitleError, setShowTitleError] = useState(false);
     const [showLocationError, setShowLocationError] = useState(false);
     const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
-    const { locations } = useSelector((state) => state.locationsData);
+    const { location } = useSelector((state) => state.locationsData);
     useEffect(() => {
-        dispatch(findWeatherThunk(location));
-    }, [location]);
+        dispatch(findWeatherThunk(locationText));
+    }, [locationText, dispatch]);
     const handleSubmit = () => {
         const newPost = {
             title: title,
             content: text,
             time: new Date(),
             username: currentUser.username,
-            location: location,
-            temperature: locations[0]?.main.temp,
-            conditions: locations[0]?.weather[0].main,
-            weatherIconCode: locations[0]?.weather[0].icon,
+            location: locationText,
+            temperature: location?.main.temp,
+            conditions: location?.weather[0].main,
+            weatherIconCode: location?.weather[0].icon,
         };
         dispatch(createPostThunk(newPost));
         nav("/");
@@ -131,7 +131,7 @@ const PostForm = ({ locationDefault }) => {
                         <Select
                             onChange={locationHandler}
                             placeholder="Select Your Location"
-                            value={location}
+                            value={locationText}
                         >
                             {cities.map((l, index) => (
                                 <option key={index}>{l}</option>

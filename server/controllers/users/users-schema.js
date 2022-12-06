@@ -7,6 +7,7 @@ const usersSchema = mongoose.Schema(
         type: { type: String, enum: ["User", "Moderator"] },
         twentyFour: Boolean,
         metric: Boolean,
+        location: String,
     },
     { collection: "users" }
 );

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { findWeatherThunk } from "../locations/location-thunks";
 
 const initialState = {
-    locations: [],
+    location: [],
     loading: false,
     locationDefault: "",
 };
@@ -13,7 +13,7 @@ const locationsSlice = createSlice({
     extraReducers: {
         [findWeatherThunk.fulfilled]: (state, action) => {
             state.loading = false;
-            state.locations.push(action.payload);
+            state.location = action.payload;
         },
         [findWeatherThunk.rejected]: (state) => {
             state.loading = false;
