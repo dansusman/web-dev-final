@@ -6,12 +6,13 @@ import {
     Stack,
     Text,
 } from "@chakra-ui/react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router";
 import { updatePostThunk } from "../posts/posts-thunks";
 import ReplyBorder from "./reply-border";
 
 const ReplyItem = ({ reply, post }) => {
+    const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
     const deleteHandler = (id) => {
         const withoutId = post.replies.filter(
@@ -56,19 +57,22 @@ const ReplyItem = ({ reply, post }) => {
                     {reply.content}
                 </Text>
             </HStack>
-            <CloseButton
-                position="absolute"
-                right={"2"}
-                top={"2"}
-                onClick={(e) => {
-                    e.preventDefault();
-                    deleteHandler(reply._id);
-                }}
-                backgroundColor={"transparent"}
-                _hover={{
-                    bg: "transparent",
-                }}
-            />
+            {((currentUser && currentUser?._id === reply.author) ||
+                currentUser?.type === "Moderator") && (
+                <CloseButton
+                    position="absolute"
+                    right={"2"}
+                    top={"2"}
+                    onClick={(e) => {
+                        e.preventDefault();
+                        deleteHandler(reply._id);
+                    }}
+                    backgroundColor={"transparent"}
+                    _hover={{
+                        bg: "transparent",
+                    }}
+                />
+            )}
         </ReplyBorder>
     );
 };

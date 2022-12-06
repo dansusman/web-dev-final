@@ -34,8 +34,9 @@
 
 -   [x] Sort My Posts/Liked Posts on Profile page
 -   [x] Finish Follow Implementation
--   [ ] Filter posts to who you are following
+-   [x] Filter posts to who you are following
 -   [x] Filter posts by location on home page
--   [ ] Add button to PostItem that takes you to posts with that location
 -   [x] Allow users to select a location on /profile page
+-   [ ] Add button to PostItem that takes you to posts with that location
+-   [ ] Ensure home page filtering is mutually exclusive
 -   [ ] Show/Hide Follow buttons in UserListModals

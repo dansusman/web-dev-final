@@ -21,6 +21,7 @@ import { profileThunk } from "../users/users-thunks";
 const HomePage = () => {
     const [chronological, setChronological] = useState(true);
     const [wantLocation, setWantLocation] = useState(false);
+    const [wantFollowing, setWantFollowing] = useState(false);
     const [location, setLocation] = useState(undefined);
     const { currentUser } = useSelector((state) => state.users);
     const { following, reload } = useSelector((state) => state.follows);
@@ -70,6 +71,7 @@ const HomePage = () => {
                                     <TabList>
                                         <Tab
                                             onClick={() => {
+                                                setWantFollowing(() => false);
                                                 setWantLocation(() => false);
                                                 return setChronological(
                                                     (chronological) =>
@@ -81,6 +83,7 @@ const HomePage = () => {
                                         </Tab>
                                         <Tab
                                             onClick={() => {
+                                                setWantFollowing(() => false);
                                                 setWantLocation(() => false);
                                                 return setChronological(
                                                     (chronological) =>
@@ -91,12 +94,29 @@ const HomePage = () => {
                                             Popular
                                         </Tab>
                                         <Tab
-                                            onClick={() =>
-                                                setWantLocation(() => true)
-                                            }
+                                            onClick={() => {
+                                                setWantFollowing(() => false);
+                                                return setWantLocation(
+                                                    () => true
+                                                );
+                                            }}
                                         >
                                             Location
                                         </Tab>
+                                        {currentUser && (
+                                            <Tab
+                                                onClick={() => {
+                                                    setWantLocation(
+                                                        () => false
+                                                    );
+                                                    return setWantFollowing(
+                                                        () => true
+                                                    );
+                                                }}
+                                            >
+                                                Following
+                                            </Tab>
+                                        )}
                                     </TabList>
                                 </Tabs>
                             }
@@ -119,6 +139,7 @@ const HomePage = () => {
                         chronological={chronological}
                         location={location}
                         wantLocation={wantLocation}
+                        wantFollowing={wantFollowing}
                     />
                 </Stack>
             }

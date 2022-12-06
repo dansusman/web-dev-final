@@ -66,6 +66,7 @@ const CreateReply = ({ post }) => {
                         const newPost = {
                             content: text,
                             username: currentUser.username,
+                            author: currentUser._id,
                             _id: new Date().getTime() + "",
                         };
                         const newPosts = (post.replies || []).concat(newPost);

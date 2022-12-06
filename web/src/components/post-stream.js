@@ -2,6 +2,7 @@ import { Flex, Heading, SimpleGrid } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { findFollowingThunk } from "../follows/follows-thunks";
 import {
     findPostsByAuthorThunk,
     findPostsByLocationThunk,
@@ -17,9 +18,12 @@ const PostStream = ({
     following = null,
     location = null,
     wantLocation = false,
+    wantFollowing = false,
 }) => {
     const { posts, loading } = useSelector((state) => state.postsData);
     const { likers } = useSelector((state) => state.likes);
+    const follows = useSelector((state) => state.follows);
+    const followings = follows.following;
     const dispatch = useDispatch();
     useEffect(() => {
         if (forUser) {
@@ -31,15 +35,15 @@ const PostStream = ({
         } else {
             dispatch(findPostsThunk(chronological));
         }
-    }, [dispatch, forUser]);
+    }, [dispatch, forUser, liked, chronological]);
 
     useEffect(() => {
-        if (!location) {
+        if (!location || wantFollowing) {
             dispatch(findPostsThunk(chronological));
         } else if (wantLocation) {
             dispatch(findPostsByLocationThunk(location));
         }
-    }, [wantLocation, location]);
+    }, [wantLocation, location, wantFollowing]);
 
     var postsSort = [...posts];
     if (!chronological) {
@@ -61,6 +65,18 @@ const PostStream = ({
             }
             return p;
         });
+    }
+
+    var postsIWant = [];
+    if (wantFollowing) {
+        actualPosts.forEach((p) => {
+            followings.forEach((f) => {
+                if (f.followed._id === p.author) {
+                    postsIWant.push(p);
+                }
+            });
+        });
+        actualPosts = postsIWant;
     }
 
     return (

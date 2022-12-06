@@ -93,6 +93,7 @@ const PostItem = ({ post, following, forUser }) => {
                             e.preventDefault();
                             nav(`/profile/${post.author}`);
                         }}
+                        align="center"
                     >
                         <Avatar
                             src={imageGenerator()}

@@ -22,8 +22,11 @@ const Post = () => {
     const { following, reload } = useSelector((state) => state.follows);
 
     useEffect(() => {
-        dispatch(findAllUsersThunk());
         dispatch(profileThunk());
+    }, [dispatch]);
+
+    useEffect(() => {
+        dispatch(findAllUsersThunk());
         dispatch(findPostByIdThunk(pid));
     }, [dispatch, pid]);
 
