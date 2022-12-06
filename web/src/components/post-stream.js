@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import {
     findPostsByAuthorThunk,
+    findPostsByLocationThunk,
     findPostsLikedByUserThunk,
     findPostsThunk,
 } from "../posts/posts-thunks";
@@ -14,6 +15,8 @@ const PostStream = ({
     forUser = null,
     liked = false,
     following = null,
+    location = null,
+    wantLocation = false,
 }) => {
     const { posts, loading } = useSelector((state) => state.postsData);
     const { likers } = useSelector((state) => state.likes);
@@ -29,6 +32,14 @@ const PostStream = ({
             dispatch(findPostsThunk(chronological));
         }
     }, [dispatch, forUser]);
+
+    useEffect(() => {
+        if (!location) {
+            dispatch(findPostsThunk(chronological));
+        } else if (wantLocation) {
+            dispatch(findPostsByLocationThunk(location));
+        }
+    }, [wantLocation, location]);
 
     var postsSort = [...posts];
     if (!chronological) {

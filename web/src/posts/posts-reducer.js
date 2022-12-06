@@ -4,6 +4,7 @@ import {
     deletePostThunk,
     findPostByIdThunk,
     findPostsByAuthorThunk,
+    findPostsByLocationThunk,
     findPostsLikedByUserThunk,
     findPostsThunk,
     updatePostThunk,
@@ -12,7 +13,6 @@ import {
 const initialState = {
     post: null,
     posts: [],
-    postsForUser: [],
     loading: false,
 };
 
@@ -36,11 +36,20 @@ const postsSlice = createSlice({
         [findPostsThunk.rejected]: (state) => {
             state.loading = false;
         },
+
         [findPostsByAuthorThunk.fulfilled]: (state, { payload }) => {
             state.loading = false;
             state.posts = payload;
         },
         [findPostsByAuthorThunk.rejected]: (state) => {
+            state.loading = false;
+        },
+
+        [findPostsByLocationThunk.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.posts = payload;
+        },
+        [findPostsByLocationThunk.rejected]: (state) => {
             state.loading = false;
         },
 

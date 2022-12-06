@@ -44,3 +44,10 @@ export const findPostsLikedByUserThunk = createAsyncThunk(
         return await service.findPostsLikedByUser(uid);
     }
 );
+
+export const findPostsByLocationThunk = createAsyncThunk(
+    "posts/location",
+    async (location) => {
+        return await service.findPostsByLocation(location);
+    }
+);

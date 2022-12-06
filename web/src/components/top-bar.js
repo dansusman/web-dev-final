@@ -108,7 +108,9 @@ const NavTopBar = ({ user }) => {
                                     </Center>
                                     <Center>
                                         <chakra.p color={"gray.500"}>
-                                            @{user?.username}
+                                            {user
+                                                ? "@" + user?.username
+                                                : "Anonymous User"}
                                         </chakra.p>
                                     </Center>
                                     <Center>

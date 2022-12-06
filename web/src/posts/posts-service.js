@@ -45,6 +45,11 @@ export const findPostsByAuthor = async (author) => {
 
 export const findPostsLikedByUser = async (uid) => {
     const url = `${USERS_URL}/${uid}/likes`;
-    const response = await axios.get(url);
+    const response = await api.get(url);
+    return response.data;
+};
+
+export const findPostsByLocation = async (location) => {
+    const response = await api.get(`${POSTS_API}/location/${location}`);
     return response.data;
 };

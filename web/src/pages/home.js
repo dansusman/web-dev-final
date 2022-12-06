@@ -1,4 +1,13 @@
-import { Avatar, HStack, Stack, Tab, TabList, Tabs } from "@chakra-ui/react";
+import {
+    Avatar,
+    HStack,
+    Select,
+    Stack,
+    Tab,
+    TabList,
+    Tabs,
+    useColorModeValue,
+} from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BasicPage from "../components/basic-page";
@@ -6,10 +15,13 @@ import CreatePost from "../components/create-post";
 import PostBorder from "../components/post-border";
 import PostStream from "../components/post-stream";
 import { findFollowingThunk } from "../follows/follows-thunks";
+import cities from "../locations/locations";
 import { findPostsThunk } from "../posts/posts-thunks";
 import { profileThunk } from "../users/users-thunks";
 const HomePage = () => {
     const [chronological, setChronological] = useState(true);
+    const [wantLocation, setWantLocation] = useState(false);
+    const [location, setLocation] = useState(undefined);
     const { currentUser } = useSelector((state) => state.users);
     const { following, reload } = useSelector((state) => state.follows);
     const dispatch = useDispatch();
@@ -18,6 +30,13 @@ const HomePage = () => {
         const url = `https://ui-avatars.com/api/?background=random&name=${username}`;
         return url;
     };
+
+    const locationHandler = (e) => {
+        const lowerCase = e.target.value;
+        setLocation(lowerCase);
+    };
+    const selectColor = useColorModeValue("white", "gray.800");
+
     useEffect(() => {
         dispatch(profileThunk());
     }, [dispatch]);
@@ -50,33 +69,56 @@ const HomePage = () => {
                                 >
                                     <TabList>
                                         <Tab
-                                            onClick={() =>
-                                                setChronological(
+                                            onClick={() => {
+                                                setWantLocation(() => false);
+                                                return setChronological(
                                                     (chronological) =>
                                                         !chronological
-                                                )
-                                            }
+                                                );
+                                            }}
                                         >
                                             New
                                         </Tab>
                                         <Tab
-                                            onClick={() =>
-                                                setChronological(
+                                            onClick={() => {
+                                                setWantLocation(() => false);
+                                                return setChronological(
                                                     (chronological) =>
                                                         !chronological
-                                                )
-                                            }
+                                                );
+                                            }}
                                         >
                                             Popular
+                                        </Tab>
+                                        <Tab
+                                            onClick={() =>
+                                                setWantLocation(() => true)
+                                            }
+                                        >
+                                            Location
                                         </Tab>
                                     </TabList>
                                 </Tabs>
                             }
                         />
+                        {wantLocation && (
+                            <Select
+                                onChange={locationHandler}
+                                placeholder="Select a Location"
+                                value={location}
+                                bg={selectColor}
+                            >
+                                {cities.map((l, index) => (
+                                    <option key={index}>{l}</option>
+                                ))}
+                            </Select>
+                        )}
                     </Stack>
                     <PostStream
                         following={following}
                         chronological={chronological}
+                        location={location}
+                        wantLocation={wantLocation}
                     />
                 </Stack>
             }
