@@ -47,6 +47,7 @@ const Search = () => {
         return (
             p.title?.toLowerCase().includes(searchText) ||
             p.content?.toLowerCase().includes(searchText) ||
+            p.location.toLowerCase().includes(searchText) ||
             repliesContain(p)
         );
     });
