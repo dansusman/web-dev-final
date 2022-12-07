@@ -8,6 +8,7 @@ import {
     updateUserThunk,
     findUserByUsernameThunk,
     findUserByIdThunk,
+    deleteUserThunk,
 } from "./users-thunks";
 
 const usersReducer = createSlice({
@@ -68,6 +69,10 @@ const usersReducer = createSlice({
         [profileThunk.rejected]: (state, action) => {
             state.error = action.payload;
             state.currentUser = null;
+        },
+        [deleteUserThunk.fulfilled]: (state, { payload }) => {
+            state.loading = false;
+            state.users = state.users.filter((u) => u._id !== payload);
         },
     },
 });

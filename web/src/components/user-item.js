@@ -1,7 +1,16 @@
-import { CloseButton, HStack, Spacer, Text } from "@chakra-ui/react";
+import { CloseButton, Text } from "@chakra-ui/react";
+import { useDispatch } from "react-redux";
+import { deleteUserThunk } from "../users/users-thunks";
 import ReplyBorder from "./reply-border";
 
 const UserItem = ({ user }) => {
+    const dispatch = useDispatch();
+    const handleClick = (e) => {
+        e.preventDefault();
+        if (user) {
+            dispatch(deleteUserThunk(user._id));
+        }
+    };
     return (
         <ReplyBorder
             height={"90px"}
@@ -12,9 +21,7 @@ const UserItem = ({ user }) => {
                         position="absolute"
                         right={"2"}
                         top={"2"}
-                        onClick={(e) => {
-                            e.preventDefault();
-                        }}
+                        onClick={handleClick}
                         backgroundColor={"transparent"}
                         _hover={{
                             bg: "transparent",

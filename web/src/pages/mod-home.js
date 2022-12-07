@@ -1,4 +1,4 @@
-import { Box, Heading, HStack, Spacer, Stack } from "@chakra-ui/react";
+import { Heading, Stack } from "@chakra-ui/react";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import BasicPage from "../components/basic-page";
@@ -15,7 +15,7 @@ const ModPage = () => {
     useEffect(() => {
         dispatch(findAllUsersThunk());
         dispatch(findPostsThunk());
-    }, []);
+    }, [dispatch]);
     useEffect(() => {
         if (currentUser) {
             dispatch(findFollowingThunk(currentUser._id));

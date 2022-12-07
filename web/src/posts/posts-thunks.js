@@ -21,8 +21,10 @@ export const createPostThunk = createAsyncThunk(
 export const deletePostThunk = createAsyncThunk(
     "posts/deletePost",
     async (postId) => {
-        await service.deletePost(postId);
-        return postId;
+        const response = await service.deletePost(postId);
+        if (response.deletedCount > 0) {
+            return postId;
+        }
     }
 );
 

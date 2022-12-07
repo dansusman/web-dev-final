@@ -15,11 +15,16 @@ const UserStream = () => {
                     direction={"column"}
                 >
                     <SimpleGrid columns={{ base: 1, lg: 2 }} spacing={"10"}>
-                        {users.map((u, index) => (
-                            <Link to={`/profile/${u._id}`} key={index}>
-                                <UserItem user={u} />
-                            </Link>
-                        ))}
+                        {users.map((u, index) => {
+                            if (u.type !== "Moderator") {
+                                return (
+                                    <Link to={`/profile/${u._id}`} key={index}>
+                                        <UserItem user={u} />
+                                    </Link>
+                                );
+                            }
+                            return null;
+                        })}
                     </SimpleGrid>
                 </Flex>
             )}
