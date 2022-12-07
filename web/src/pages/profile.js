@@ -32,6 +32,12 @@ const ProfilePage = () => {
         dispatch(profileThunk());
     }, [dispatch]);
 
+    useEffect(() => {
+        if (currentUser) {
+            dispatch(findWeatherThunk(currentUser.location));
+        }
+    }, [currentUser]);
+
     const clickHandler = () => {
         setWantLiked((wantLiked) => !wantLiked);
     };
