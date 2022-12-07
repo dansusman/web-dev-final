@@ -39,3 +39,4 @@
 -   [x] Allow users to select a location on /profile page
 -   [x] Ensure home page filtering is mutually exclusive
 -   [ ] Add button to PostItem that takes you to posts with that location (see details page requirements)
+-   [ ] Ensure all pages layout fine on various screen sizes

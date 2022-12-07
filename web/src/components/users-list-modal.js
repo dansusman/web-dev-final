@@ -8,15 +8,12 @@ import {
     ModalHeader,
     ModalOverlay,
     SimpleGrid,
-    Text,
     useDisclosure,
 } from "@chakra-ui/react";
-import { useSelector } from "react-redux";
 import UserListItem from "./user-list-item";
 
 export const UsersListModal = ({ text, users, followed }) => {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { followers } = useSelector((state) => state.follows);
     return (
         <>
             <Button onClick={onOpen}>{text}</Button>
@@ -34,9 +31,7 @@ export const UsersListModal = ({ text, users, followed }) => {
                                     followed={followed}
                                     user={u}
                                     key={index}
-                                    showFollowButton={
-                                        false // TODO: make this dynamic
-                                    }
+                                    showFollowButton={false}
                                 />
                             ))}
                         </SimpleGrid>

@@ -4,7 +4,7 @@ import BasicPage from "../components/basic-page";
 import { Link } from "react-router-dom";
 import PostItem from "../components/post-item";
 import React, { useEffect } from "react";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { findPostByIdThunk } from "../posts/posts-thunks";
@@ -17,6 +17,7 @@ const Post = () => {
     const { loading } = useSelector((state) => state.postsData);
     const { currentUser } = useSelector((state) => state.users);
     const dispatch = useDispatch();
+    const nav = useNavigate();
     const { pid } = useParams();
     const { post } = useSelector((state) => state.postsData);
     const { following, reload } = useSelector((state) => state.follows);
@@ -66,8 +67,9 @@ const Post = () => {
                                 _hover={{
                                     bg: "blue.500",
                                 }}
+                                onClick={() => nav("/")}
                             >
-                                <Link to={"/"}>Retry</Link>
+                                Retry
                             </Button>
                         </Stack>
                     )}

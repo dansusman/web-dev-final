@@ -38,9 +38,14 @@ const UserCard = ({ user, showFollow }) => {
                         <Avatar size={"lg"} src={user.image}></Avatar>
                         <Stack spacing="5">
                             <HStack>
-                                <Heading size="md" as="h2">
-                                    {user.username}
-                                </Heading>
+                                <Stack spacing={"1"}>
+                                    <Heading size="md" as="h2">
+                                        {user.username}
+                                    </Heading>
+                                    {user.type === "Moderator" && (
+                                        <Text>{user.type}</Text>
+                                    )}
+                                </Stack>
                                 <Spacer />
                                 {showFollow && (
                                     <Button

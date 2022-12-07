@@ -105,8 +105,9 @@ const Search = () => {
                                     _hover={{
                                         bg: "blue.500",
                                     }}
+                                    onClick={() => nav("/")}
                                 >
-                                    <Link to={"/"}>Retry</Link>
+                                    Retry
                                 </Button>
                             </Stack>
                         </Stack>
