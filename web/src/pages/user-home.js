@@ -69,8 +69,7 @@ const HomePage = () => {
                                                 setWantFollowing(() => false);
                                                 setWantLocation(() => false);
                                                 return setChronological(
-                                                    (chronological) =>
-                                                        !chronological
+                                                    () => true
                                                 );
                                             }}
                                         >
@@ -81,8 +80,7 @@ const HomePage = () => {
                                                 setWantFollowing(() => false);
                                                 setWantLocation(() => false);
                                                 return setChronological(
-                                                    (chronological) =>
-                                                        !chronological
+                                                    () => false
                                                 );
                                             }}
                                         >

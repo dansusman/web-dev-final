@@ -37,12 +37,18 @@ const PostStream = ({
     }, [dispatch, forUser, liked, chronological]);
 
     useEffect(() => {
-        if (!location || wantFollowing) {
-            dispatch(findPostsThunk(chronological));
-        } else if (wantLocation) {
+        if (location && wantLocation) {
             dispatch(findPostsByLocationThunk(location));
+        } else {
+            dispatch(findPostsThunk());
         }
-    }, [wantLocation, location, wantFollowing]);
+    }, [wantLocation, location]);
+
+    useEffect(() => {
+        if (wantFollowing) {
+            dispatch(findPostsThunk(chronological));
+        }
+    }, [wantFollowing]);
 
     var postsSort = [...posts];
     if (!chronological) {
@@ -66,8 +72,8 @@ const PostStream = ({
         });
     }
 
-    var postsIWant = [];
     if (wantFollowing) {
+        var postsIWant = [];
         actualPosts.forEach((p) => {
             followings.forEach((f) => {
                 if (f.followed._id === p.author) {

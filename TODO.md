@@ -38,5 +38,5 @@
 -   [x] Filter posts by location on home page
 -   [x] Allow users to select a location on /profile page
 -   [ ] Add button to PostItem that takes you to posts with that location
--   [ ] Ensure home page filtering is mutually exclusive
+-   [x] Ensure home page filtering is mutually exclusive
 -   [ ] Show/Hide Follow buttons in UserListModals

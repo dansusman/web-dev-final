@@ -27,6 +27,11 @@ const ReplyItem = ({ reply, post }) => {
         );
     };
     const nav = useNavigate();
+    const imageGenerator = () => {
+        const username = reply.username;
+        const url = `https://ui-avatars.com/api/?background=random&name=${username}`;
+        return url;
+    };
     return (
         <ReplyBorder>
             <HStack>
@@ -39,7 +44,11 @@ const ReplyItem = ({ reply, post }) => {
                         nav(`/profile/${post.author}`);
                     }}
                 >
-                    <Avatar src={reply.image} height={"50px"} width={"50px"} />
+                    <Avatar
+                        src={imageGenerator()}
+                        height={"50px"}
+                        width={"50px"}
+                    />
                     <chakra.p fontWeight={"bold"} fontSize={14}>
                         {reply.name}
                     </chakra.p>
