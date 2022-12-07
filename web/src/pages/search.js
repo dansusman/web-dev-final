@@ -43,11 +43,17 @@ const Search = () => {
             );
         }
     };
+
+    const resultsHelper = (input) => {
+        return input?.toLowerCase().includes(searchText);
+    };
+
     const results = posts.filter((p) => {
         return (
-            p.title?.toLowerCase().includes(searchText) ||
-            p.content?.toLowerCase().includes(searchText) ||
-            p.location.toLowerCase().includes(searchText) ||
+            resultsHelper(p.title) ||
+            resultsHelper(p.content) ||
+            resultsHelper(p.location) ||
+            resultsHelper(p.conditions) ||
             repliesContain(p)
         );
     });
