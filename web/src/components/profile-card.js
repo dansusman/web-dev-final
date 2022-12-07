@@ -1,15 +1,11 @@
-import { SmallCloseIcon, ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
+import { ViewIcon, ViewOffIcon } from "@chakra-ui/icons";
 import {
-    Avatar,
-    AvatarBadge,
     Button,
-    Center,
     Flex,
     FormControl,
     FormErrorMessage,
     FormLabel,
     Heading,
-    IconButton,
     Input,
     InputGroup,
     InputRightElement,

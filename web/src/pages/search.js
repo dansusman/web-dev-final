@@ -3,22 +3,39 @@ import { Button, Flex, Heading, SimpleGrid, Stack } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 import PostItem from "../components/post-item";
 import React, { useEffect } from "react";
-import { useLocation } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import BasicPage from "../components/basic-page";
 import { useDispatch } from "react-redux";
 import { useSelector } from "react-redux";
 import { findPostsThunk } from "../posts/posts-thunks";
+import { findFollowingThunk } from "../follows/follows-thunks";
+import { profileThunk } from "../users/users-thunks";
 
 const Search = () => {
     const { posts, loading } = useSelector((state) => state.postsData);
     const dispatch = useDispatch();
     const { currentUser } = useSelector((state) => state.users);
+    const { following } = useSelector((state) => state.follows);
+    const nav = useNavigate();
+
+    useEffect(() => {
+        dispatch(profileThunk());
+    });
+
     useEffect(() => {
         dispatch(findPostsThunk());
+        if (currentUser) {
+            dispatch(findFollowingThunk(currentUser._id));
+        }
     }, [dispatch]);
+
     const location = useLocation().pathname;
     const splitLocation = location.split("/");
     const searchText = decodeURI(splitLocation[splitLocation.length - 1]);
+    if (!searchText || searchText === "search" || searchText === "") {
+        nav("/");
+        return;
+    }
     const repliesContain = (p) => {
         if (p.replies) {
             return p.replies.some((r) =>
@@ -28,8 +45,8 @@ const Search = () => {
     };
     const results = posts.filter((p) => {
         return (
-            p.title.toLowerCase().includes(searchText) ||
-            p.content.toLowerCase().includes(searchText) ||
+            p.title?.toLowerCase().includes(searchText) ||
+            p.content?.toLowerCase().includes(searchText) ||
             repliesContain(p)
         );
     });
@@ -58,6 +75,8 @@ const Search = () => {
                                             <PostItem
                                                 post={post}
                                                 index={index}
+                                                following={following}
+                                                forUser={true}
                                             />
                                         </Link>
                                     ))}
