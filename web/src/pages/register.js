@@ -25,6 +25,7 @@ import { useNavigate } from "react-router";
 const SignupCard = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [moderator, setModerator] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
     const [showPasswordError, setShowPasswordError] = useState(false);
     const [showError, setShowError] = useState(false);
@@ -48,6 +49,10 @@ const SignupCard = () => {
     const handleSubmit = () => {
         setShowError(false);
         setShowPasswordError(false);
+        if (username === "") {
+            setShowError(true);
+            return;
+        }
         if (!passwordValid()) {
             setShowPasswordError(true);
             return;
@@ -60,7 +65,7 @@ const SignupCard = () => {
             registerThunk({
                 username: username,
                 password: password,
-                type: "User",
+                type: moderator ? "Moderator" : "User",
             })
         );
         nav("/login");
@@ -101,18 +106,6 @@ const SignupCard = () => {
                             </FormErrorMessage>
                         </FormControl>
                         <FormControl
-                            id="isModerator"
-                            // isInvalid={showError}
-                            // onChange={handleUsername}
-                        >
-                            <FormLabel>Want Mod?</FormLabel>
-                            <Switch />
-                            {/* <Input type="text" name="username" /> */}
-                            <FormErrorMessage>
-                                Invalid name! Please enter another username.
-                            </FormErrorMessage>
-                        </FormControl>
-                        <FormControl
                             id="password"
                             isRequired
                             isInvalid={showPasswordError}
@@ -145,6 +138,15 @@ const SignupCard = () => {
                                 Please enter a password longer than 8
                                 characters.
                             </FormErrorMessage>
+                        </FormControl>
+                        <FormControl id="isModerator">
+                            <FormLabel>Moderator?</FormLabel>
+                            <Switch
+                                onChange={() =>
+                                    setModerator((moderator) => !moderator)
+                                }
+                                value={moderator}
+                            />
                         </FormControl>
                         <Stack spacing={10} pt={2}>
                             <Button

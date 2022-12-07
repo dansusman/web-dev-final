@@ -1,7 +1,6 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import HomePage from "./pages/home";
 import LoginCard from "./pages/login";
 import Post from "./pages/post-details";
 import Search from "./pages/search";
@@ -13,13 +12,14 @@ import PublicProfile from "./pages/public-profile";
 import UserPage from "./pages/users";
 import ModeratorRoute from "./components/moderator-route";
 import BasicPage from "./components/basic-page";
+import Home from "./pages/home";
 
 function App() {
     return (
         <BrowserRouter>
             <div className="container">
                 <Routes>
-                    <Route index element={<HomePage />}></Route>
+                    <Route index element={<Home />}></Route>
                     <Route
                         path="/login"
                         element={

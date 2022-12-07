@@ -24,9 +24,9 @@
 -   [x] Make PostItem UI responsive
 -   [x] Sort New/Popular
 
-## Updated Todos (3 December 2022)
+## Updated Todos (7 December 2022)
 
--   [ ] User privileges (User vs Moderator)
+-   [x] User privileges (User vs Moderator)
 
     -   Different home page?
     -   Can delete any post?
