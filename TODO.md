@@ -24,7 +24,7 @@
 -   [x] Make PostItem UI responsive
 -   [x] Sort New/Popular
 
-## Updated Todos (7 December 2022)
+## Updated Todos (8 December 2022)
 
 -   [x] User privileges (User vs Moderator)
 
@@ -38,8 +38,5 @@
 -   [x] Filter posts by location on home page
 -   [x] Allow users to select a location on /profile page
 -   [x] Ensure home page filtering is mutually exclusive
--   [ ] Ensure all pages layout fine on various screen sizes
-
-### I don't think these are required, but maybe??
-
--   [ ] Add button to PostItem that takes you to posts with that location (see details page requirements)
+-   [x] Ensure all pages layout fine on various screen sizes
+-   [x] ReplyItem link needs e.preventDefault()
