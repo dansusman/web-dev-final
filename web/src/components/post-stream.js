@@ -40,7 +40,7 @@ const PostStream = ({
         if (location && wantLocation) {
             dispatch(findPostsByLocationThunk(location));
         } else {
-            dispatch(findPostsThunk());
+            dispatch(findPostsThunk(chronological));
         }
     }, [wantLocation, location]);
 

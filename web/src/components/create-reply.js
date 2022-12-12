@@ -21,7 +21,7 @@ const CreateReply = ({ post }) => {
     const [showError, setShowError] = useState(false);
     const dispatch = useDispatch();
     const contentHandler = (e) => {
-        const lowerCase = e.target.value.toLowerCase();
+        const lowerCase = e.target.value;
         setText(lowerCase);
     };
     return (
